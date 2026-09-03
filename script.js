@@ -55,6 +55,20 @@ sharedStyles.textContent = `
 `;
 document.head.appendChild(sharedStyles);
 
+const visualStyles = document.createElement('style');
+visualStyles.textContent = `
+  :root{--serif:var(--sans)}
+  h1,h2,h3,blockquote,.wordmark,.article-pullquote{font-family:var(--sans)!important;font-weight:700!important;letter-spacing:-.035em}
+  .photo-placeholder,.portrait-placeholder,.article-image{background-image:linear-gradient(0deg,rgba(31,91,76,.12),rgba(31,91,76,.12)),url('assets/dr-santi-portrait-dummy.png')!important;background-size:cover!important;background-position:center!important;border-radius:24px}.photo-placeholder{font-size:0!important}.photo-placeholder span{display:none}.portrait-placeholder{font-size:0!important}.article-image{font-size:0!important}
+  .hero-visual{border-radius:28px}.hero-visual .photo-placeholder{border-radius:16px}.visual-caption{border-radius:0 16px 16px 0}
+  .program-card,.story-card,.resource-grid article,.article-feature,.article-list article,.credentials>div,.newsletter-panel,.invitation-panel,.offer-section,.article-cta,.book-card,.book-cover,.inquiry-form input,.inquiry-form select,.inquiry-form textarea{border-radius:16px}
+  .quote-band{border-radius:28px;margin:0 6%}.quote-band .section-shell{margin-inline:auto}.proof-strip{border-radius:0}
+  .landing-hero{border-radius:0 0 28px 28px}.landing-hero:before{display:none}
+  .button,.nav-cta{border-radius:999px}.site-nav a{font-family:var(--sans)}
+  @media(max-width:760px){.quote-band{margin:0;border-radius:0}.hero-visual{border-radius:20px}.program-card,.story-card,.resource-grid article,.article-feature,.article-list article,.credentials>div,.newsletter-panel,.invitation-panel,.offer-section,.article-cta,.book-card{border-radius:14px}}
+`;
+document.head.appendChild(visualStyles);
+
 const form = document.querySelector('#inquiry-form');
 if (form) {
   form.addEventListener('submit', (event) => {
