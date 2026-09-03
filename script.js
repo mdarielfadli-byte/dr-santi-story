@@ -15,6 +15,43 @@ if (bookNavItem) {
   bookNavItem.classList.toggle('active', location.pathname.endsWith('/books.html'));
 }
 
+const translationPairs = [
+  ['Home', 'Beranda'], ['About', 'Tentang'], ['Programs & Services', 'Program & Layanan'], ['Stories & Resources', 'Cerita & Referensi'], ['Contact', 'Kontak'], ['Start a conversation', 'Mulai percakapan'], ['Explore programs', 'Jelajahi program'], ['About Dr Santi', 'Tentang Dr Santi'], ['Articles', 'Artikel'], ['Partnership', 'Kemitraan'], ['Explore partnership', 'Jelajahi kemitraan'], ['Explore Fantasia', 'Jelajahi Fantasia'], ['Explore stories', 'Jelajahi cerita'], ['Coming soon', 'Segera hadir'], ['Reading, leadership & lifelong learning', 'Membaca, kepemimpinan & pembelajaran sepanjang hayat'],
+  ["Dr Santi's Story is a brand created by Dr Santi Dharmaputra.", "Dr Santi's Story adalah brand yang dibuat oleh Dr Santi Dharmaputra."], ['Through books, reflective ideas, and meaningful conversation, it helps families and learning communities build a stronger culture of reading and lifelong learning.', 'Melalui buku, gagasan reflektif, dan percakapan bermakna, brand ini membantu keluarga serta komunitas belajar membangun budaya membaca dan belajar sepanjang hayat.'], ['Make room for the questions that help us grow.', 'Memberi ruang bagi pertanyaan yang membantu kita bertumbuh.'], ['Ideas that become a shared practice.', 'Gagasan yang menjadi praktik bersama.'], ['Small ideas, held with care.', 'Gagasan kecil, dirawat dengan penuh perhatian.'], ['A thoughtful, trusted voice for people who want perspective they can understand and use.', 'Suara yang hangat dan tepercaya bagi mereka yang mencari perspektif untuk dipahami dan digunakan.'],
+  ['Pilihan bacaan', 'Reading selections'], ['Buku yang menemani pertanyaan-pertanyaan baik.', 'Books that accompany good questions.'], ['Rekomendasi bacaan pilihan dari Dr Santi untuk membangun percakapan, rasa ingin tahu, dan kebiasaan membaca yang bertumbuh bersama.', 'Dr Santi’s selected reading recommendations for building conversation, curiosity, and a reading habit that grows together.'], ['Pilihan untuk keluarga', 'For families'], ['Buku anak yang dibaca bersama', 'Children’s books to read together'], ['Memulai dari cerita yang dekat', 'Beginning with stories that feel close'], ['Pilih buku yang membuka ruang untuk bercerita, bertanya, dan kembali dibaca bersama.', 'Choose books that make room for telling stories, asking questions, and reading together again.'], ['Rekomendasi lengkap akan segera hadir.', 'Full recommendations are coming soon.'], ['Untuk orang tua', 'For parents'], ['Mendampingi anak bertumbuh', 'Supporting children as they grow'], ['Untuk pendidik', 'For educators'], ['Menghidupkan budaya belajar', 'Bringing learning culture to life'],
+  ['A Dr Santi\'s Story gathering', 'Sebuah pertemuan Dr Santi’s Story'], ['A room for imagination, stories, and conversations that help us see more possibilities.', 'Ruang untuk imajinasi, cerita, dan percakapan yang membantu kita melihat lebih banyak kemungkinan.'], ['Fantasia is an upcoming gathering by Dr Santi\'s Story. Its final date, format, venue, and programme will be announced after the event details are confirmed.', 'Fantasia adalah pertemuan mendatang dari Dr Santi’s Story. Tanggal, format, tempat, dan program final akan diumumkan setelah detail acara dikonfirmasi.'], ['Receive the first invitation', 'Dapatkan undangan pertama'], ['What to expect', 'Yang akan hadir'], ['Not just an event. A gentle invitation to stay curious.', 'Bukan sekadar acara. Sebuah undangan lembut untuk tetap ingin tahu.'], ['First to know', 'Jadi yang pertama tahu'], ['Be on the Fantasia invitation list.', 'Masuk ke daftar undangan Fantasia.'], ['Leave your contact and we will share the confirmed event information and registration link.', 'Tinggalkan kontak Anda dan kami akan membagikan informasi acara serta tautan registrasi yang telah dikonfirmasi.'], ['QR lead capture will be added when the registration flow is live.', 'QR lead capture akan ditambahkan saat alur registrasi sudah aktif.'], ['Register your interest online', 'Daftarkan minat Anda secara online'],
+  ['A library is more than a collection. It is an everyday invitation.', 'Perpustakaan lebih dari sekadar koleksi. Ia adalah undangan sehari-hari.'], ['Dr Santi\'s Story partners with homes, schools, and workplaces to shape thoughtful reading environments—starting from the people who will use them.', 'Dr Santi’s Story bermitra dengan rumah, sekolah, dan tempat kerja untuk membangun ruang baca yang relevan—dimulai dari orang-orang yang akan menggunakannya.'], ['Home library', 'Perpustakaan rumah'], ['School library', 'Perpustakaan sekolah'], ['Workplace library', 'Perpustakaan tempat kerja'], ['Start a partnership', 'Mulai kemitraan'], ['Tell us about the library you want to bring to life.', 'Ceritakan perpustakaan yang ingin Anda hidupkan.'], ['Partnership formats, scope, and fees are developed after an initial conversation.', 'Format, ruang lingkup, dan biaya kemitraan disusun setelah percakapan awal.']
+];
+
+const toIndonesian = new Map(translationPairs);
+const toEnglish = new Map(translationPairs.map(([english, indonesian]) => [indonesian, english]));
+const languageButton = document.createElement('button');
+languageButton.type = 'button';
+languageButton.className = 'language-switch';
+
+function translatePage(language) {
+  const dictionary = language === 'id' ? toIndonesian : toEnglish;
+  const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
+  const nodes = [];
+  while (walker.nextNode()) nodes.push(walker.currentNode);
+  nodes.forEach((node) => {
+    const original = node.nodeValue;
+    const trimmed = original.trim();
+    if (dictionary.has(trimmed)) node.nodeValue = original.replace(trimmed, dictionary.get(trimmed));
+  });
+  document.documentElement.lang = language;
+  languageButton.textContent = language === 'id' ? 'EN' : 'ID';
+  languageButton.setAttribute('aria-label', language === 'id' ? 'Switch to English' : 'Ganti ke Bahasa Indonesia');
+  localStorage.setItem('dr-santi-language', language);
+}
+
+if (nav) {
+  nav.insertAdjacentElement('afterend', languageButton);
+  const savedLanguage = localStorage.getItem('dr-santi-language') || 'en';
+  translatePage(savedLanguage);
+  languageButton.addEventListener('click', () => translatePage(document.documentElement.lang === 'id' ? 'en' : 'id'));
+}
+
 const footer = document.querySelector('.site-footer');
 if (footer) {
   footer.innerHTML = `
@@ -43,6 +80,8 @@ if (footer) {
       <a href="contact.html">Start a conversation <span aria-hidden="true">→</span></a>
     </div>`;
 }
+
+if (nav) translatePage(document.documentElement.lang);
 
 const sharedStyles = document.createElement('style');
 sharedStyles.textContent = `
@@ -79,6 +118,13 @@ brandStyles.textContent = `
   @media(max-width:760px){.home-feature-grid,.fantasia-hero,.fantasia-capture,.partnership-grid{grid-template-columns:1fr}.home-feature-grid{padding-bottom:70px}.home-feature-card{min-height:260px;padding:30px}.fantasia-hero{gap:38px;min-height:0;padding:57px 0}.fantasia-orbit{min-height:300px;width:min(100%,330px);justify-self:center}.fantasia-capture{gap:34px;margin-bottom:70px;padding:35px 28px}.fantasia-capture h2{font-size:37px}.partnership-grid{padding-bottom:70px}.partnership-process{padding-bottom:70px}}
 `;
 document.head.appendChild(brandStyles);
+
+const languageStyles = document.createElement('style');
+languageStyles.textContent = `
+  .language-switch{flex:0 0 auto;border:1px solid var(--emerald);border-radius:999px;background:transparent;color:var(--forest);padding:8px 10px;font:700 11px var(--sans);letter-spacing:.06em;cursor:pointer}.language-switch:hover{background:var(--emerald);color:var(--white)}
+  @media(max-width:760px){.language-switch{margin-left:auto;margin-right:10px}.site-header{gap:10px}.nav-toggle{order:3}.site-nav{top:78px}}
+`;
+document.head.appendChild(languageStyles);
 
 const contentPlaceholderPages = ['stories-resources.html', 'articles.html'];
 if (contentPlaceholderPages.some((page) => location.pathname.endsWith(`/${page}`))) {
