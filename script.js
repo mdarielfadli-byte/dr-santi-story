@@ -43,6 +43,42 @@ function translatePage(language) {
   languageButton.textContent = language === 'id' ? 'EN' : 'ID';
   languageButton.setAttribute('aria-label', language === 'id' ? 'Switch to English' : 'Ganti ke Bahasa Indonesia');
   localStorage.setItem('dr-santi-language', language);
+  renderLocalizedPage(language);
+}
+
+function renderLocalizedPage(language) {
+  if (!location.pathname.endsWith('/programs-services.html')) return;
+  const main = document.querySelector('main');
+  if (!main) return;
+  const copy = language === 'id'
+    ? {
+        eyebrow: 'Untuk percakapan & kolaborasi',
+        title: 'Sebuah titik awal yang hangat untuk menumbuhkan budaya membaca.',
+        intro: 'Mungkin Anda baru bertemu Dr Santi di sebuah acara, atau kembali ke kartu nama ini beberapa waktu kemudian. Halaman ini adalah tempat untuk mengenal cara kerja Dr Santi’s Story dan memulai percakapan yang sesuai dengan kebutuhan Anda.',
+        note: 'Dr Santi’s Story terus bertumbuh. Format di bawah adalah cara untuk memulai hari ini; layanan dan kolaborasi baru akan hadir seiring kebutuhan komunitas semakin jelas.',
+        section: 'Pilih percakapan yang paling relevan hari ini.',
+        services: [['01', 'Keynote & thoughtful conversations', 'Perspektif yang hangat dan membumi untuk audiens yang berkumpul membahas membaca, belajar, parenting, kepemimpinan, atau perkembangan manusia.'], ['02', 'Parent & family workshops', 'Ruang praktis untuk keluarga yang ingin menjadikan membaca bagian yang lebih dekat dari kehidupan sehari-hari.'], ['03', 'Learning for educators & leaders', 'Sesi reflektif bagi pendidik dan pemimpin yang ingin membangun rasa ingin tahu, percakapan, dan budaya belajar.'], ['04', 'Book conversations & curation', 'Percakapan berbasis buku serta arah kurasi untuk komunitas, ruang baca, book café, atau library yang ingin tumbuh dengan tujuan yang jelas.']],
+        process: 'Setiap kolaborasi dimulai dari konteks Anda.',
+        steps: [['01', 'Mendengar', 'Kami mulai dari orang-orang yang hadir, kebutuhan mereka, dan perubahan yang ingin Anda lihat.'], ['02', 'Mengarahkan', 'Kami menyusun format, sudut pandang, dan pengalaman yang terasa relevan—bukan paket satu ukuran untuk semua.'], ['03', 'Melanjutkan', 'Kami mengidentifikasi langkah kecil yang dapat dibawa pulang dan diteruskan setelah percakapan selesai.']],
+        future: 'Punya kebutuhan yang belum tercantum?',
+        futureText: 'Ceritakan konteks Anda. Layanan baru akan bertumbuh dari percakapan nyata bersama keluarga, sekolah, komunitas, dan organisasi.',
+        cta: 'Mulai percakapan'
+      }
+    : {
+        eyebrow: 'For conversations & collaborations',
+        title: 'A thoughtful starting point for growing a reading culture.',
+        intro: 'Perhaps you met Dr Santi at an event, or returned to this card some time later. This page is a lasting place to understand how Dr Santi’s Story works and begin a conversation that fits what you need.',
+        note: 'Dr Santi’s Story is continuing to grow. The formats below are ways to begin today; new services and collaborations will take shape as community needs become clearer.',
+        section: 'Choose the conversation that feels most relevant today.',
+        services: [['01', 'Keynote & thoughtful conversations', 'A warm, grounded perspective for audiences gathering around reading, learning, parenting, leadership, or human development.'], ['02', 'Parent & family workshops', 'Practical spaces for families who want to make reading feel closer to everyday life.'], ['03', 'Learning for educators & leaders', 'Reflective sessions for educators and leaders who want to build curiosity, conversation, and a culture of learning.'], ['04', 'Book conversations & curation', 'Book-led conversations and curation direction for communities, reading spaces, book cafés, or libraries that want to grow with intention.']],
+        process: 'Every collaboration begins with your context.',
+        steps: [['01', 'Listen', 'We begin with the people in the room, what they need, and the change you hope to create.'], ['02', 'Shape', 'We develop a format, perspective, and experience that feels relevant—not a one-size-fits-all package.'], ['03', 'Continue', 'We identify small next steps that people can carry forward after the conversation ends.']],
+        future: 'Have a need that is not listed yet?',
+        futureText: 'Tell us about your context. New services will grow from real conversations with families, schools, communities, and organisations.',
+        cta: 'Start a conversation'
+      };
+  document.title = language === 'id' ? 'Program & Layanan | Dr Santi’s Story' : 'Programs & Services | Dr Santi’s Story';
+  main.innerHTML = `<section class="service-entry-hero section-shell"><p class="eyebrow">${copy.eyebrow}</p><h1>${copy.title}</h1><p class="lead">${copy.intro}</p><p class="service-entry-note">${copy.note}</p></section><section class="service-entry-section section-shell"><div class="section-heading"><div><p class="eyebrow">Ways to begin</p><h2>${copy.section}</h2></div><a class="text-link" href="contact.html">${copy.cta} <span>→</span></a></div><div class="service-entry-grid">${copy.services.map(([number, name, description]) => `<article><span>${number}</span><h3>${name}</h3><p>${description}</p><a href="contact.html">${copy.cta} <span>→</span></a></article>`).join('')}</div></section><section class="service-entry-process"><div class="section-shell"><p class="eyebrow light">A considered process</p><h2>${copy.process}</h2><div class="process-grid">${copy.steps.map(([number, name, description]) => `<div><span>${number}</span><h3>${name}</h3><p>${description}</p></div>`).join('')}</div></div></section><section class="section-shell service-entry-cta"><div><p class="eyebrow">Keep this page close</p><h2>${copy.future}</h2></div><div><p>${copy.futureText}</p><a class="button button-primary" href="contact.html">${copy.cta} <span>→</span></a></div></section>`;
 }
 
 if (nav) {
@@ -125,6 +161,15 @@ languageStyles.textContent = `
   @media(max-width:760px){.language-switch{margin-left:auto;margin-right:10px}.site-header{gap:10px}.nav-toggle{order:3}.site-nav{top:78px}}
 `;
 document.head.appendChild(languageStyles);
+
+const serviceEntryStyles = document.createElement('style');
+serviceEntryStyles.textContent = `
+  .service-entry-hero{padding:88px 0 66px}.service-entry-hero h1{max-width:850px;margin:0;color:var(--forest);font-size:clamp(46px,5.5vw,74px);line-height:1.01}.service-entry-hero .lead{max-width:760px;margin-bottom:22px}.service-entry-note{max-width:720px;margin:0;padding:17px 20px;border-left:4px solid var(--gold);border-radius:0 12px 12px 0;background:var(--white);font-size:14px;color:#315e53}
+  .service-entry-section{padding:34px 0 110px}.service-entry-section .section-heading h2{max-width:700px}.service-entry-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}.service-entry-grid article{display:flex;min-height:305px;flex-direction:column;align-items:flex-start;padding:30px;border-radius:18px;background:var(--white);border-top:4px solid var(--emerald)}.service-entry-grid article:nth-child(2){background:#d8e0d2}.service-entry-grid article:nth-child(3){background:#f5df96}.service-entry-grid article:nth-child(4){background:var(--forest);color:var(--cream);border-color:var(--gold)}.service-entry-grid article>span{color:var(--coral);font-size:13px;font-weight:700}.service-entry-grid article:nth-child(4)>span{color:var(--gold)}.service-entry-grid h3{margin:52px 0 10px;font-size:30px;line-height:1.05}.service-entry-grid p{margin:0;font-size:15px}.service-entry-grid a{margin-top:auto;padding-top:22px;font-size:13px;font-weight:700;text-decoration:none;border-bottom:1px solid currentColor}
+  .service-entry-process{padding:94px 0;background:var(--forest);color:var(--cream)}.service-entry-process h2{max-width:660px;margin:0;font-size:clamp(37px,4.6vw,58px);line-height:1.03}.service-entry-process .eyebrow{color:var(--gold)}.service-entry-process .process-grid{margin-top:48px}.service-entry-process .process-grid span{color:var(--gold)}.service-entry-process .process-grid p{color:#d5e6da}.service-entry-cta{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;padding:105px 0}.service-entry-cta h2{margin:0;color:var(--forest);font-size:clamp(37px,4vw,54px);line-height:1.04}.service-entry-cta>div:last-child{max-width:420px}.service-entry-cta>div:last-child p{font-size:17px}
+  @media(max-width:760px){.service-entry-hero{padding:55px 0 45px}.service-entry-section{padding:26px 0 70px}.service-entry-grid{grid-template-columns:1fr}.service-entry-grid article{min-height:260px;padding:27px}.service-entry-grid h3{margin-top:38px}.service-entry-process{padding:70px 0}.service-entry-cta{grid-template-columns:1fr;gap:30px;padding:70px 0}.service-entry-note{font-size:13px}}
+`;
+document.head.appendChild(serviceEntryStyles);
 
 const contentPlaceholderPages = ['stories-resources.html', 'articles.html'];
 if (contentPlaceholderPages.some((page) => location.pathname.endsWith(`/${page}`))) {
