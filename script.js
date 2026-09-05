@@ -187,6 +187,13 @@ serviceMotionStyles.textContent = `
 `;
 document.head.appendChild(serviceMotionStyles);
 
+const serviceHeroRefinementStyles = document.createElement('style');
+serviceHeroRefinementStyles.textContent = `
+  .service-entry-hero{display:block;min-height:0;padding:100px 0 76px;overflow:visible}.service-entry-hero:before,.service-entry-hero:after{display:none}.service-entry-hero h1{max-width:780px;font-size:clamp(48px,5.2vw,70px);letter-spacing:-.045em}.service-entry-hero .lead{max-width:680px;margin:28px 0 24px;font-size:19px;line-height:1.6}.service-entry-hero .eyebrow{display:flex;align-items:center;gap:10px}.service-entry-hero .eyebrow:after{width:62px;height:1px;background:var(--gold);content:""}.service-entry-note{max-width:680px;padding:16px 18px;border-left:3px solid var(--emerald);border-radius:0;background:transparent;box-shadow:none!important}.service-entry-note:hover{transform:none}
+  @media(max-width:760px){.service-entry-hero{padding:58px 0 48px}.service-entry-hero h1{font-size:46px}.service-entry-hero .lead{font-size:17px}.service-entry-hero .eyebrow:after{width:42px}}
+`;
+document.head.appendChild(serviceHeroRefinementStyles);
+
 const contentPlaceholderPages = ['stories-resources', 'articles'];
 if (contentPlaceholderPages.some((page) => isPage(page))) {
   const banner = document.querySelector('.page-banner');
