@@ -8,11 +8,12 @@ if (toggle && nav) {
   });
 }
 
+const isPage = (name) => location.pathname === `/${name}` || location.pathname.endsWith(`/${name}.html`);
 const bookNavItem = document.querySelector('.site-nav a[href="speaking-collaboration.html"]');
 if (bookNavItem) {
   bookNavItem.href = 'books.html';
   bookNavItem.textContent = "Buku Santi's Story";
-  bookNavItem.classList.toggle('active', location.pathname.endsWith('/books.html'));
+  bookNavItem.classList.toggle('active', isPage('books'));
 }
 
 const translationPairs = [
@@ -47,7 +48,7 @@ function translatePage(language) {
 }
 
 function renderLocalizedPage(language) {
-  if (!location.pathname.endsWith('/programs-services.html')) return;
+  if (!isPage('programs-services')) return;
   const main = document.querySelector('main');
   if (!main) return;
   const copy = language === 'id'
@@ -117,6 +118,13 @@ if (footer) {
     </div>`;
 }
 
+document.querySelectorAll('a[href]').forEach((link) => {
+  const href = link.getAttribute('href');
+  if (!href || /^(https?:|mailto:|tel:|#)/.test(href)) return;
+  if (href === 'index.html') link.setAttribute('href', '/');
+  else link.setAttribute('href', href.replace(/\.html(?=($|[?#]))/, ''));
+});
+
 if (nav) translatePage(document.documentElement.lang);
 
 const sharedStyles = document.createElement('style');
@@ -171,8 +179,16 @@ serviceEntryStyles.textContent = `
 `;
 document.head.appendChild(serviceEntryStyles);
 
-const contentPlaceholderPages = ['stories-resources.html', 'articles.html'];
-if (contentPlaceholderPages.some((page) => location.pathname.endsWith(`/${page}`))) {
+const serviceMotionStyles = document.createElement('style');
+serviceMotionStyles.textContent = `
+  .service-entry-hero{position:relative;overflow:hidden;display:grid;grid-template-columns:1.05fr .55fr;gap:40px;align-items:end}.service-entry-hero:after{position:absolute;right:-90px;top:-125px;width:390px;height:390px;border:42px solid var(--gold);border-radius:50%;content:"";opacity:.7}.service-entry-hero:before{position:absolute;right:90px;bottom:45px;width:145px;height:145px;border-radius:28px;background:var(--emerald);box-shadow:33px -32px 0 var(--coral);content:"";transform:rotate(14deg)}.service-entry-hero>*{position:relative;z-index:1}.service-entry-note{transition:transform .25s ease,box-shadow .25s ease}.service-entry-note:hover{transform:translateX(7px);box-shadow:0 12px 22px rgba(23,61,53,.12)}
+  .service-entry-grid article{position:relative;overflow:hidden;isolation:isolate;transition:transform .25s ease,box-shadow .25s ease,border-color .25s ease}.service-entry-grid article:after{position:absolute;right:-45px;bottom:-62px;z-index:-1;width:145px;height:145px;border-radius:50%;background:rgba(33,134,111,.12);content:"";transition:transform .35s ease,background .35s ease}.service-entry-grid article:hover{transform:translateY(-9px) rotate(-.4deg);box-shadow:0 20px 35px rgba(23,61,53,.16);border-color:var(--gold)}.service-entry-grid article:hover:after{background:rgba(241,194,75,.45);transform:scale(1.45)}.service-entry-grid article:nth-child(even):hover{transform:translateY(-9px) rotate(.4deg)}.service-entry-grid article a span{display:inline-block;transition:transform .2s ease}.service-entry-grid article:hover a span{transform:translateX(6px)}.service-entry-process .process-grid>div{transition:transform .25s ease}.service-entry-process .process-grid>div:hover{transform:translateY(-7px)}
+  @media(max-width:760px){.service-entry-hero{display:block}.service-entry-hero:after{right:-135px;width:280px;height:280px;border-width:30px}.service-entry-hero:before{display:none}.service-entry-grid article:hover,.service-entry-grid article:nth-child(even):hover{transform:translateY(-4px)}}
+`;
+document.head.appendChild(serviceMotionStyles);
+
+const contentPlaceholderPages = ['stories-resources', 'articles'];
+if (contentPlaceholderPages.some((page) => isPage(page))) {
   const banner = document.querySelector('.page-banner');
   if (banner) {
     banner.insertAdjacentHTML('afterbegin', '<p class="content-status">Content preview · Stories, articles, and social integrations will be published after the website launch.</p>');
