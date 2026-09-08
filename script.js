@@ -48,6 +48,36 @@ function translatePage(language) {
 }
 
 function renderLocalizedPage(language) {
+  if (isPage('collaborate')) {
+    const main = document.querySelector('main');
+    if (!main) return;
+    const copy = language === 'id'
+      ? {
+          eyebrow: 'Mari berkolaborasi',
+          title: 'Mari membuka ruang untuk membaca, belajar, dan bertumbuh.',
+          intro: 'Terima kasih telah berkunjung. Dr Santi’s Story membuka percakapan dengan keluarga, sekolah, komunitas, dan organisasi yang ingin menjadikan buku serta pembelajaran bagian yang lebih hidup dari keseharian.',
+          cta: 'Mulai percakapan',
+          audiences: [['01', 'Sekolah & institusi', 'Sesi, program, dan gagasan pembelajaran yang berangkat dari kebutuhan orang-orang di dalamnya.'], ['02', 'Keluarga & komunitas', 'Ruang untuk menghidupkan kebiasaan membaca, percakapan, dan rasa ingin tahu bersama.'], ['03', 'Tim & organisasi', 'Percakapan reflektif tentang kepemimpinan, budaya belajar, dan perkembangan manusia.']],
+          focus: 'Setiap kolaborasi dimulai dari konteks Anda.',
+          focusText: 'Ceritakan siapa yang ingin Anda ajak bertumbuh, apa yang sedang dihadapi, dan kemungkinan yang ingin dibuka bersama. Kami akan membantu menemukan titik awal yang tepat.',
+          close: 'Satu percakapan yang baik dapat membuka banyak kemungkinan.',
+          closeText: 'Mari mulai dari kebutuhan yang nyata.'
+        }
+      : {
+          eyebrow: 'Let’s collaborate',
+          title: 'Let’s make room for reading, learning, and growth.',
+          intro: 'Thank you for stopping by. Dr Santi’s Story begins conversations with families, schools, communities, and organisations that want books and learning to feel more alive in everyday life.',
+          cta: 'Start a conversation',
+          audiences: [['01', 'Schools & institutions', 'Sessions, programmes, and learning perspectives shaped around the people within them.'], ['02', 'Families & communities', 'Spaces for making reading, conversation, and curiosity part of life together.'], ['03', 'Teams & organisations', 'Reflective conversations on leadership, learning culture, and human development.']],
+          focus: 'Every collaboration begins with your context.',
+          focusText: 'Tell us who you hope to gather, what you are facing, and the possibility you want to open. We will help find the right starting point.',
+          close: 'One good conversation can open many possibilities.',
+          closeText: 'Let’s begin with what is real and needed.'
+        };
+    document.title = language === 'id' ? 'Kolaborasi | Dr Santi’s Story' : 'Collaborate | Dr Santi’s Story';
+    main.innerHTML = `<section class="collaborate-hero"><div class="section-shell collaborate-hero-inner"><div><p class="eyebrow light">${copy.eyebrow}</p><h1>${copy.title}</h1><p class="lead">${copy.intro}</p><a class="button button-cream" href="contact.html">${copy.cta} <span aria-hidden="true">→</span></a></div><aside class="collaborate-hero-note"><span aria-hidden="true">✦</span><p>${copy.closeText}</p></aside></div></section><section class="section-shell collaborate-audiences"><p class="eyebrow">${language === 'id' ? 'Ruang yang bisa kita bangun bersama' : 'Spaces we can build together'}</p><h2>${copy.focus}</h2><div class="collaborate-audience-grid">${copy.audiences.map(([number, title, description]) => `<article><span>${number}</span><h3>${title}</h3><p>${description}</p></article>`).join('')}</div></section><section class="collaborate-invitation"><div class="section-shell"><div><p class="eyebrow light">${language === 'id' ? 'Mulai dari yang penting' : 'Start with what matters'}</p><h2>${copy.close}</h2></div><div><p>${copy.focusText}</p><a class="button button-cream" href="contact.html">${copy.cta} <span aria-hidden="true">→</span></a></div></div></section>`;
+    return;
+  }
   if (!isPage('programs-services')) return;
   const main = document.querySelector('main');
   if (!main) return;
@@ -112,6 +142,7 @@ if (footer) {
         <a href="stories-resources.html">Stories &amp; Resources</a>
         <a href="articles.html">Articles</a>
         <a href="fantasia.html">Fantasia</a>
+        <a href="collaborate.html">Collaborate</a>
         <a href="contact.html">Contact</a>
       </nav>
     </div>
@@ -204,6 +235,13 @@ serviceHeroPhotoStyles.textContent = `
   @media(max-width:760px){.service-entry-hero{display:block}.service-entry-copy h1{max-width:100%;font-size:clamp(40px,11vw,52px)}.service-entry-photos{display:grid;grid-template-columns:1.15fr .85fr;gap:12px;min-height:0;margin-top:32px;padding:0}.service-photo-primary,.service-photo-secondary{position:static;width:auto;height:245px;border:0}.service-photo-secondary{margin-top:30px}.service-photo-primary img{object-position:center}.service-photo-secondary img{object-position:center}.service-photo{border-radius:17px}}
 `;
 document.head.appendChild(serviceHeroPhotoStyles);
+
+const collaborateStyles = document.createElement('style');
+collaborateStyles.textContent = `
+  .collaborate-hero{margin-top:16px;border-radius:0 0 30px 30px;background:var(--forest);color:var(--cream)}.collaborate-hero-inner{display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:90px;align-items:end;min-height:560px;padding:98px 0 80px}.collaborate-hero h1{max-width:750px;margin:0;color:var(--cream);font-size:clamp(48px,5.6vw,76px);line-height:1;letter-spacing:-.045em}.collaborate-hero .lead{max-width:650px;margin:27px 0 31px;color:#d5e6da;font-size:19px}.collaborate-hero-note{display:flex;min-height:260px;flex-direction:column;justify-content:flex-end;padding:30px;border:1px solid rgba(244,240,231,.34);border-radius:22px;background:rgba(255,255,255,.06)}.collaborate-hero-note span{margin-bottom:auto;color:var(--gold);font-size:34px}.collaborate-hero-note p{margin:35px 0 0;font-size:20px;font-weight:700;line-height:1.3}.collaborate-audiences{padding:108px 0}.collaborate-audiences>h2{max-width:690px;margin:0;color:var(--forest);font-size:clamp(38px,4.7vw,62px);line-height:1.04;letter-spacing:-.04em}.collaborate-audience-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:52px}.collaborate-audience-grid article{min-height:265px;padding:29px;border-radius:20px;background:var(--white);border-top:4px solid var(--emerald);transition:transform .25s ease,box-shadow .25s ease}.collaborate-audience-grid article:nth-child(2){background:#d8e0d2}.collaborate-audience-grid article:nth-child(3){background:#f5df96}.collaborate-audience-grid article:hover{transform:translateY(-7px);box-shadow:0 18px 32px rgba(23,61,53,.14)}.collaborate-audience-grid span{color:var(--coral);font-size:13px;font-weight:700}.collaborate-audience-grid h3{margin:48px 0 10px;font-size:26px;line-height:1.08}.collaborate-audience-grid p{margin:0;font-size:15px}.collaborate-invitation{padding:88px 0;background:var(--emerald);color:var(--cream)}.collaborate-invitation .section-shell{display:grid;grid-template-columns:1.05fr .75fr;gap:105px;align-items:center}.collaborate-invitation h2{max-width:590px;margin:0;font-size:clamp(37px,4.5vw,60px);line-height:1.03;letter-spacing:-.04em}.collaborate-invitation .eyebrow{color:var(--gold)}.collaborate-invitation>div>div:last-child p{margin:0 0 26px;color:#d5e6da;font-size:17px;line-height:1.6}
+  @media(max-width:760px){.collaborate-hero{margin-top:0;border-radius:0 0 22px 22px}.collaborate-hero-inner,.collaborate-invitation .section-shell{grid-template-columns:1fr;gap:38px}.collaborate-hero-inner{min-height:0;padding:62px 0}.collaborate-hero h1{font-size:clamp(42px,11vw,54px)}.collaborate-hero-note{min-height:160px;padding:24px}.collaborate-hero-note p{margin-top:20px;font-size:18px}.collaborate-audiences{padding:70px 0}.collaborate-audience-grid{grid-template-columns:1fr;margin-top:36px}.collaborate-audience-grid article{min-height:225px}.collaborate-invitation{padding:70px 0}.collaborate-invitation .section-shell{gap:28px}}
+`;
+document.head.appendChild(collaborateStyles);
 
 const contentPlaceholderPages = ['stories-resources', 'articles'];
 if (contentPlaceholderPages.some((page) => isPage(page))) {
