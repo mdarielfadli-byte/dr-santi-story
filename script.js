@@ -70,6 +70,15 @@ function renderLocalizedPage(language) {
       : { eyebrow: 'Fantasia · 12 September 2026', title: 'A small room for stories, imagination, and curiosity.', intro: 'Fantasia is a warm gathering by Dr Santi’s Story for families and communities who want to return to books, conversation, and the small possibilities that grow from them.', detail: 'The time, venue, and programme will be shared through the invitation.', cta: 'Get the 7 Days Reading Ritual', note: 'Take home one small ritual to continue at home.', cards: [['01', 'Stories to enter', 'Books, voices, and ideas that open a new way into a familiar question.'], ['02', 'Conversations to carry', 'Warm, reflective exchanges that stay close to everyday life.'], ['03', 'Rituals to continue', 'Small steps that keep reading and curiosity alive after the gathering.']], invitation: 'Begin with seven simple days.', invitationText: 'Download a guide for reading together at home, then look out for the next update from Dr Santi’s Story.', link: 'Get the guide' };
     document.title = `Fantasia | Dr Santi’s Story`;
     main.innerHTML = `<section class="fantasia-warm-hero"><div class="section-shell fantasia-warm-layout"><div class="fantasia-warm-copy"><p class="eyebrow light">${copy.eyebrow}</p><h1>Fantasia</h1><p class="fantasia-warm-title">${copy.title}</p><p class="lead">${copy.intro}</p><p class="fantasia-event-note">${copy.detail}</p><a class="button button-cream" href="fantasia/reading-ritual.html">${copy.cta} <span aria-hidden="true">→</span></a></div><figure class="fantasia-warm-photo"><img src="https://raw.githubusercontent.com/mdarielfadli-byte/dr-santi-story/main/assets/dr-santi-reading.webp" alt="${language === 'id' ? 'Dr Santi bersama buku pilihannya' : 'Dr Santi with one of her book choices'}"><figcaption>${copy.note}</figcaption></figure></div></section><section class="section-shell fantasia-gathering"><p class="eyebrow">${language === 'id' ? 'Yang akan tinggal lebih lama' : 'What stays with you'}</p><h2>${copy.note}</h2><div class="fantasia-gathering-grid">${copy.cards.map(([number, title, description]) => `<article><span>${number}</span><h3>${title}</h3><p>${description}</p></article>`).join('')}</div></section><section class="fantasia-ritual-invite"><div class="section-shell"><div><p class="eyebrow light">7 Days Reading Ritual</p><h2>${copy.invitation}</h2></div><div><p>${copy.invitationText}</p><a class="button button-cream" href="fantasia/reading-ritual.html">${copy.link} <span aria-hidden="true">→</span></a></div></div></section>`;
+    const ritual = main.querySelector('.fantasia-ritual-invite');
+    const ritualCopy = language === 'id'
+      ? { title: 'Mulai dari tujuh hari yang sederhana.', text: 'Isi data singkat Anda, lalu unduh panduan untuk memulai ritual membaca di rumah.', name: 'Nama', email: 'Email', consent: 'Saya bersedia menerima kabar dari Dr Santi’s Story.', button: 'Unduh panduan', response: 'PDF sedang dibuka di tab baru.' }
+      : { title: 'Begin with seven simple days.', text: 'Complete a few details, then download the guide to begin a reading ritual at home.', name: 'Name', email: 'Email', consent: 'I agree to receive updates from Dr Santi’s Story.', button: 'Download the guide', response: 'Your PDF is opening in a new tab.' };
+    const heroButton = main.querySelector('.fantasia-warm-copy .button');
+    heroButton.href = '#reading-ritual';
+    heroButton.innerHTML = `${copy.cta} <span aria-hidden="true">↓</span>`;
+    ritual.id = 'reading-ritual';
+    ritual.innerHTML = `<div class="section-shell fantasia-ritual-form-layout"><div><p class="eyebrow light">7 Days Reading Ritual</p><h2>${ritualCopy.title}</h2><p>${ritualCopy.text}</p></div><form class="ritual-form" id="reading-ritual-form" novalidate><label>${ritualCopy.name}<input name="name" autocomplete="name" required></label><label>${ritualCopy.email}<input name="email" type="email" autocomplete="email" required></label><label class="ritual-consent"><input type="checkbox" name="consent" required><span>${ritualCopy.consent}</span></label><button class="button button-cream" type="submit">${ritualCopy.button} <span aria-hidden="true">↓</span></button><p class="ritual-response" aria-live="polite" data-response="${ritualCopy.response}"></p></form></div>`;
     return;
   }
   if (isPage('reading-ritual')) {
@@ -213,9 +222,9 @@ if (footer) {
       </nav>
       <nav class="footer-nav" aria-label="Contact channels">
         <p class="footer-title">Contact</p>
-        <a href="/contact">WhatsApp</a>
-        <a href="/contact">Instagram</a>
-        <a href="mailto:drsantistory@gmail.com">drsantistory@gmail.com</a>
+        <a href="/contact"><span class="footer-contact-icon" aria-hidden="true">◔</span>WhatsApp</a>
+        <a href="/contact"><span class="footer-contact-icon" aria-hidden="true">◎</span>Instagram</a>
+        <a href="mailto:drsantistory@gmail.com"><span class="footer-contact-icon" aria-hidden="true">✉</span>drsantistory@gmail.com</a>
       </nav>
     </div>
     <div class="footer-meta section-shell">
@@ -239,8 +248,8 @@ sharedStyles.textContent = `
   .footer-invitation{background:var(--gold);color:var(--forest)}.footer-invitation-inner{display:flex;align-items:center;justify-content:space-between;gap:36px;padding:56px 0}.footer-invitation .eyebrow{color:var(--forest)}.footer-invitation h2{max-width:650px;margin:0;font-size:clamp(34px,4.4vw,56px);line-height:1.04;letter-spacing:-.04em}.footer-invitation .button{flex:0 0 auto}
   .footer-main{display:grid;grid-template-columns:1.45fr 1fr 1fr 1fr;gap:42px;padding:62px 0 52px}
   .site-header .wordmark{display:block;width:156px;flex:0 0 auto}.site-header .wordmark img{display:block;width:100%;height:auto}.footer-brand{max-width:365px}.site-footer .wordmark{display:block;width:192px}.site-footer .wordmark img{display:block;width:100%;height:auto}
-  .footer-brand p{margin:22px 0 0;color:#c9dbce;font-size:14px;line-height:1.6}.footer-nav{display:flex;flex-direction:column;align-items:flex-start;gap:9px}
-  .footer-title{margin:0 0 6px!important;color:var(--gold);font-size:11px!important;font-weight:700;letter-spacing:.1em;text-transform:uppercase}.footer-nav a{font-size:14px;text-decoration:none}.footer-nav a:hover,.footer-meta a:hover{color:var(--gold)}
+  .footer-brand p{margin:22px 0 0;color:#c9dbce;font-size:14px;line-height:1.6;text-align:left}.footer-nav{display:flex;flex-direction:column;align-items:flex-start;gap:9px}
+  .footer-title{margin:0 0 6px!important;color:var(--gold);font-size:11px!important;font-weight:700;letter-spacing:.1em;text-transform:uppercase}.footer-nav a{font-size:14px;text-decoration:none}.footer-contact-icon{display:inline-grid;place-items:center;width:18px;margin-right:6px;color:var(--gold);font-size:16px}.footer-nav a:hover,.footer-meta a:hover{color:var(--gold)}
   .footer-meta{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:20px 0 24px;border-top:1px solid rgba(244,240,231,.25)}.footer-meta p{font-size:12px;color:#c9dbce}.footer-meta a{font-size:13px;font-weight:700;text-decoration:none}
   .book-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;padding-bottom:108px}.book-card{display:flex;min-height:540px;flex-direction:column;padding:28px;background:var(--white);border-top:4px solid var(--emerald)}.book-card-featured{background:var(--forest);border-color:var(--gold);color:var(--cream)}.book-card-featured .story-type{color:var(--gold)}.book-card h2{margin:24px 0 10px;font:32px/1.06 var(--serif)}.book-card p:not(.story-type){margin:0;font-size:15px}.book-cover{display:grid;min-height:180px;place-items:center;margin-top:25px;padding:22px;background:#b3977a;color:var(--white);font:26px/1.1 var(--serif);text-align:center}.book-cover-sage{background:#8e9b84}.book-cover-gold{background:var(--gold);color:var(--forest)}.book-note{margin-top:auto;padding-top:28px;color:var(--emerald);font-size:12px;font-weight:700}.book-card-featured .book-note{color:var(--gold)}
   @media(max-width:760px){.site-header .wordmark{width:125px}.site-footer .wordmark{width:176px}.footer-invitation-inner{display:block;padding:46px 0}.footer-invitation .button{margin-top:26px}.footer-main{grid-template-columns:1fr;gap:34px;padding:44px 0 36px}.footer-meta{display:block;padding:18px 0 24px}.footer-meta a{display:inline-block;margin-top:11px}.book-grid{grid-template-columns:1fr;padding-bottom:70px}.book-card{min-height:470px}}
@@ -324,6 +333,13 @@ fantasiaEventStyles.textContent = `
   @media(max-width:760px){.fantasia-warm-hero{margin-top:0;border-radius:0 0 22px 22px}.fantasia-warm-layout,.fantasia-ritual-invite .section-shell,.ritual-download-layout,.event-archive-heading{grid-template-columns:1fr;gap:39px}.fantasia-warm-layout{min-height:0;padding:62px 0}.fantasia-warm-copy h1{font-size:clamp(66px,18vw,92px)}.fantasia-warm-photo{min-height:385px;padding:13px 0 0 13px}.fantasia-warm-photo img{height:340px}.fantasia-gathering{padding:70px 0}.fantasia-gathering-grid,.event-archive-grid{grid-template-columns:1fr;margin-top:35px}.fantasia-gathering-grid article{min-height:225px}.fantasia-ritual-invite{padding:70px 0}.fantasia-ritual-invite .section-shell{gap:28px}.ritual-download-page{padding:42px 0 70px}.ritual-download-layout{gap:38px}.ritual-back{margin-bottom:42px}.ritual-form{padding:26px}.ritual-days{margin-top:30px}.event-archive{padding-bottom:70px}.event-archive-heading{margin-bottom:28px}}
 `;
 document.head.appendChild(fantasiaEventStyles);
+
+const fantasiaFormStyles = document.createElement('style');
+fantasiaFormStyles.textContent = `
+  .fantasia-ritual-form-layout{display:grid;grid-template-columns:1.06fr .76fr;gap:104px;align-items:center}.fantasia-ritual-form-layout>div>p:not(.eyebrow){max-width:500px;margin:18px 0 0;color:#d5e6da;font-size:17px;line-height:1.6}.fantasia-ritual-form-layout .ritual-form{background:var(--cream);box-shadow:none}.fantasia-ritual-form-layout .ritual-form h2{color:var(--forest)}
+  @media(max-width:760px){.fantasia-ritual-form-layout{grid-template-columns:1fr;gap:32px}}
+`;
+document.head.appendChild(fantasiaFormStyles);
 
 const contentPlaceholderPages = ['stories-resources', 'articles'];
 if (contentPlaceholderPages.some((page) => isPage(page))) {

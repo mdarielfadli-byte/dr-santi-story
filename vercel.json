@@ -6,6 +6,11 @@
       "source": "/product-services",
       "destination": "/programs-services",
       "permanent": true
+    },
+    {
+      "source": "/fantasia/reading-ritual",
+      "destination": "/fantasia",
+      "permanent": true
     }
   ]
 }
