@@ -79,6 +79,11 @@ function renderLocalizedPage(language) {
     heroButton.innerHTML = `${copy.cta} <span aria-hidden="true">↓</span>`;
     ritual.id = 'reading-ritual';
     ritual.innerHTML = `<div class="section-shell fantasia-ritual-form-layout"><div><p class="eyebrow light">7 Days Reading Ritual</p><h2>${ritualCopy.title}</h2><p>${ritualCopy.text}</p></div><form class="ritual-form" id="reading-ritual-form" novalidate><label>${ritualCopy.name}<input name="name" autocomplete="name" required></label><label>${ritualCopy.email}<input name="email" type="email" autocomplete="email" required></label><label class="ritual-consent"><input type="checkbox" name="consent" required><span>${ritualCopy.consent}</span></label><button class="button button-cream" type="submit">${ritualCopy.button} <span aria-hidden="true">↓</span></button><p class="ritual-response" aria-live="polite" data-response="${ritualCopy.response}"></p></form></div>`;
+    const ritualForm = ritual.querySelector('.ritual-form');
+    ritualForm.insertAdjacentHTML('afterbegin', `<div class="ritual-form-intro"><span>01 — 07</span><p>${language === 'id' ? 'Panduan gratis untuk dibawa pulang.' : 'A free guide to take home.'}</p></div>`);
+    const phoneField = document.createElement('label');
+    phoneField.innerHTML = `${language === 'id' ? 'Nomor WhatsApp' : 'WhatsApp number'}<input name="whatsapp" inputmode="tel" autocomplete="tel" placeholder="+62812…" required>`;
+    ritualForm.querySelector('label:nth-of-type(2)').insertAdjacentElement('afterend', phoneField);
     return;
   }
   if (isPage('reading-ritual')) {
@@ -336,8 +341,8 @@ document.head.appendChild(fantasiaEventStyles);
 
 const fantasiaFormStyles = document.createElement('style');
 fantasiaFormStyles.textContent = `
-  .fantasia-ritual-form-layout{display:grid;grid-template-columns:1.06fr .76fr;gap:104px;align-items:center}.fantasia-ritual-form-layout>div>p:not(.eyebrow){max-width:500px;margin:18px 0 0;color:#d5e6da;font-size:17px;line-height:1.6}.fantasia-ritual-form-layout .ritual-form{background:var(--cream);box-shadow:none}.fantasia-ritual-form-layout .ritual-form h2{color:var(--forest)}
-  @media(max-width:760px){.fantasia-ritual-form-layout{grid-template-columns:1fr;gap:32px}}
+  .fantasia-ritual-form-layout{display:grid;grid-template-columns:1.06fr .76fr;gap:104px;align-items:center}.fantasia-ritual-form-layout>div>p:not(.eyebrow){max-width:500px;margin:18px 0 0;color:#f4f0e7;font-size:17px;line-height:1.6}.fantasia-ritual-form-layout .ritual-form{gap:18px;padding:34px;border:1px solid rgba(244,240,231,.5);border-radius:26px;background:#fffdfa;box-shadow:0 18px 38px rgba(9,45,38,.2)}.ritual-form-intro{display:flex;align-items:center;justify-content:space-between;gap:20px;padding-bottom:17px;border-bottom:1px solid #c6c1b6}.ritual-form-intro span{color:var(--emerald);font-size:12px;font-weight:700;letter-spacing:.08em}.ritual-form-intro p{margin:0!important;color:#173d35!important;font-size:13px!important;font-weight:700;line-height:1.35!important;text-align:right}.fantasia-ritual-form-layout .ritual-form label{display:grid;gap:7px;color:#173d35;font-size:14px;font-weight:700}.fantasia-ritual-form-layout .ritual-form input:not([type="checkbox"]){margin:0;padding:14px;border-color:#8e9b84;border-radius:12px;background:#fffdfa;color:#173d35}.fantasia-ritual-form-layout .ritual-form input::placeholder{color:#557267;opacity:1}.fantasia-ritual-form-layout .ritual-consent{margin-top:2px;color:#173d35;font-size:13px;font-weight:500}.fantasia-ritual-form-layout .button{width:100%;margin-top:4px;padding:16px 20px}.fantasia-ritual-form-layout .ritual-response{min-height:18px;color:#173d35!important;text-align:center}
+  @media(max-width:760px){.fantasia-ritual-form-layout{grid-template-columns:1fr;gap:32px}.fantasia-ritual-form-layout .ritual-form{padding:25px}.ritual-form-intro{align-items:flex-start}.ritual-form-intro p{text-align:left}}
 `;
 document.head.appendChild(fantasiaFormStyles);
 
@@ -374,4 +379,13 @@ document.addEventListener('submit', (event) => {
   ritualForm.querySelector('.ritual-response').textContent = ritualForm.querySelector('.ritual-response').dataset.response;
   window.open('https://raw.githubusercontent.com/mdarielfadli-byte/dr-santi-story/main/assets/7-days-reading-ritual.pdf', '_blank', 'noopener');
   ritualForm.reset();
+});
+
+document.addEventListener('input', (event) => {
+  const phone = event.target.closest('#reading-ritual-form input[name="whatsapp"]');
+  if (!phone) return;
+  const value = phone.value.replace(/[^\d+]/g, '');
+  if (value.startsWith('08')) phone.value = `+62${value.slice(1)}`;
+  else if (value.startsWith('62')) phone.value = `+${value}`;
+  else phone.value = value;
 });
