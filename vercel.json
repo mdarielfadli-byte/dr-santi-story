@@ -1,4 +1,26 @@
 {
   "cleanUrls": true,
-  "trailingSlash": false
+  "trailingSlash": false,
+  "redirects": [
+    {
+      "source": "/product-services",
+      "destination": "/programs-services",
+      "permanent": true
+    },
+    {
+      "source": "/fantasia/reading-ritual",
+      "destination": "/fantasia",
+      "permanent": true
+    },
+    {
+      "source": "/invite-dr-santi",
+      "destination": "/programs-services",
+      "permanent": true
+    },
+    {
+      "source": "/invite-dr-santi.html",
+      "destination": "/programs-services",
+      "permanent": true
+    }
+  ]
 }
