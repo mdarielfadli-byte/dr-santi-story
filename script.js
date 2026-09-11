@@ -147,18 +147,33 @@ function renderLocalizedPage(language) {
         };
     document.title = 'Cartea | Dr Santi’s Story';
     const carteaAsset = (name) => `https://raw.githubusercontent.com/mdarielfadli-byte/dr-santi-story/main/assets/cartea/${name}`;
-    main.innerHTML = `<section class="cartea-hero"><div class="section-shell cartea-hero-layout"><div class="cartea-hero-copy"><a class="cartea-back" href="/stories-resources">← ${copy.back}</a><p class="eyebrow light">${copy.eyebrow}</p><h1>Cartea</h1><p class="cartea-hero-title">${copy.title}</p><p class="lead">${copy.intro}</p></div><figure class="cartea-hero-photo"><img src="${carteaAsset('cartea-hero.webp')}" alt="${language === 'id' ? 'Peserta Cartea berfoto bersama setelah sesi diskusi' : 'Cartea participants together after the discussion'}"></figure></div></section><section class="section-shell cartea-story"><div><p class="eyebrow">Cartea x Dr Santi’s Story</p><h2>${copy.storyTitle}</h2></div><div class="cartea-story-copy"><p>${copy.storyOne}</p><p>${copy.storyTwo}</p></div></section><section class="section-shell cartea-gallery"><div class="cartea-section-heading"><p class="eyebrow">${copy.galleryEyebrow}</p><h2>${copy.galleryTitle}</h2></div><div class="cartea-gallery-grid"><figure class="cartea-gallery-large"><img src="${carteaAsset('cartea-01.webp')}" alt="${language === 'id' ? 'Suasana peserta di Cartea' : 'Guests gathered at Cartea'}"></figure><figure><img src="${carteaAsset('cartea-02.webp')}" alt="${language === 'id' ? 'Ruang diskusi di Cartea' : 'The conversation space at Cartea'}"></figure><figure><img src="${carteaAsset('cartea-03.webp')}" alt="${language === 'id' ? 'Peserta menyimak sesi di Cartea' : 'Guests listening during the Cartea session'}"></figure><figure><img src="${carteaAsset('cartea-04.webp')}" alt="${language === 'id' ? 'Momen bersama setelah sesi Cartea' : 'A shared moment after the Cartea session'}"></figure></div></section><section class="cartea-video"><div class="section-shell"><div class="cartea-video-heading"><div><p class="eyebrow light">${copy.videoEyebrow}</p><h2>${copy.videoTitle}</h2></div><p>${copy.videoText}</p></div><div class="cartea-video-grid"><article><p>${copy.reelOne}</p><blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/reel/DZUugkjO-Ub/" data-instgrm-version="14"><a href="https://www.instagram.com/reel/DZUugkjO-Ub/">${copy.reelOne}</a></blockquote></article><article><p>${copy.reelTwo}</p><blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/DZyqn9gTUzj/" data-instgrm-version="14"><a href="https://www.instagram.com/p/DZyqn9gTUzj/">${copy.reelTwo}</a></blockquote></article></div></div></section><section class="cartea-partners"><div class="section-shell cartea-partners-layout"><div><p class="eyebrow">${copy.partnersEyebrow}</p><h2>${copy.partnersTitle}</h2></div><div><p>${copy.partnersText}</p><a class="button button-primary" href="/stories-resources">${copy.next} <span aria-hidden="true">→</span></a></div></div></section>`;
-    const instagramEmbed = document.querySelector('script[data-instagram-embed]');
+    main.innerHTML = `<section class="cartea-hero"><div class="section-shell cartea-hero-layout"><div class="cartea-hero-copy"><a class="cartea-back" href="/stories-resources">← ${copy.back}</a><p class="eyebrow light">${copy.eyebrow}</p><h1>Cartea</h1><p class="cartea-hero-title">${copy.title}</p><p class="lead">${copy.intro}</p></div><figure class="cartea-hero-photo"><img src="${carteaAsset('cartea-hero.webp')}" alt="${language === 'id' ? 'Peserta Cartea berfoto bersama setelah sesi diskusi' : 'Cartea participants together after the discussion'}"></figure></div></section><section class="section-shell cartea-story"><div><p class="eyebrow">Cartea x Dr Santi’s Story</p><h2>${copy.storyTitle}</h2></div><div class="cartea-story-copy"><p>${copy.storyOne}</p><p>${copy.storyTwo}</p></div></section><section class="section-shell cartea-gallery"><div class="cartea-section-heading"><p class="eyebrow">${copy.galleryEyebrow}</p><h2>${copy.galleryTitle}</h2></div><div class="cartea-gallery-grid"><figure class="cartea-gallery-large"><img src="${carteaAsset('cartea-01.webp')}" alt="${language === 'id' ? 'Suasana peserta di Cartea' : 'Guests gathered at Cartea'}"></figure><figure><img src="${carteaAsset('cartea-02.webp')}" alt="${language === 'id' ? 'Ruang diskusi di Cartea' : 'The conversation space at Cartea'}"></figure><figure><img src="${carteaAsset('cartea-03.webp')}" alt="${language === 'id' ? 'Peserta menyimak sesi di Cartea' : 'Guests listening during the Cartea session'}"></figure><figure><img src="${carteaAsset('cartea-04.webp')}" alt="${language === 'id' ? 'Momen bersama setelah sesi Cartea' : 'A shared moment after the Cartea session'}"></figure></div></section><section class="cartea-video"><div class="section-shell"><div class="cartea-video-heading"><div><p class="eyebrow light">${copy.videoEyebrow}</p><h2>${copy.videoTitle}</h2></div><p>${copy.videoText}</p></div><div class="cartea-video-grid"><article><button class="cartea-video-trigger" type="button" data-instagram-url="https://www.instagram.com/reel/DZUugkjO-Ub/" data-video-title="${copy.reelOne}" aria-haspopup="dialog"><img src="${carteaAsset('cartea-01.webp')}" alt=""><span class="cartea-play-icon" aria-hidden="true">▶</span><span><strong>${copy.reelOne}</strong><small>${language === 'id' ? 'Putar video' : 'Play video'}</small></span></button></article><article><button class="cartea-video-trigger" type="button" data-instagram-url="https://www.instagram.com/p/DZyqn9gTUzj/" data-video-title="${copy.reelTwo}" aria-haspopup="dialog"><img src="${carteaAsset('cartea-04.webp')}" alt=""><span class="cartea-play-icon" aria-hidden="true">▶</span><span><strong>${copy.reelTwo}</strong><small>${language === 'id' ? 'Buka di pop-up' : 'Open in pop-up'}</small></span></button></article></div></div></section><section class="cartea-partners"><div class="section-shell cartea-partners-layout"><div><p class="eyebrow">${copy.partnersEyebrow}</p><h2>${copy.partnersTitle}</h2></div><div><p>${copy.partnersText}</p><a class="button button-primary" href="/stories-resources">${copy.next} <span aria-hidden="true">→</span></a></div></div></section>`;
+    const dialog = document.createElement('dialog');
+    dialog.className = 'cartea-video-modal';
+    dialog.innerHTML = `<div class="cartea-video-modal-panel"><div class="cartea-video-modal-top"><p></p><button type="button" aria-label="${language === 'id' ? 'Tutup video' : 'Close video'}">×</button></div><div class="cartea-video-modal-embed"></div></div>`;
+    document.body.appendChild(dialog);
+    const modalTitle = dialog.querySelector('.cartea-video-modal-top p');
+    const modalEmbed = dialog.querySelector('.cartea-video-modal-embed');
+    const closeModal = () => { dialog.close(); modalEmbed.replaceChildren(); };
+    dialog.querySelector('button').addEventListener('click', closeModal);
+    dialog.addEventListener('click', (event) => { if (event.target === dialog) closeModal(); });
     const processEmbeds = () => window.instgrm?.Embeds?.process();
-    if (instagramEmbed) processEmbeds();
-    else {
-      const script = document.createElement('script');
-      script.async = true;
-      script.src = 'https://www.instagram.com/embed.js';
-      script.dataset.instagramEmbed = 'true';
-      script.addEventListener('load', processEmbeds);
-      document.body.appendChild(script);
-    }
+    const openVideo = (trigger) => {
+      modalTitle.textContent = trigger.dataset.videoTitle;
+      modalEmbed.innerHTML = `<blockquote class="instagram-media" data-instgrm-permalink="${trigger.dataset.instagramUrl}" data-instgrm-version="14"><a href="${trigger.dataset.instagramUrl}">${trigger.dataset.videoTitle}</a></blockquote>`;
+      dialog.showModal();
+      const instagramEmbed = document.querySelector('script[data-instagram-embed]');
+      if (instagramEmbed) processEmbeds();
+      else {
+        const script = document.createElement('script');
+        script.async = true;
+        script.src = 'https://www.instagram.com/embed.js';
+        script.dataset.instagramEmbed = 'true';
+        script.addEventListener('load', processEmbeds);
+        document.body.appendChild(script);
+      }
+    };
+    main.querySelectorAll('.cartea-video-trigger').forEach((trigger) => trigger.addEventListener('click', () => openVideo(trigger)));
     return;
   }
   if (isPage('stories-resources')) {
@@ -421,6 +436,20 @@ carteaStyles.textContent = `
   @media(max-width:760px){.cartea-hero{margin-top:0;border-radius:0 0 22px 22px}.cartea-hero-layout,.cartea-story,.cartea-section-heading,.cartea-video-heading,.cartea-partners-layout{grid-template-columns:1fr;gap:34px}.cartea-hero-layout{min-height:0;padding:54px 0 64px}.cartea-back{margin-bottom:47px}.cartea-hero h1{font-size:clamp(67px,18vw,92px)}.cartea-hero-photo img{min-height:330px}.cartea-story{padding-top:74px;padding-bottom:74px}.cartea-story-copy{padding-top:0}.cartea-story-copy p{font-size:16px}.cartea-gallery{padding-bottom:74px}.cartea-section-heading{margin-bottom:28px}.cartea-gallery-grid{grid-template-columns:1fr 1fr;grid-template-rows:250px 155px 155px;gap:11px}.cartea-gallery-grid figure:first-child{grid-column:span 2;grid-row:span 1}.cartea-gallery-grid figure:last-child{grid-column:span 1}.cartea-video{padding:74px 0}.cartea-video-heading{margin-bottom:30px}.cartea-video-grid{grid-template-columns:1fr}.cartea-video-grid article{min-height:0;padding:14px}.cartea-partners{padding:74px 0}}
 `;
 document.head.appendChild(carteaStyles);
+
+const carteaVideoPopupStyles = document.createElement('style');
+carteaVideoPopupStyles.textContent = `
+  .cartea-video-grid article{min-height:0;padding:0;overflow:hidden}.cartea-video-trigger{position:relative;display:block;width:100%;min-height:360px;overflow:hidden;padding:0;border:0;background:var(--forest);color:var(--cream);font:inherit;text-align:left;cursor:pointer}.cartea-video-trigger>img{display:block;width:100%;height:360px;object-fit:cover;opacity:.72;transition:transform .35s ease,opacity .35s ease}.cartea-video-trigger:hover>img,.cartea-video-trigger:focus-visible>img{opacity:.88;transform:scale(1.04)}.cartea-video-trigger>span:last-child{position:absolute;right:0;bottom:0;left:0;display:flex;flex-direction:column;gap:3px;padding:22px 24px;background:linear-gradient(transparent,rgba(9,45,38,.92));font-size:16px}.cartea-video-trigger small{color:#d5e6da;font-size:13px}.cartea-play-icon{position:absolute;top:50%;left:50%;display:grid;width:64px;height:64px;place-items:center;border-radius:50%;background:var(--gold);color:var(--forest);font-size:22px;transform:translate(-50%,-50%);transition:transform .25s ease}.cartea-video-trigger:hover .cartea-play-icon,.cartea-video-trigger:focus-visible .cartea-play-icon{transform:translate(-50%,-50%) scale(1.1)}.cartea-video-modal{width:min(650px,calc(100vw - 32px));max-height:calc(100vh - 32px);padding:0;border:0;border-radius:22px;background:var(--cream);box-shadow:0 28px 72px rgba(0,0,0,.34)}.cartea-video-modal::backdrop{background:rgba(9,45,38,.78);backdrop-filter:blur(4px)}.cartea-video-modal-panel{padding:17px}.cartea-video-modal-top{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:0 4px 14px}.cartea-video-modal-top p{margin:0;color:var(--forest);font-size:14px;font-weight:700}.cartea-video-modal-top button{display:grid;width:37px;height:37px;place-items:center;border:0;border-radius:50%;background:var(--forest);color:var(--cream);font:28px/1 var(--sans);cursor:pointer}.cartea-video-modal-embed{max-height:calc(100vh - 112px);overflow:auto}.cartea-video-modal .instagram-media{width:100%!important;min-width:0!important;margin:0!important}
+  @media(max-width:760px){.cartea-video-trigger,.cartea-video-trigger>img{min-height:300px;height:300px}}
+`;
+document.head.appendChild(carteaVideoPopupStyles);
+
+const carteaGalleryRatioStyles = document.createElement('style');
+carteaGalleryRatioStyles.textContent = `
+  .cartea-gallery-grid{display:block;columns:2;column-gap:16px}.cartea-gallery-grid figure,.cartea-gallery-grid figure:first-child,.cartea-gallery-grid figure:last-child{display:block;break-inside:avoid;margin:0 0 16px}.cartea-gallery-grid img{width:100%;height:auto;object-fit:contain}.cartea-gallery-grid figure:hover img{transform:none}
+  @media(max-width:760px){.cartea-gallery-grid{columns:1;column-gap:0}.cartea-gallery-grid figure,.cartea-gallery-grid figure:first-child,.cartea-gallery-grid figure:last-child{margin-bottom:12px}}
+`;
+document.head.appendChild(carteaGalleryRatioStyles);
 
 const contentPlaceholderPages = ['stories-resources', 'articles'];
 if (contentPlaceholderPages.some((page) => isPage(page))) {
