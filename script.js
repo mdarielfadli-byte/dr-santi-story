@@ -101,12 +101,72 @@ function renderLocalizedPage(language) {
     main.innerHTML = `<section class="ritual-download-page"><div class="section-shell ritual-download-layout"><div><a class="ritual-back" href="/fantasia">← Fantasia</a><p class="eyebrow">${copy.eyebrow}</p><h1>${copy.title}</h1><p class="lead">${copy.intro}</p><p class="ritual-detail">${copy.detail}</p><div class="ritual-days" aria-hidden="true"><span>01</span><span>02</span><span>03</span><span>04</span><span>05</span><span>06</span><span>07</span></div></div><form class="ritual-form" id="reading-ritual-form" novalidate><p class="eyebrow">7 Days Reading Ritual</p><h2>${language === 'id' ? 'Mulai dari satu cerita hari ini.' : 'Begin with one story today.'}</h2><p>${copy.fileNote}</p><label>${copy.name}<input name="name" autocomplete="name" required></label><label>${copy.email}<input name="email" type="email" autocomplete="email" required></label><label class="ritual-consent"><input type="checkbox" name="consent" required><span>${copy.consent}</span></label><button class="button button-primary" type="submit">${copy.button} <span aria-hidden="true">→</span></button><p class="ritual-response" aria-live="polite" data-response="${copy.response}"></p></form></div></section>`;
     return;
   }
+  if (isPage('cartea')) {
+    const main = document.querySelector('main');
+    if (!main) return;
+    const copy = language === 'id'
+      ? {
+          eyebrow: 'Cartea · Juni 2026',
+          title: 'Reading Culture Between Generations',
+          intro: 'Sebuah sesi berbagi yang hangat dan intim tentang budaya membaca lintas generasi—bersama sekitar 50 peserta yang hadir untuk menyimak, bertanya, dan berbagi pengalaman.',
+          back: 'Kembali ke Stories & Resources',
+          storyTitle: 'Sebuah ruang untuk membaca, bertanya, dan terhubung.',
+          storyOne: 'Dalam percakapan ini, Santi Dharmaputra, PhD membagikan wawasan dan pengalamannya tentang peran membaca dalam membentuk budaya, pemahaman, dan koneksi antar-generasi.',
+          storyTwo: 'Yang membuat pertemuan ini berkesan bukan hanya topiknya, tetapi juga rasa ingin tahu dan kontribusi setiap peserta di dalam ruangan.',
+          galleryEyebrow: 'Potret dari pertemuan',
+          galleryTitle: 'Momen yang kami bawa pulang.',
+          videoEyebrow: 'Tonton kembali',
+          videoTitle: 'Reel dan cerita dari Cartea.',
+          videoText: 'Saksikan suasana Cartea melalui Reel, lalu lanjutkan ceritanya lewat unggahan asli di Instagram.',
+          reelOne: 'Reel dari Dr Santi’s Story',
+          reelTwo: 'Cerita dari Cartea',
+          partnersEyebrow: 'Dengan terima kasih',
+          partnersTitle: 'Dibuat bersama oleh orang-orang yang percaya pada percakapan yang baik.',
+          partnersText: 'Terima kasih kepada Cartea sebagai tuan rumah, Fullspec Community yang memfasilitasi percakapan, serta Abang None Jakarta sebagai media partner.',
+          next: 'Baca Stories & Resources lainnya'
+        }
+      : {
+          eyebrow: 'Cartea · June 2026',
+          title: 'Reading Culture Between Generations',
+          intro: 'A warm, intimate sharing session on reading culture across generations—with around 50 people who came to listen, question, and share their experiences.',
+          back: 'Back to Stories & Resources',
+          storyTitle: 'A room to read, question, and connect.',
+          storyOne: 'In this conversation, Santi Dharmaputra, PhD shared insights and experiences on the role of reading in shaping culture, understanding, and connection across generations.',
+          storyTwo: 'What made the gathering memorable was not only the subject, but the curiosity and contributions that each person brought into the room.',
+          galleryEyebrow: 'From the gathering',
+          galleryTitle: 'Moments we carried home.',
+          videoEyebrow: 'Watch again',
+          videoTitle: 'A reel and story from Cartea.',
+          videoText: 'Watch the atmosphere from Cartea in the reel, then continue the story through the original Instagram post.',
+          reelOne: 'A reel from Dr Santi’s Story',
+          reelTwo: 'A story from Cartea',
+          partnersEyebrow: 'With thanks',
+          partnersTitle: 'Made with people who believe in a good conversation.',
+          partnersText: 'Thank you to Cartea for hosting, Fullspec Community for facilitating the conversation, and Abang None Jakarta as media partner.',
+          next: 'Explore more Stories & Resources'
+        };
+    document.title = 'Cartea | Dr Santi’s Story';
+    const carteaAsset = (name) => `https://raw.githubusercontent.com/mdarielfadli-byte/dr-santi-story/main/assets/cartea/${name}`;
+    main.innerHTML = `<section class="cartea-hero"><div class="section-shell cartea-hero-layout"><div class="cartea-hero-copy"><a class="cartea-back" href="/stories-resources">← ${copy.back}</a><p class="eyebrow light">${copy.eyebrow}</p><h1>Cartea</h1><p class="cartea-hero-title">${copy.title}</p><p class="lead">${copy.intro}</p></div><figure class="cartea-hero-photo"><img src="${carteaAsset('cartea-hero.webp')}" alt="${language === 'id' ? 'Peserta Cartea berfoto bersama setelah sesi diskusi' : 'Cartea participants together after the discussion'}"></figure></div></section><section class="section-shell cartea-story"><div><p class="eyebrow">Cartea x Dr Santi’s Story</p><h2>${copy.storyTitle}</h2></div><div class="cartea-story-copy"><p>${copy.storyOne}</p><p>${copy.storyTwo}</p></div></section><section class="section-shell cartea-gallery"><div class="cartea-section-heading"><p class="eyebrow">${copy.galleryEyebrow}</p><h2>${copy.galleryTitle}</h2></div><div class="cartea-gallery-grid"><figure class="cartea-gallery-large"><img src="${carteaAsset('cartea-01.webp')}" alt="${language === 'id' ? 'Suasana peserta di Cartea' : 'Guests gathered at Cartea'}"></figure><figure><img src="${carteaAsset('cartea-02.webp')}" alt="${language === 'id' ? 'Ruang diskusi di Cartea' : 'The conversation space at Cartea'}"></figure><figure><img src="${carteaAsset('cartea-03.webp')}" alt="${language === 'id' ? 'Peserta menyimak sesi di Cartea' : 'Guests listening during the Cartea session'}"></figure><figure><img src="${carteaAsset('cartea-04.webp')}" alt="${language === 'id' ? 'Momen bersama setelah sesi Cartea' : 'A shared moment after the Cartea session'}"></figure></div></section><section class="cartea-video"><div class="section-shell"><div class="cartea-video-heading"><div><p class="eyebrow light">${copy.videoEyebrow}</p><h2>${copy.videoTitle}</h2></div><p>${copy.videoText}</p></div><div class="cartea-video-grid"><article><p>${copy.reelOne}</p><blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/reel/DZUugkjO-Ub/" data-instgrm-version="14"><a href="https://www.instagram.com/reel/DZUugkjO-Ub/">${copy.reelOne}</a></blockquote></article><article><p>${copy.reelTwo}</p><blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/DZyqn9gTUzj/" data-instgrm-version="14"><a href="https://www.instagram.com/p/DZyqn9gTUzj/">${copy.reelTwo}</a></blockquote></article></div></div></section><section class="cartea-partners"><div class="section-shell cartea-partners-layout"><div><p class="eyebrow">${copy.partnersEyebrow}</p><h2>${copy.partnersTitle}</h2></div><div><p>${copy.partnersText}</p><a class="button button-primary" href="/stories-resources">${copy.next} <span aria-hidden="true">→</span></a></div></div></section>`;
+    const instagramEmbed = document.querySelector('script[data-instagram-embed]');
+    const processEmbeds = () => window.instgrm?.Embeds?.process();
+    if (instagramEmbed) processEmbeds();
+    else {
+      const script = document.createElement('script');
+      script.async = true;
+      script.src = 'https://www.instagram.com/embed.js';
+      script.dataset.instagramEmbed = 'true';
+      script.addEventListener('load', processEmbeds);
+      document.body.appendChild(script);
+    }
+    return;
+  }
   if (isPage('stories-resources')) {
     const grid = document.querySelector('.resource-grid');
     if (!grid) return;
     const copy = language === 'id'
-      ? { eyebrow: 'Arsip acara', title: 'Ruang yang pernah kita bagi bersama.', intro: 'Dokumentasi percakapan, buku, dan pertemuan yang telah berlangsung. Foto di bawah adalah placeholder dan akan diganti dengan dokumentasi resmi.', eventOne: 'Cartea', eventOneMeta: 'Juni 2026 · Dokumentasi segera hadir', eventTwo: 'Fantasia', eventTwoMeta: '12 September 2026 · Menunggu dokumentasi acara', action: 'Lihat cerita acara' }
-      : { eyebrow: 'Event archive', title: 'Rooms we have shared together.', intro: 'A record of conversations, books, and gatherings that have taken place. The images below are placeholders and will be replaced with official documentation.', eventOne: 'Cartea', eventOneMeta: 'June 2026 · Documentation coming soon', eventTwo: 'Fantasia', eventTwoMeta: '12 September 2026 · Event documentation pending', action: 'View event story' };
+      ? { eyebrow: 'Arsip acara', title: 'Ruang yang pernah kita bagi bersama.', intro: 'Dokumentasi percakapan, buku, dan pertemuan yang telah berlangsung.', eventOne: 'Cartea', eventOneMeta: 'Juni 2026 · Reading Culture Between Generations', eventTwo: 'Fantasia', eventTwoMeta: '12 September 2026 · Menunggu dokumentasi acara', action: 'Lihat cerita acara' }
+      : { eyebrow: 'Event archive', title: 'Rooms we have shared together.', intro: 'A record of conversations, books, and gatherings that have taken place.', eventOne: 'Cartea', eventOneMeta: 'June 2026 · Reading Culture Between Generations', eventTwo: 'Fantasia', eventTwoMeta: '12 September 2026 · Event documentation pending', action: 'View event story' };
     let archive = document.querySelector('#event-archive');
     if (!archive) {
       archive = document.createElement('section');
@@ -114,7 +174,7 @@ function renderLocalizedPage(language) {
       archive.className = 'section-shell event-archive';
       grid.insertAdjacentElement('afterend', archive);
     }
-    archive.innerHTML = `<div class="event-archive-heading"><div><p class="eyebrow">${copy.eyebrow}</p><h2>${copy.title}</h2></div><p>${copy.intro}</p></div><div class="event-archive-grid"><article><img src="https://raw.githubusercontent.com/mdarielfadli-byte/dr-santi-story/main/assets/event-reading-gathering-dummy.jpg" alt="${language === 'id' ? 'Placeholder dokumentasi acara Cartea' : 'Placeholder for Cartea event documentation'}"><div><p>${copy.eventOneMeta}</p><h3>${copy.eventOne}</h3><a class="text-link" href="/stories-resources">${copy.action} <span>→</span></a></div></article><article><img src="https://raw.githubusercontent.com/mdarielfadli-byte/dr-santi-story/main/assets/event-reading-gathering-dummy.jpg" alt="${language === 'id' ? 'Placeholder dokumentasi acara Fantasia' : 'Placeholder for Fantasia event documentation'}"><div><p>${copy.eventTwoMeta}</p><h3>${copy.eventTwo}</h3><a class="text-link" href="/fantasia">${copy.action} <span>→</span></a></div></article></div>`;
+    archive.innerHTML = `<div class="event-archive-heading"><div><p class="eyebrow">${copy.eyebrow}</p><h2>${copy.title}</h2></div><p>${copy.intro}</p></div><div class="event-archive-grid"><article><img src="https://raw.githubusercontent.com/mdarielfadli-byte/dr-santi-story/main/assets/cartea/cartea-hero.webp" alt="${language === 'id' ? 'Dokumentasi acara Cartea' : 'Cartea event documentation'}"><div><p>${copy.eventOneMeta}</p><h3>${copy.eventOne}</h3><a class="text-link" href="/stories-resources/cartea">${copy.action} <span>→</span></a></div></article><article><img src="https://raw.githubusercontent.com/mdarielfadli-byte/dr-santi-story/main/assets/event-reading-gathering-dummy.jpg" alt="${language === 'id' ? 'Placeholder dokumentasi acara Fantasia' : 'Placeholder for Fantasia event documentation'}"><div><p>${copy.eventTwoMeta}</p><h3>${copy.eventTwo}</h3><a class="text-link" href="/fantasia">${copy.action} <span>→</span></a></div></article></div>`;
     return;
   }
   if (isPage('collaborate')) {
@@ -354,6 +414,13 @@ fantasiaFormStyles.textContent = `
   @media(max-width:760px){.fantasia-ritual-form-layout{grid-template-columns:1fr;gap:32px}.fantasia-ritual-form-layout .ritual-form{padding:25px}.ritual-form-intro{align-items:flex-start}.ritual-form-intro p{text-align:left}}
 `;
 document.head.appendChild(fantasiaFormStyles);
+
+const carteaStyles = document.createElement('style');
+carteaStyles.textContent = `
+  .cartea-hero{margin-top:16px;border-radius:0 0 32px 32px;background:var(--forest);color:var(--cream)}.cartea-hero-layout{display:grid;grid-template-columns:minmax(0,1fr) minmax(340px,.74fr);gap:80px;align-items:center;min-height:620px;padding:70px 0}.cartea-back{display:inline-block;margin-bottom:72px;color:#d5e6da;font-size:14px;font-weight:700;text-decoration:none}.cartea-back:hover{color:var(--gold)}.cartea-hero h1{margin:0;color:var(--cream);font-size:clamp(72px,9vw,124px);line-height:.84;letter-spacing:-.065em}.cartea-hero-title{max-width:600px;margin:28px 0 17px;color:var(--gold);font-size:clamp(25px,3vw,37px);font-weight:700;line-height:1.16}.cartea-hero .lead{max-width:615px;margin:0;color:#d5e6da;font-size:18px;line-height:1.6}.cartea-hero-photo{position:relative;margin:0;padding:16px 0 0 16px}.cartea-hero-photo:before{position:absolute;inset:0 28px 28px 0;border:1px solid rgba(244,240,231,.5);border-radius:26px;content:""}.cartea-hero-photo img{position:relative;display:block;width:100%;min-height:410px;border-radius:22px;object-fit:cover;box-shadow:0 20px 35px rgba(5,20,16,.28)}.cartea-story{display:grid;grid-template-columns:1fr .78fr;gap:100px;padding-top:112px;padding-bottom:112px}.cartea-story h2,.cartea-section-heading h2,.cartea-partners h2{margin:0;color:var(--forest);font-size:clamp(39px,4.8vw,63px);line-height:1.04;letter-spacing:-.045em}.cartea-story-copy{padding-top:37px}.cartea-story-copy p{margin:0 0 20px;font-size:18px;line-height:1.68}.cartea-gallery{padding-bottom:112px}.cartea-section-heading{display:grid;grid-template-columns:1fr .72fr;gap:60px;align-items:end;margin-bottom:39px}.cartea-gallery-grid{display:grid;grid-template-columns:1.25fr .75fr .75fr;grid-template-rows:220px 220px;gap:16px}.cartea-gallery-grid figure{margin:0;overflow:hidden;border-radius:20px;background:var(--sage)}.cartea-gallery-grid figure:first-child{grid-row:span 2}.cartea-gallery-grid figure:last-child{grid-column:span 2}.cartea-gallery-grid img{display:block;width:100%;height:100%;object-fit:cover;transition:transform .45s ease}.cartea-gallery-grid figure:hover img{transform:scale(1.04)}.cartea-video{padding:102px 0;background:#d8e0d2}.cartea-video-heading{display:grid;grid-template-columns:1fr .72fr;gap:70px;align-items:end;margin-bottom:44px}.cartea-video-heading h2{max-width:620px;margin:0;color:var(--forest);font-size:clamp(39px,4.7vw,61px);line-height:1.04;letter-spacing:-.045em}.cartea-video-heading>p{margin:0;color:#315e53;font-size:17px;line-height:1.6}.cartea-video-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}.cartea-video-grid article{min-height:520px;padding:21px;border-radius:22px;background:var(--white);box-shadow:0 12px 28px rgba(23,61,53,.08)}.cartea-video-grid article>p{margin:0 0 13px;color:#315e53;font-size:13px;font-weight:700}.cartea-video-grid .instagram-media{width:100%!important;min-width:0!important;margin:0!important}.cartea-partners{padding:108px 0;background:var(--gold)}.cartea-partners-layout{display:grid;grid-template-columns:1fr .78fr;gap:100px;align-items:end}.cartea-partners-layout>div:last-child p{margin:0 0 27px;color:#315e53;font-size:17px;line-height:1.6}
+  @media(max-width:760px){.cartea-hero{margin-top:0;border-radius:0 0 22px 22px}.cartea-hero-layout,.cartea-story,.cartea-section-heading,.cartea-video-heading,.cartea-partners-layout{grid-template-columns:1fr;gap:34px}.cartea-hero-layout{min-height:0;padding:54px 0 64px}.cartea-back{margin-bottom:47px}.cartea-hero h1{font-size:clamp(67px,18vw,92px)}.cartea-hero-photo img{min-height:330px}.cartea-story{padding-top:74px;padding-bottom:74px}.cartea-story-copy{padding-top:0}.cartea-story-copy p{font-size:16px}.cartea-gallery{padding-bottom:74px}.cartea-section-heading{margin-bottom:28px}.cartea-gallery-grid{grid-template-columns:1fr 1fr;grid-template-rows:250px 155px 155px;gap:11px}.cartea-gallery-grid figure:first-child{grid-column:span 2;grid-row:span 1}.cartea-gallery-grid figure:last-child{grid-column:span 1}.cartea-video{padding:74px 0}.cartea-video-heading{margin-bottom:30px}.cartea-video-grid{grid-template-columns:1fr}.cartea-video-grid article{min-height:0;padding:14px}.cartea-partners{padding:74px 0}}
+`;
+document.head.appendChild(carteaStyles);
 
 const contentPlaceholderPages = ['stories-resources', 'articles'];
 if (contentPlaceholderPages.some((page) => isPage(page))) {
