@@ -59,6 +59,11 @@ function usePublishedPhotos() {
       .replace('dr-santi-portrait.webp', 'dr-santi-portrait.jpg')
       .replace('dr-santi-reading.webp', 'dr-santi-reading.jpg');
   });
+  if (isPage('programs-services')) {
+    const [primary, secondary] = document.querySelectorAll('.service-entry-photos img');
+    if (primary) primary.src = 'https://raw.githubusercontent.com/mdarielfadli-byte/dr-santi-story/main/assets/programs-services-1.webp';
+    if (secondary) secondary.src = 'https://raw.githubusercontent.com/mdarielfadli-byte/dr-santi-story/main/assets/programs-services-2.webp';
+  }
 }
 
 function renderLocalizedPage(language) {
@@ -202,7 +207,7 @@ const footer = document.querySelector('.site-footer');
 if (footer) {
   const preFooter = document.createElement('section');
   preFooter.className = 'footer-invitation';
-  preFooter.innerHTML = `<div class="section-shell footer-invitation-inner"><div><p class="eyebrow">Mari terhubung</p><h2>Mulai dari satu percakapan yang bermakna.</h2></div><a class="button button-primary" href="/contact">Hubungi kami <span aria-hidden="true">→</span></a></div>`;
+  preFooter.innerHTML = `<div class="section-shell footer-invitation-inner"><div><p class="eyebrow">Let's connect</p><h2>Begin with one meaningful conversation.</h2></div><a class="button button-primary" href="/contact">Contact us <span aria-hidden="true">→</span></a></div>`;
   footer.insertAdjacentElement('beforebegin', preFooter);
   footer.innerHTML = `
     <div class="footer-main section-shell">
@@ -227,8 +232,8 @@ if (footer) {
       </nav>
       <nav class="footer-nav" aria-label="Contact channels">
         <p class="footer-title">Contact</p>
-        <a href="/contact"><span class="footer-contact-icon" aria-hidden="true">◔</span>WhatsApp</a>
-        <a href="/contact"><span class="footer-contact-icon" aria-hidden="true">◎</span>Instagram</a>
+        <a href="https://wa.me/6287720666619" target="_blank" rel="noopener"><span class="footer-contact-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M20.5 3.5A11.8 11.8 0 0 0 12.1 0C5.6 0 .3 5.3.3 11.8c0 2.1.5 4.1 1.6 5.9L0 24l6.5-1.7a11.8 11.8 0 0 0 17.3-10.5c0-3.2-1.2-6.1-3.3-8.3Zm-8.4 18.5a9.8 9.8 0 0 1-5-1.4l-.4-.2-3.9 1 1-3.8-.3-.4a9.8 9.8 0 1 1 8.6 4.8Zm5.4-7.3c-.3-.2-1.8-.9-2.1-1-.3-.1-.5-.2-.7.2-.2.3-.8 1-.9 1.2-.2.2-.3.2-.6.1-1.7-.8-2.8-1.5-3.9-3.4-.3-.5.3-.5.8-1.7.1-.2.1-.4 0-.6l-1-2.3c-.2-.5-.5-.4-.7-.4h-.6c-.2 0-.6.1-.9.4s-1.2 1.1-1.2 2.7 1.2 3.1 1.4 3.3c.2.2 2.3 3.6 5.6 5 2.1.9 3 .9 4.1.8.7-.1 1.8-.7 2.1-1.4.3-.7.3-1.3.2-1.4-.1-.1-.3-.2-.6-.4Z"/></svg></span>WhatsApp</a>
+        <a href="https://www.instagram.com/drsantistory/" target="_blank" rel="noopener"><span class="footer-contact-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7.3 0h9.4C20.7 0 24 3.3 24 7.3v9.4c0 4-3.3 7.3-7.3 7.3H7.3C3.3 24 0 20.7 0 16.7V7.3C0 3.3 3.3 0 7.3 0Zm-.3 2.4A4.6 4.6 0 0 0 2.4 7v10A4.6 4.6 0 0 0 7 21.6h10a4.6 4.6 0 0 0 4.6-4.6V7A4.6 4.6 0 0 0 17 2.4H7Zm10.9 1.8a1.4 1.4 0 1 1 0 2.8 1.4 1.4 0 0 1 0-2.8ZM12 5.8A6.2 6.2 0 1 1 12 18.2 6.2 6.2 0 0 1 12 5.8Zm0 2.4a3.8 3.8 0 1 0 0 7.6 3.8 3.8 0 0 0 0-7.6Z"/></svg></span>Instagram</a>
         <a href="mailto:drsantistory@gmail.com"><span class="footer-contact-icon" aria-hidden="true">✉</span>drsantistory@gmail.com</a>
       </nav>
     </div>
@@ -265,7 +270,7 @@ const visualStyles = document.createElement('style');
 visualStyles.textContent = `
   :root{--serif:var(--sans)}
   h1,h2,h3,blockquote,.wordmark,.article-pullquote{font-family:var(--sans)!important;font-weight:700!important;letter-spacing:-.035em}
-  .photo-placeholder,.portrait-placeholder,.article-image{background-image:linear-gradient(0deg,rgba(31,91,76,.12),rgba(31,91,76,.12)),url('https://raw.githubusercontent.com/mdarielfadli-byte/dr-santi-story/main/assets/dr-santi-portrait-dummy.png')!important;background-size:cover!important;background-position:center!important;border-radius:24px}.photo-placeholder{font-size:0!important}.photo-placeholder span{display:none}.portrait-placeholder{font-size:0!important}.article-image{font-size:0!important}
+  .photo-placeholder,.portrait-placeholder,.article-image{background-image:linear-gradient(0deg,rgba(31,91,76,.08),rgba(31,91,76,.08)),url('https://raw.githubusercontent.com/mdarielfadli-byte/dr-santi-story/main/assets/drsantistory.webp')!important;background-size:cover!important;background-position:center!important;border-radius:24px}.photo-placeholder{font-size:0!important}.photo-placeholder span{display:none}.portrait-placeholder{font-size:0!important}.article-image{font-size:0!important}
   .hero-visual{border-radius:28px}.hero-visual .photo-placeholder{border-radius:16px}.visual-caption{border-radius:0 16px 16px 0}
   .program-card,.story-card,.resource-grid article,.article-feature,.article-list article,.credentials>div,.newsletter-panel,.invitation-panel,.offer-section,.article-cta,.book-card,.book-cover,.inquiry-form input,.inquiry-form select,.inquiry-form textarea{border-radius:16px}
   .quote-band{border-radius:28px;margin:0 6%}.quote-band .section-shell{margin-inline:auto}.proof-strip{border-radius:0}
@@ -274,6 +279,10 @@ visualStyles.textContent = `
   @media(max-width:760px){.quote-band{margin:0;border-radius:0}.hero-visual{border-radius:20px}.program-card,.story-card,.resource-grid article,.article-feature,.article-list article,.credentials>div,.newsletter-panel,.invitation-panel,.offer-section,.article-cta,.book-card{border-radius:14px}}
 `;
 document.head.appendChild(visualStyles);
+
+const footerIconStyles = document.createElement('style');
+footerIconStyles.textContent = `.footer-contact-icon{display:inline-grid;place-items:center;width:18px;height:18px;margin-right:6px;color:var(--gold);font-size:16px;vertical-align:-3px}.footer-contact-icon svg{width:16px;height:16px;fill:currentColor}`;
+document.head.appendChild(footerIconStyles);
 
 const brandStyles = document.createElement('style');
 brandStyles.textContent = `
