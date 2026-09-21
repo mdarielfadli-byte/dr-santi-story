@@ -1,0 +1,4 @@
+.vercel
+.sanity
+node_modules
+dist

@@ -1,0 +1,16 @@
+{
+  "name": "dr-santi-story-cms",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "sanity start",
+    "build": "sanity build"
+  },
+  "dependencies": {
+    "@sanity/vision": "latest",
+    "react": "latest",
+    "react-dom": "latest",
+    "sanity": "latest",
+    "styled-components": "6.5.3"
+  }
+}
