@@ -576,3 +576,53 @@ if (!window.DrSantiCMSStarted && !document.querySelector('script[data-dr-santi-c
   cmsScript.dataset.drSantiCms = 'true';
   document.body.append(cmsScript);
 }
+
+const canonicalPaths = {
+  '/': '/',
+  '/index.html': '/',
+  '/about': '/about',
+  '/about.html': '/about',
+  '/programs-services': '/programs-services',
+  '/programs-services.html': '/programs-services',
+  '/speaking-collaboration': '/speaking-collaboration',
+  '/speaking-collaboration.html': '/speaking-collaboration',
+  '/stories-resources': '/stories-resources',
+  '/stories-resources.html': '/stories-resources',
+  '/stories-resources/cartea': '/stories-resources/cartea',
+  '/articles': '/articles',
+  '/articles.html': '/articles',
+  '/article-kebiasaan-membaca-anak': '/article-kebiasaan-membaca-anak',
+  '/article-kebiasaan-membaca-anak.html': '/article-kebiasaan-membaca-anak',
+  '/fantasia': '/fantasia',
+  '/fantasia.html': '/fantasia',
+  '/fantasia-event': '/fantasia-event',
+  '/fantasia-event.html': '/fantasia-event',
+  '/partnership': '/partnership',
+  '/partnership.html': '/partnership',
+  '/collaborate': '/collaborate',
+  '/collaborate.html': '/collaborate',
+  '/contact': '/contact',
+  '/contact.html': '/contact'
+};
+
+const pageDescriptions = {
+  '/contact': "Contact Dr Santi's Story for speaking, workshops, learning experiences, and collaborations.",
+  '/contact.html': "Contact Dr Santi's Story for speaking, workshops, learning experiences, and collaborations.",
+  '/stories-resources': "Stories, articles, reading resources, and event documentation from Dr Santi's Story.",
+  '/stories-resources.html': "Stories, articles, reading resources, and event documentation from Dr Santi's Story."
+};
+
+const canonicalPath = canonicalPaths[window.location.pathname];
+if (canonicalPath && !document.querySelector('link[rel="canonical"]')) {
+  const canonical = document.createElement('link');
+  canonical.rel = 'canonical';
+  canonical.href = `https://www.drsantistory.com${canonicalPath}`;
+  document.head.append(canonical);
+}
+
+if (pageDescriptions[window.location.pathname] && !document.querySelector('meta[name="description"]')) {
+  const description = document.createElement('meta');
+  description.name = 'description';
+  description.content = pageDescriptions[window.location.pathname];
+  document.head.append(description);
+}
