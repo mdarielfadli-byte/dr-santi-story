@@ -27,7 +27,8 @@ Retired routes:
 - Published website copy: `GET /api/cms-content?page=<pageId>`
 - Published article feed: `GET /api/articles`
 - SEO-ready article page: `/articles/<slug>` (server-rendered from Sanity)
-- Dynamic sitemap: `/sitemap.xml` (includes published Sanity articles)
+- Primary sitemap: `/sitemap.xml` (static, submitted to Search Console)
+- Optional dynamic sitemap: `/sitemap-dynamic.xml` (includes published Sanity articles; verify it before submission)
 - The public form endpoints proxy to the configured Google Apps Script endpoint.
 - The 7 Days Reading Ritual PDF is stored at `/assets/7-days-reading-ritual.pdf`.
 
