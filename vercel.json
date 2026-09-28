@@ -7,7 +7,7 @@
       "destination": "/api/article-page?slug=:slug"
     },
     {
-      "source": "/sitemap.xml",
+      "source": "/sitemap-dynamic.xml",
       "destination": "/api/sitemap"
     }
   ],
