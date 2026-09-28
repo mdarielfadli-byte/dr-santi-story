@@ -61,16 +61,18 @@ const pageCopy = defineType({
 
 const article = defineType({
   name: 'article',
-  title: 'Article',
+  title: 'Artikel',
   type: 'document',
   fields: [
-    defineField({name: 'title', title: 'Title', type: 'string', validation: Rule => Rule.required()}),
-    defineField({name: 'slug', title: 'URL slug', type: 'slug', options: {source: 'title'}, validation: Rule => Rule.required()}),
-    defineField({name: 'category', title: 'Category', type: 'string'}),
-    defineField({name: 'summary', title: 'Summary', type: 'text', rows: 3}),
-    defineField({name: 'featuredImage', title: 'Featured image', type: 'image', options: {hotspot: true}}),
-    defineField({name: 'body', title: 'Article body', type: 'array', of: [{type: 'block'}]}),
-    defineField({name: 'publishedAt', title: 'Published date', type: 'datetime'})
+    defineField({name: 'title', title: 'Judul artikel', type: 'string', validation: Rule => Rule.required()}),
+    defineField({name: 'slug', title: 'URL artikel', type: 'slug', options: {source: 'title'}, validation: Rule => Rule.required(), description: 'Dibuat otomatis dari judul. Jangan diubah setelah artikel dipublikasikan.'}),
+    defineField({name: 'category', title: 'Kategori', type: 'string'}),
+    defineField({name: 'summary', title: 'Ringkasan', type: 'text', rows: 3, description: 'Tampil pada kartu artikel dan dapat digunakan sebagai deskripsi pencarian.'}),
+    defineField({name: 'featuredImage', title: 'Foto utama', type: 'image', options: {hotspot: true}, fields: [defineField({name: 'alt', title: 'Deskripsi foto untuk aksesibilitas', type: 'string'})]}),
+    defineField({name: 'body', title: 'Isi artikel', type: 'array', of: [{type: 'block'}, {type: 'image', fields: [defineField({name: 'alt', title: 'Deskripsi foto', type: 'string'})]}]}),
+    defineField({name: 'publishedAt', title: 'Tanggal publikasi', type: 'datetime'}),
+    defineField({name: 'seoTitle', title: 'Judul Google', type: 'string', description: 'Opsional. Gunakan bila judul hasil pencarian perlu berbeda dari judul artikel.'}),
+    defineField({name: 'seoDescription', title: 'Deskripsi Google', type: 'text', rows: 3, description: 'Ringkasan yang digunakan untuk hasil Google dan saat artikel dibagikan.'})
   ],
   preview: {select: {title: 'title', subtitle: 'category', media: 'featuredImage'}}
 })

@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "sanity start",
     "build": "sanity build",
-    "sync:missing": "node sync-content.mjs"
+    "sync:missing": "node sync-content.mjs",
+    "sync:articles": "node sync-articles.mjs"
   },
   "dependencies": {
     "@sanity/vision": "latest",

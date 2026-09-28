@@ -1,6 +1,16 @@
 {
   "cleanUrls": true,
   "trailingSlash": false,
+  "rewrites": [
+    {
+      "source": "/articles/:slug",
+      "destination": "/api/article-page?slug=:slug"
+    },
+    {
+      "source": "/sitemap.xml",
+      "destination": "/api/sitemap"
+    }
+  ],
   "redirects": [
     {
       "source": "/product-services",
@@ -20,6 +30,11 @@
     {
       "source": "/invite-dr-santi",
       "destination": "/contact",
+      "permanent": true
+    },
+    {
+      "source": "/article-kebiasaan-membaca-anak",
+      "destination": "/articles/kebiasaan-membaca-anak",
       "permanent": true
     }
   ]

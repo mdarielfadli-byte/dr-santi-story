@@ -25,6 +25,9 @@ Retired routes:
 - Contact form: `POST /api/inquiry`
 - Participant ritual capture: `POST /api/reading-ritual`
 - Published website copy: `GET /api/cms-content?page=<pageId>`
+- Published article feed: `GET /api/articles`
+- SEO-ready article page: `/articles/<slug>` (server-rendered from Sanity)
+- Dynamic sitemap: `/sitemap.xml` (includes published Sanity articles)
 - The public form endpoints proxy to the configured Google Apps Script endpoint.
 - The 7 Days Reading Ritual PDF is stored at `/assets/7-days-reading-ritual.pdf`.
 
@@ -49,12 +52,26 @@ Retired routes:
 | Participant PDF | HTTP 200, `application/pdf` |
 | CMS API | HTTP 200 and public copy renders from Sanity |
 | Sanity Studio build | Passed |
+| Article CMS synchronisation | Passed; existing copy was not replaced |
 
 No real visitor form submission is used in testing, so the live Apps Script delivery path should be verified with a team-approved test contact before launch.
 
+## SEO foundation
+
+- `robots.txt` permits public crawling and points to the sitemap.
+- Public pages use canonical URLs; article pages use a server-rendered canonical URL, per-article title, description, Open Graph data, and `Article` JSON-LD.
+- The initial article is available in Sanity under **Artikel** with the URL `/articles/kebiasaan-membaca-anak`.
+- Future team workflow: create an **Artikel** document, fill **URL artikel**, **Ringkasan**, **Isi artikel**, and **Deskripsi Google**, then publish. The article card, unique URL, metadata, and sitemap entry are generated automatically.
+
+## Still requires account access
+
+- Add a Google Analytics or Google Tag Manager measurement ID in Vercel environment settings.
+- Verify `https://www.drsantistory.com` in Google Search Console.
+- Submit `https://www.drsantistory.com/sitemap.xml`, then use Search Console for indexing status and the baseline of keywords, impressions, clicks, CTR, and average position.
+
 ## Intentionally deferred
 
-- SEO: metadata review, sitemap/robots, canonical URLs, structured data, and analytics.
-- CMS: article/event collections are editorially available, but a fully CMS-driven article renderer and protected participant-download workflow are future work.
+- SEO: Google Analytics/Tag Manager, Search Console verification, indexing, and performance reporting require the Google account owner.
+- CMS: event collection and protected participant-download workflow are future work.
 - Privacy: the PDF remains a static asset. The present event-participant gate is not authentication and should not be treated as secure access control.
 - QR: image files are included; end-to-end scans should be repeated after the final deployment.
