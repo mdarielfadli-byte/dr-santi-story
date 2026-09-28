@@ -6,8 +6,8 @@ module.exports = async (request, response) => {
     return response.status(405).json({ message: 'Method not allowed.' });
   }
 
-  const { name, email, whatsapp = '', consent } = request.body || {};
-  if (!name || !email || consent !== true) {
+  const { name, email, whatsapp, consent } = request.body || {};
+  if (!name || !email || !whatsapp || consent !== true) {
     return response.status(400).json({ message: 'Please complete the required fields.' });
   }
 
