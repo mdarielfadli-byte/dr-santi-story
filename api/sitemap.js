@@ -11,7 +11,13 @@ module.exports = async (_request, response) => {
       const query = '*[_type == "article" && defined(slug.current)] | order(_updatedAt desc){"slug":slug.current,_updatedAt}';
       const endpoint = new URL(`https://${projectId}.api.sanity.io/v${apiVersion}/data/query/${dataset}`);
       endpoint.searchParams.set('query', query);
-      const result = await fetch(endpoint, {headers: {Authorization: `Bearer ${token}`}});
+      // Crawlers must never wait for the CMS. The core sitemap remains useful
+      // even if Sanity is slow or temporarily unavailable.
+      const timeout = new Promise(resolve => setTimeout(() => resolve(null), 1500));
+      const result = await Promise.race([
+        fetch(endpoint, {headers: {Authorization: `Bearer ${token}`}}),
+        timeout
+      ]);
       if (result.ok) articles = (await result.json()).result || [];
     }
   } catch (_) {
