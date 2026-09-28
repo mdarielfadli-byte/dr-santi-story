@@ -61,17 +61,16 @@ No real visitor form submission is used in testing, so the live Apps Script deli
 - `robots.txt` permits public crawling and points to the sitemap.
 - Public pages use canonical URLs; article pages use a server-rendered canonical URL, per-article title, description, Open Graph data, and `Article` JSON-LD.
 - The initial article is available in Sanity under **Artikel** with the URL `/articles/kebiasaan-membaca-anak`.
-- Future team workflow: create an **Artikel** document, fill **URL artikel**, **Ringkasan**, **Isi artikel**, and **Deskripsi Google**, then publish. The article card, unique URL, metadata, and sitemap entry are generated automatically.
+- Future team workflow: create an **Artikel** document, fill **URL artikel**, **Ringkasan**, **Isi artikel**, and **Deskripsi Google**, then publish. The article card, unique URL, and metadata are generated automatically. Add each major new article URL to the static sitemap as part of the publishing checklist.
 
-## Still requires account access
+## Account-owned operations
 
-- Add a Google Analytics or Google Tag Manager measurement ID in Vercel environment settings.
-- Verify `https://www.drsantistory.com` in Google Search Console.
-- Submit `https://www.drsantistory.com/sitemap.xml`, then use Search Console for indexing status and the baseline of keywords, impressions, clicks, CTR, and average position.
+- Google Analytics, Google Tag Manager, and Search Console are configured under the account owner. Search performance and indexing data need time to accumulate after submission.
+- Sanity member roles, trial/plan selection, invitations, and dataset backups are managed by the project administrators.
 
 ## Intentionally deferred
 
 - SEO: Google Analytics/Tag Manager, Search Console verification, indexing, and performance reporting require the Google account owner.
-- CMS: event collection and protected participant-download workflow are future work.
+- CMS: Event documents now render in the public event archive and at `/events/<slug>`. The protected participant-download workflow remains future work.
 - Privacy: the PDF remains a static asset. The present event-participant gate is not authentication and should not be treated as secure access control.
 - QR: image files are included; end-to-end scans should be repeated after the final deployment.

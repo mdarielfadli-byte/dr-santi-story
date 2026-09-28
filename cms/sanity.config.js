@@ -82,16 +82,16 @@ const event = defineType({
   title: 'Event',
   type: 'document',
   fields: [
-    defineField({name: 'title', title: 'Event title', type: 'string', validation: Rule => Rule.required()}),
-    defineField({name: 'slug', title: 'URL slug', type: 'slug', options: {source: 'title'}}),
-    defineField({name: 'status', title: 'Status', type: 'string', options: {list: ['Upcoming', 'Past', 'Draft']}}),
-    defineField({name: 'eventDate', title: 'Date and time', type: 'datetime'}),
-    defineField({name: 'location', title: 'Location', type: 'string'}),
-    defineField({name: 'summary', title: 'Short description', type: 'text', rows: 3}),
-    defineField({name: 'details', title: 'Event details', type: 'array', of: [{type: 'block'}]}),
-    defineField({name: 'featuredImage', title: 'Featured image', type: 'image', options: {hotspot: true}}),
-    defineField({name: 'ctaLabel', title: 'CTA label', type: 'string'}),
-    defineField({name: 'ctaUrl', title: 'CTA URL', type: 'url'})
+    defineField({name: 'title', title: 'Judul event', type: 'string', validation: Rule => Rule.required()}),
+    defineField({name: 'slug', title: 'URL event', type: 'slug', options: {source: 'title'}, validation: Rule => Rule.required(), description: 'Dibuat dari judul. Jangan diubah setelah event dipublikasikan.'}),
+    defineField({name: 'status', title: 'Status', type: 'string', options: {list: [{title: 'Akan datang', value: 'Upcoming'}, {title: 'Sudah berlangsung', value: 'Past'}, {title: 'Draft (tidak tampil publik)', value: 'Draft'}]}, initialValue: 'Draft'}),
+    defineField({name: 'eventDate', title: 'Tanggal dan waktu', type: 'datetime'}),
+    defineField({name: 'location', title: 'Lokasi', type: 'string'}),
+    defineField({name: 'summary', title: 'Ringkasan', type: 'text', rows: 3, description: 'Tampil di kartu event dan hasil pencarian.'}),
+    defineField({name: 'details', title: 'Detail event', type: 'array', of: [{type: 'block'}]}),
+    defineField({name: 'featuredImage', title: 'Foto utama', type: 'image', options: {hotspot: true}, fields: [defineField({name: 'alt', title: 'Deskripsi foto untuk aksesibilitas', type: 'string'})]}),
+    defineField({name: 'ctaLabel', title: 'Label tombol', type: 'string'}),
+    defineField({name: 'ctaUrl', title: 'Tautan tombol', type: 'url'})
   ],
   preview: {select: {title: 'title', subtitle: 'status', media: 'featuredImage'}}
 })

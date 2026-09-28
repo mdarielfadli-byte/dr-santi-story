@@ -44,31 +44,44 @@
     'speaking-collaboration': {heroEyebrow: '.landing-hero .eyebrow', heroTitle: '.landing-hero h1', heroLead: '.landing-hero .lead', quote: '.landing-proof p'}
   };
 
+  let isStudioPreview = false;
+  const applyCopy = (copy, seoDescription) => {
+    // The first CMS version named two service fields differently. Keep using
+    // their values so existing team edits remain visible after the layout sync.
+    if (pageId === 'programs') {
+      if (copy.keynoteTitle) copy.serviceOneTitle = copy.keynoteTitle;
+      if (copy.keynoteBody) copy.serviceOneBody = copy.keynoteBody;
+      if (copy.workshopTitle) copy.serviceTwoTitle = copy.workshopTitle;
+      if (copy.workshopBody) copy.serviceTwoBody = copy.workshopBody;
+    }
+    Object.entries(selectors[pageId] || {}).forEach(([key, selector]) => {
+      const element = document.querySelector(selector);
+      if (element && copy[key]) {
+        const icon = key === 'actionLabel' && element.querySelector('span');
+        element.textContent = copy[key];
+        if (icon) element.append(' ', icon);
+      }
+    });
+    if (seoDescription) {
+      const description = document.querySelector('meta[name="description"]');
+      if (description) description.setAttribute('content', seoDescription);
+    }
+  };
+
+  window.addEventListener('message', event => {
+    if (event.origin !== 'https://cms.drsantistory.com') return;
+    const preview = event.data;
+    if (!preview || preview.type !== 'dr-santi-cms-preview' || preview.pageId !== pageId || !Array.isArray(preview.fields)) return;
+    isStudioPreview = true;
+    applyCopy(Object.fromEntries(preview.fields.map(field => [field.key, field.value])), preview.seoDescription);
+  });
+
   fetch(`/api/cms-content?page=${encodeURIComponent(pageId)}`)
     .then(response => response.ok ? response.json() : null)
     .then(payload => {
       if (!payload?.page) return;
-      const copy = Object.fromEntries((payload.page.fields || []).map(field => [field.key, field.value]));
-      // The first CMS version named two service fields differently. Keep using
-      // their values so existing team edits remain visible after the layout sync.
-      if (pageId === 'programs') {
-        if (copy.keynoteTitle) copy.serviceOneTitle = copy.keynoteTitle;
-        if (copy.keynoteBody) copy.serviceOneBody = copy.keynoteBody;
-        if (copy.workshopTitle) copy.serviceTwoTitle = copy.workshopTitle;
-        if (copy.workshopBody) copy.serviceTwoBody = copy.workshopBody;
-      }
-      Object.entries(selectors[pageId] || {}).forEach(([key, selector]) => {
-        const element = document.querySelector(selector);
-        if (element && copy[key]) {
-          const icon = key === 'actionLabel' && element.querySelector('span');
-          element.textContent = copy[key];
-          if (icon) element.append(' ', icon);
-        }
-      });
-      if (payload.page.seoDescription) {
-        const description = document.querySelector('meta[name="description"]');
-        if (description) description.setAttribute('content', payload.page.seoDescription);
-      }
+      if (isStudioPreview) return;
+      applyCopy(Object.fromEntries((payload.page.fields || []).map(field => [field.key, field.value])), payload.page.seoDescription);
     })
     .catch(() => {});
 })();
