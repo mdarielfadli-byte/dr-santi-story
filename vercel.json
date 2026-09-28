@@ -3,16 +3,6 @@
   "trailingSlash": false,
   "rewrites": [
     {
-      "source": "/(.*)",
-      "has": [
-        {
-          "type": "host",
-          "value": "cms.drsantistory.com"
-        }
-      ],
-      "destination": "/index.html"
-    },
-    {
       "source": "/articles/:slug",
       "destination": "/api/article-page?slug=:slug"
     },
