@@ -1,3 +1,20 @@
+// Tracking runs only on the public Dr Santi's Story domain. Keeping the ID
+// here makes the source auditable and prevents local/CMS previews from
+// polluting the production Analytics property.
+const GOOGLE_TAG_MANAGER_ID = 'GTM-T563LCHZ';
+const isProductionSite = ['drsantistory.com', 'www.drsantistory.com'].includes(window.location.hostname);
+
+if (isProductionSite && GOOGLE_TAG_MANAGER_ID && !document.querySelector(`script[data-gtm-id="${GOOGLE_TAG_MANAGER_ID}"]`)) {
+  window.dataLayer = window.dataLayer || [];
+  window.dataLayer.push({ 'gtm.start': Date.now(), event: 'gtm.js' });
+
+  const gtmScript = document.createElement('script');
+  gtmScript.async = true;
+  gtmScript.src = `https://www.googletagmanager.com/gtm.js?id=${GOOGLE_TAG_MANAGER_ID}`;
+  gtmScript.dataset.gtmId = GOOGLE_TAG_MANAGER_ID;
+  document.head.appendChild(gtmScript);
+}
+
 const toggle = document.querySelector('.nav-toggle');
 const nav = document.querySelector('.site-nav');
 const header = document.querySelector('.site-header');
