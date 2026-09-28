@@ -1,6 +1,7 @@
 import {defineConfig, defineField, defineType} from 'sanity'
 import {structureTool} from 'sanity/structure'
 import {visionTool} from '@sanity/vision'
+import {PreviewPane} from './preview-pane'
 
 const copyField = defineType({
   name: 'copyField',
@@ -93,6 +94,29 @@ const event = defineType({
   preview: {select: {title: 'title', subtitle: 'status', media: 'featuredImage'}}
 })
 
+const editablePages = [
+  ['pageCopy.home', 'Home'],
+  ['pageCopy.about', 'About'],
+  ['pageCopy.programs', 'Programs & Services'],
+  ['pageCopy.contact', 'Contact'],
+  ['pageCopy.stories', 'Stories & Resources'],
+  ['pageCopy.articles', 'Articles'],
+  ['pageCopy.fantasia', 'Fantasia'],
+  ['pageCopy.fantasia-event', 'Fantasia Event'],
+  ['pageCopy.cartea', 'Cartea Event'],
+  ['pageCopy.partnership', 'Partnership'],
+  ['pageCopy.collaborate', 'Collaborate'],
+  ['pageCopy.speaking-collaboration', 'Speaking & Collaboration']
+]
+
+const pageEditor = (S, documentId) => S.document()
+  .documentId(documentId)
+  .schemaType('pageCopy')
+  .views([
+    S.view.form().title('Edit copy'),
+    S.view.component(PreviewPane).title('Preview halaman')
+  ])
+
 export default defineConfig({
   name: 'dr-santi-story',
   title: "Dr Santi’s Story CMS",
@@ -103,10 +127,19 @@ export default defineConfig({
       structure: (S) => S.list()
         .title("Dr Santi’s Story CMS")
         .items([
-          S.documentTypeList('pageCopy')
+          S.listItem()
             .title('Edit Website')
-            .filter('_type == "pageCopy"')
-            .child((documentId) => S.document().documentId(documentId).schemaType('pageCopy')),
+            .id('edit-website')
+            .child(
+              S.list()
+                .title('Edit Website')
+                .items(editablePages.map(([documentId, title]) =>
+                  S.listItem()
+                    .title(title)
+                    .id(documentId)
+                    .child(pageEditor(S, documentId))
+                ))
+            ),
           S.divider(),
           S.documentTypeListItem('article').title('Artikel'),
           S.documentTypeListItem('event').title('Event')

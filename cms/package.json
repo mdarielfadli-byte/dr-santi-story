@@ -4,7 +4,8 @@
   "type": "module",
   "scripts": {
     "dev": "sanity start",
-    "build": "sanity build"
+    "build": "sanity build",
+    "sync:missing": "node sync-content.mjs"
   },
   "dependencies": {
     "@sanity/vision": "latest",

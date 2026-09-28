@@ -19,9 +19,10 @@ const previewUrls = {
   'fantasia-event': 'https://www.drsantistory.com/fantasia-event'
 }
 
-const mutations = Object.entries(previewUrls).map(([pageId, previewUrl]) => ({
-  patch: {id: `pageCopy.${pageId}`, set: {previewUrl}}
-}))
+const mutations = Object.entries(previewUrls).flatMap(([pageId, previewUrl]) => [
+  {patch: {id: `pageCopy.${pageId}`, set: {previewUrl}}},
+  {patch: {id: `drafts.pageCopy.${pageId}`, set: {previewUrl}}}
+])
 
 const endpoint = `https://${env.SANITY_API_PROJECT_ID}.api.sanity.io/v2025-02-19/data/mutate/${env.SANITY_API_DATASET}`
 const result = await fetch(endpoint, {

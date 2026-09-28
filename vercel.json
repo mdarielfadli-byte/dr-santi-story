@@ -13,13 +13,13 @@
       "permanent": true
     },
     {
-      "source": "/invite-dr-santi",
-      "destination": "/programs-services",
+      "source": "/books",
+      "destination": "/stories-resources",
       "permanent": true
     },
     {
-      "source": "/invite-dr-santi.html",
-      "destination": "/programs-services",
+      "source": "/invite-dr-santi",
+      "destination": "/contact",
       "permanent": true
     }
   ]

@@ -85,6 +85,14 @@ const documents = [
   })
 ];
 
+// Seed both published and draft copies. Sanity Studio opens the Drafts
+// perspective by default, so this lets editors immediately find every page
+// while the public website continues reading its published content.
+const studioDocuments = documents.flatMap(document => [
+  document,
+  {...document, _id: `drafts.${document._id}`}
+]);
+
 const endpoint = `https://${env.SANITY_API_PROJECT_ID}.api.sanity.io/v2025-02-19/data/mutate/${env.SANITY_API_DATASET}`;
 const result = await fetch(endpoint, {
   method: 'POST',
@@ -92,8 +100,8 @@ const result = await fetch(endpoint, {
     Authorization: `Bearer ${env.SANITY_API_WRITE_TOKEN}`,
     'Content-Type': 'application/json'
   },
-  body: JSON.stringify({mutations: documents.map(document => ({createOrReplace: document}))})
+  body: JSON.stringify({mutations: studioDocuments.map(document => ({createOrReplace: document}))})
 });
 
 if (!result.ok) throw new Error((await result.text()) || 'Could not seed CMS content.');
-console.log(`Seeded ${documents.length} CMS pages.`);
+console.log(`Seeded ${documents.length} CMS pages with published and draft copies.`);
