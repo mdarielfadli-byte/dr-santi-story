@@ -505,6 +505,14 @@ if (isPage('contact')) {
   document.querySelector('.form-note')?.remove();
 }
 
+if (isPage('about')) {
+  const portrait = document.querySelector('.portrait-placeholder');
+  if (portrait) {
+    portrait.classList.add('approved-portrait');
+    portrait.innerHTML = '<img src="assets/dr-santi-portrait.jpg" alt="Dr Santi Dharmaputra">';
+  }
+}
+
 const form = document.querySelector('#inquiry-form');
 if (form) {
   form.addEventListener('submit', async (event) => {
