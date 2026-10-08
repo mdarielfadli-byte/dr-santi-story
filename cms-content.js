@@ -25,6 +25,8 @@
     '/collaborate.html': 'collaborate',
     '/speaking-collaboration': 'speaking-collaboration',
     '/speaking-collaboration.html': 'speaking-collaboration'
+    ,'/leadership-in-the-home': 'leadership-home'
+    ,'/leadership-in-the-home.html': 'leadership-home'
   };
   const pageId = document.body.dataset.cmsPage || pathPages[location.pathname];
   if (!pageId) return;
@@ -41,7 +43,8 @@
     cartea: {heroEyebrow: '.cartea-hero-copy .eyebrow', heroTitle: '.cartea-hero-copy h1', heroLead: '.cartea-hero-copy .lead', storyTitle: '.cartea-story h2'},
     partnership: {heroEyebrow: '.page-banner .eyebrow', heroTitle: '.page-banner h1', heroLead: '.page-banner .lead', invitationTitle: '.invitation-panel h2', invitationBody: '.invitation-panel > div:last-child > p'},
     collaborate: {heroEyebrow: '.collaborate-hero .eyebrow', heroTitle: '.collaborate-hero h1', heroLead: '.collaborate-hero .lead', audiencesTitle: '.collaborate-audiences h2', audienceOneTitle: '.collaborate-audience-grid article:nth-child(1) h3', audienceOneBody: '.collaborate-audience-grid article:nth-child(1) p', audienceTwoTitle: '.collaborate-audience-grid article:nth-child(2) h3', audienceTwoBody: '.collaborate-audience-grid article:nth-child(2) p', audienceThreeTitle: '.collaborate-audience-grid article:nth-child(3) h3', audienceThreeBody: '.collaborate-audience-grid article:nth-child(3) p', invitationTitle: '.collaborate-invitation h2', invitationBody: '.collaborate-invitation > div > div:last-child > p'},
-    'speaking-collaboration': {heroEyebrow: '.landing-hero .eyebrow', heroTitle: '.landing-hero h1', heroLead: '.landing-hero .lead', quote: '.landing-proof p'}
+    'speaking-collaboration': {heroEyebrow: '.landing-hero .eyebrow', heroTitle: '.landing-hero h1', heroLead: '.landing-hero .lead', quote: '.landing-proof p'},
+    'leadership-home': {heroEyebrow: '.leadership-hero .eyebrow', heroTitle: '.leadership-hero h1', heroLead: '.leadership-hero .lead', introEyebrow: '.leadership-intro .eyebrow', introTitle: '.leadership-intro h2', introBodyOne: '.leadership-intro > div:last-child p:nth-of-type(1)', introBodyTwo: '.leadership-intro > div:last-child p:nth-of-type(2)', pillarOneTitle: '.leadership-pillars-grid article:nth-child(1) h2', pillarOneBody: '.leadership-pillars-grid article:nth-child(1) p', pillarTwoTitle: '.leadership-pillars-grid article:nth-child(2) h2', pillarTwoBody: '.leadership-pillars-grid article:nth-child(2) p', pillarThreeTitle: '.leadership-pillars-grid article:nth-child(3) h2', pillarThreeBody: '.leadership-pillars-grid article:nth-child(3) p', invitationTitle: '.leadership-invitation h2', invitationBody: '.leadership-invitation > div:last-child p'}
   };
 
   let isStudioPreview = false;

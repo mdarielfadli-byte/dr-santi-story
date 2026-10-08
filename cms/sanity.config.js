@@ -109,6 +109,7 @@ const editablePages = [
   ['pageCopy.partnership', 'Partnership'],
   ['pageCopy.collaborate', 'Collaborate'],
   ['pageCopy.speaking-collaboration', 'Speaking & Collaboration']
+  ,['pageCopy.leadership-home', 'Leadership in the Home']
 ]
 
 const pageEditor = (S, documentId) => S.document()
