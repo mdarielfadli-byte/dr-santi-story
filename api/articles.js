@@ -38,8 +38,8 @@ module.exports = async (request, response) => {
   const slug = String(request.query.slug || '').replace(/[^a-z0-9-]/gi, '');
   try {
     const result = slug
-      ? await querySanity(`*[_type == "article" && slug.current == $slug][0] ${articleProjection}`, {slug})
-      : await querySanity(`*[_type == "article" && defined(slug.current)] | order(publishedAt desc, _updatedAt desc) ${articleProjection}`);
+      ? await querySanity(`*[_type == "article" && !(_id in path("drafts.**")) && slug.current == $slug][0] ${articleProjection}`, {slug})
+      : await querySanity(`*[_type == "article" && !(_id in path("drafts.**")) && defined(slug.current)] | order(publishedAt desc, _updatedAt desc) ${articleProjection}`);
     response.setHeader('Cache-Control', 's-maxage=60, stale-while-revalidate=300');
     return response.status(200).json({article: slug ? result || null : undefined, articles: slug ? undefined : result || []});
   } catch (error) {

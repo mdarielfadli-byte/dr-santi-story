@@ -8,7 +8,7 @@ module.exports = async (_request, response) => {
   try {
     const {SANITY_API_PROJECT_ID: projectId, SANITY_API_DATASET: dataset, SANITY_API_READ_TOKEN: token} = process.env;
     if (projectId && dataset && token) {
-      const query = '*[_type == "article" && defined(slug.current)] | order(_updatedAt desc){"slug":slug.current,_updatedAt}';
+      const query = '*[_type == "article" && !(_id in path("drafts.**")) && defined(slug.current)] | order(_updatedAt desc){"slug":slug.current,_updatedAt}';
       const endpoint = new URL(`https://${projectId}.api.sanity.io/v${apiVersion}/data/query/${dataset}`);
       endpoint.searchParams.set('query', query);
       // Crawlers must never wait for the CMS. The core sitemap remains useful

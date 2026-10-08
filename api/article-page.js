@@ -2,10 +2,30 @@ const apiVersion = '2025-02-19';
 const siteUrl = 'https://www.drsantistory.com';
 
 const escapeHtml = value => String(value || '').replace(/[&<>'"]/g, character => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;'}[character]));
+const safeHref = value => {
+  const href = String(value || '').trim();
+  return /^(https?:\/\/|\/)/i.test(href) ? href : '';
+};
 const textFromBlock = block => (block.children || []).map(child => child.text || '').join('');
+const inlineFromBlock = block => {
+  const definitions = new Map((block.markDefs || []).map(definition => [definition._key, definition]));
+  return (block.children || []).map(child => {
+    let text = escapeHtml(child.text || '');
+    (child.marks || []).forEach(mark => {
+      if (mark === 'strong') text = `<strong>${text}</strong>`;
+      else if (mark === 'em') text = `<em>${text}</em>`;
+      else {
+        const definition = definitions.get(mark);
+        const href = definition?._type === 'link' ? safeHref(definition.href) : '';
+        if (href) text = `<a href="${escapeHtml(href)}"${href.startsWith('http') ? ' rel="noopener noreferrer"' : ''}>${text}</a>`;
+      }
+    });
+    return text;
+  }).join('');
+};
 const toParagraphs = blocks => (blocks || []).map(block => {
   if (block._type === 'image' && block.url) return `<figure class="article-feature-image"><img src="${escapeHtml(block.url)}" alt="${escapeHtml(block.alt || '')}"></figure>`;
-  const text = escapeHtml(textFromBlock(block));
+  const text = inlineFromBlock(block);
   if (!text) return '';
   if (block.style === 'h2') return `<h2>${text}</h2>`;
   if (block.style === 'h3') return `<h3>${text}</h3>`;
@@ -18,7 +38,7 @@ async function getArticle(slug) {
   const dataset = process.env.SANITY_API_DATASET;
   const token = process.env.SANITY_API_READ_TOKEN;
   if (!projectId || !dataset || !token) throw new Error('CMS is not configured.');
-  const query = `*[_type == "article" && slug.current == $slug][0]{title,"slug":slug.current,category,summary,seoTitle,seoDescription,"imageUrl":featuredImage.asset->url,"imageAlt":featuredImage.alt,body[]{..., _type == "image" => {"url":asset->url,alt}},publishedAt,_updatedAt}`;
+  const query = `*[_type == "article" && !(_id in path("drafts.**")) && slug.current == $slug][0]{title,"slug":slug.current,category,summary,seoTitle,seoDescription,"imageUrl":featuredImage.asset->url,"imageAlt":featuredImage.alt,body[]{..., _type == "image" => {"url":asset->url,alt}},publishedAt,_updatedAt}`;
   const endpoint = new URL(`https://${projectId}.api.sanity.io/v${apiVersion}/data/query/${dataset}`);
   endpoint.searchParams.set('query', query);
   endpoint.searchParams.set('$slug', JSON.stringify(slug));
