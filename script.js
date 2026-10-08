@@ -509,7 +509,15 @@ if (isPage('about')) {
   const portrait = document.querySelector('.portrait-placeholder');
   if (portrait) {
     portrait.classList.add('approved-portrait');
+    portrait.style.padding = '0';
+    portrait.style.overflow = 'hidden';
+    portrait.style.aspectRatio = '4 / 3';
     portrait.innerHTML = '<img src="assets/dr-santi-portrait.jpg" alt="Dr Santi Dharmaputra">';
+    const image = portrait.querySelector('img');
+    image.style.display = 'block';
+    image.style.width = '100%';
+    image.style.height = '100%';
+    image.style.objectFit = 'cover';
   }
 }
 
