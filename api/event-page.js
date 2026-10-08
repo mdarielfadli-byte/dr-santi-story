@@ -1,7 +1,7 @@
 const apiVersion = '2025-02-19';
 const siteUrl = 'https://www.drsantistory.com';
 
-const escapeHtml = value => String(value || '').replace(/[&<>'"]/g, character => ({'&': '&amp;', '>': '&gt;', "'": '&#39;', '"': '&quot;'}[character]));
+const escapeHtml = value => String(value || '').replace(/[&<>'"]/g, character => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;'}[character]));
 const safeUrl = value => /^(https?:\/\/|\/)/.test(String(value || '')) ? value : '';
 const textFromBlock = block => (block.children || []).map(child => child.text || '').join('');
 const renderBlocks = blocks => (blocks || []).map(block => {
