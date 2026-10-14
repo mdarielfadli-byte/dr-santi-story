@@ -6,7 +6,7 @@ module.exports = async (request, response) => {
     return response.status(405).json({ message: 'Method not allowed.' });
   }
 
-  const { name, organization, email, whatsapp = '', interest, message, consent } = request.body || {};
+  const { name, organization, email, whatsapp = '', interest, event_date = '', participant_count = '', message, consent } = request.body || {};
   if (!name || !organization || !email || !interest || !message || consent !== true) {
     return response.status(400).json({ message: 'Please complete the required fields.' });
   }
@@ -15,7 +15,7 @@ module.exports = async (request, response) => {
     const endpointResponse = await fetch(formEndpoint, {
       method: 'POST',
       headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-      body: JSON.stringify({ type: 'inquiry', name, organization, email, whatsapp, interest, message, consent })
+      body: JSON.stringify({ type: 'inquiry', name, organization, email, whatsapp, interest, event_date, participant_count, message, consent })
     });
     const result = await endpointResponse.json();
     if (!endpointResponse.ok || !result.ok) throw new Error(result.message || 'Could not save the inquiry.');

@@ -3,6 +3,14 @@
   "trailingSlash": false,
   "rewrites": [
     {
+      "source": "/parenting-reading",
+      "destination": "/campaign.html"
+    },
+    {
+      "source": "/parenting-reading/thanks",
+      "destination": "/campaign-thank-you.html"
+    },
+    {
       "source": "/articles/:slug",
       "destination": "/api/article-page?slug=:slug"
     },
