@@ -18,13 +18,44 @@ const copyField = defineType({
     }),
     defineField({
       name: 'value',
-      title: 'Wording di website',
+      title: 'Copy English lama',
       type: 'text',
       rows: 4,
-      description: 'Ubah teks ini, lalu klik Publish di kanan bawah.'
+      hidden: ({parent}) => Boolean(parent?.valueEn),
+      description: 'Disimpan untuk menjaga wording lama. Setelah tersedia, gunakan field English di bawah ini.'
+    }),
+    defineField({
+      name: 'valueId',
+      title: 'Copy Bahasa Indonesia',
+      type: 'text',
+      rows: 4,
+      description: 'Tulis seperti Dr Santi berbicara: hangat, jelas, dan tidak terlalu formal. Ini bukan terjemahan kata per kata dari English.'
+    }),
+    defineField({
+      name: 'valueEn',
+      title: 'Copy English',
+      type: 'text',
+      rows: 4,
+      description: 'Write naturally for an English-speaking reader. Keep the intent, not a literal translation of Bahasa Indonesia.'
+    }),
+    defineField({
+      name: 'purpose',
+      title: 'Tujuan bagian ini',
+      type: 'text',
+      rows: 2,
+      readOnly: true,
+      description: 'Mengapa bagian ini ada di halaman.'
+    }),
+    defineField({
+      name: 'editorPrompt',
+      title: 'Panduan saat merevisi',
+      type: 'text',
+      rows: 3,
+      readOnly: true,
+      description: 'Hal penting yang perlu tetap terasa setelah copy direvisi.'
     })
   ],
-  preview: {select: {title: 'label', subtitle: 'value'}}
+  preview: {select: {title: 'label', subtitle: 'valueId'}}
 })
 
 const pageCopy = defineType({

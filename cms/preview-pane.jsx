@@ -13,7 +13,8 @@ const previewUrls = {
   cartea: 'https://www.drsantistory.com/stories-resources/cartea',
   partnership: 'https://www.drsantistory.com/partnership',
   collaborate: 'https://www.drsantistory.com/collaborate',
-  'speaking-collaboration': 'https://www.drsantistory.com/speaking-collaboration'
+  'speaking-collaboration': 'https://www.drsantistory.com/speaking-collaboration',
+  'leadership-home': 'https://www.drsantistory.com/leadership-in-the-home'
 }
 
 const pageIdsByTitle = {
@@ -28,7 +29,8 @@ const pageIdsByTitle = {
   'Cartea Event': 'cartea',
   Partnership: 'partnership',
   Collaborate: 'collaborate',
-  'Speaking & Collaboration': 'speaking-collaboration'
+  'Speaking & Collaboration': 'speaking-collaboration',
+  'Leadership in the Home': 'leadership-home'
 }
 
 export function PreviewPane(props) {

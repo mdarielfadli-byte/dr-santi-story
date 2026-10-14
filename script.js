@@ -67,6 +67,9 @@ function translatePage(language) {
   localStorage.setItem('dr-santi-language', language);
   renderLocalizedPage(language);
   usePublishedPhotos();
+  enhancePageMotion();
+  enhanceEditorialComposition();
+  window.dispatchEvent(new CustomEvent('dr-santi-language-change'));
 }
 
 function usePublishedPhotos() {
@@ -253,12 +256,19 @@ function renderLocalizedPage(language) {
   if (!main) return;
   const copy = language === 'id'
     ? {
-        eyebrow: 'Untuk percakapan & kolaborasi',
-        title: 'Sebuah titik awal yang hangat untuk menumbuhkan budaya membaca.',
-        intro: 'Mungkin Anda baru bertemu Dr Santi di sebuah acara, atau kembali ke kartu nama ini beberapa waktu kemudian. Halaman ini adalah tempat untuk mengenal cara kerja Dr Santi’s Story dan memulai percakapan yang sesuai dengan kebutuhan Anda.',
+        eyebrow: 'Percakapan & kolaborasi',
+        title: 'Percakapan yang baik selalu berangkat dari kebutuhan orang-orang di dalamnya.',
+        intro: 'Halaman ini membantu Anda memilih bentuk pertemuan yang paling sesuai—untuk sekolah, keluarga, komunitas, atau organisasi yang sedang ingin membuka percakapan penting.',
         note: 'Dr Santi’s Story terus bertumbuh. Format di bawah adalah cara untuk memulai hari ini; layanan dan kolaborasi baru akan hadir seiring kebutuhan komunitas semakin jelas.',
         section: 'Pilih percakapan yang paling relevan hari ini.',
+        serviceTypes: ['Perspektif bersama', 'Ruang keluarga', 'Ruang belajar', 'Buku & komunitas'],
         services: [['01', 'Keynote & thoughtful conversations', 'Perspektif yang hangat dan membumi untuk audiens yang berkumpul membahas membaca, belajar, parenting, kepemimpinan, atau perkembangan manusia.'], ['02', 'Parent & family workshops', 'Ruang praktis untuk keluarga yang ingin menjadikan membaca bagian yang lebih dekat dari kehidupan sehari-hari.'], ['03', 'Learning for educators & leaders', 'Sesi reflektif bagi pendidik dan pemimpin yang ingin membangun rasa ingin tahu, percakapan, dan budaya belajar.'], ['04', 'Book conversations & curation', 'Percakapan berbasis buku serta arah kurasi untuk komunitas, ruang baca, book café, atau library yang ingin tumbuh dengan tujuan yang jelas.']],
+        serviceDetails: [
+          { intro: 'Sebuah sesi untuk memberi bahasa baru pada hal-hal yang sedang dihadapi bersama.', for: 'Sekolah, komunitas, organisasi, atau forum yang sedang membuka percakapan tentang membaca, belajar, parenting, kepemimpinan, atau perkembangan manusia.', includes: ['Perspektif dan cerita yang dekat dengan konteks audiens', 'Ruang untuk refleksi, tanya jawab, dan percakapan lanjut', 'Satu atau dua gagasan yang dapat dibawa pulang setelah sesi'] },
+          { intro: 'Ruang yang hangat untuk membantu keluarga menemukan langkah kecil yang dapat dijalani di rumah.', for: 'Orang tua, sekolah, dan komunitas keluarga yang ingin memperkuat budaya membaca, komunikasi, dan rasa ingin tahu dalam keseharian.', includes: ['Percakapan yang praktis dan tidak menggurui', 'Contoh kebiasaan sederhana yang dapat dicoba bersama anak', 'Waktu untuk membicarakan kebutuhan nyata para peserta'] },
+          { intro: 'Sesi reflektif yang menghubungkan pengalaman belajar dengan cara kita memimpin ruang bersama.', for: 'Pendidik, pemimpin sekolah, fasilitator, dan tim yang sedang membangun lingkungan belajar yang lebih hidup dan manusiawi.', includes: ['Pertanyaan untuk melihat kembali kebiasaan yang sudah ada', 'Pertukaran perspektif dari pengalaman peserta', 'Langkah awal yang dapat diteruskan oleh tim'] },
+          { intro: 'Percakapan dan kurasi yang menggunakan buku sebagai titik awal untuk membangun ruang bersama.', for: 'Komunitas, ruang baca, book café, perpustakaan, atau organisasi yang ingin menghidupkan percakapan melalui buku.', includes: ['Arah tema dan pilihan bacaan sesuai kebutuhan komunitas', 'Format percakapan yang mengundang partisipasi', 'Pendampingan untuk merancang pengalaman yang terasa relevan'] }
+        ],
         process: 'Setiap kolaborasi dimulai dari konteks Anda.',
         steps: [['01', 'Mendengar', 'Kami mulai dari orang-orang yang hadir, kebutuhan mereka, dan perubahan yang ingin Anda lihat.'], ['02', 'Mengarahkan', 'Kami menyusun format, sudut pandang, dan pengalaman yang terasa relevan—bukan paket satu ukuran untuk semua.'], ['03', 'Melanjutkan', 'Kami mengidentifikasi langkah kecil yang dapat dibawa pulang dan diteruskan setelah percakapan selesai.']],
         future: 'Punya kebutuhan yang belum tercantum?',
@@ -266,12 +276,19 @@ function renderLocalizedPage(language) {
         cta: 'Mulai percakapan'
       }
     : {
-        eyebrow: 'For conversations & collaborations',
-        title: 'A thoughtful starting point for growing a reading culture.',
-        intro: 'Perhaps you met Dr Santi at an event, or returned to this card some time later. This page is a lasting place to understand how Dr Santi’s Story works and begin a conversation that fits what you need.',
+        eyebrow: 'Conversations & collaborations',
+        title: 'A good conversation begins with what the people in the room need.',
+        intro: 'This page helps you choose a format that fits your context—whether you are bringing together a school, family, community, or organisation around a question that matters.',
         note: 'Dr Santi’s Story is continuing to grow. The formats below are ways to begin today; new services and collaborations will take shape as community needs become clearer.',
         section: 'Choose the conversation that feels most relevant today.',
+        serviceTypes: ['Shared perspective', 'Family practice', 'Learning culture', 'Books & community'],
         services: [['01', 'Keynote & thoughtful conversations', 'A warm, grounded perspective for audiences gathering around reading, learning, parenting, leadership, or human development.'], ['02', 'Parent & family workshops', 'Practical spaces for families who want to make reading feel closer to everyday life.'], ['03', 'Learning for educators & leaders', 'Reflective sessions for educators and leaders who want to build curiosity, conversation, and a culture of learning.'], ['04', 'Book conversations & curation', 'Book-led conversations and curation direction for communities, reading spaces, book cafés, or libraries that want to grow with intention.']],
+        serviceDetails: [
+          { intro: 'A session that brings useful language to the questions a group is already carrying.', for: 'Schools, communities, organisations, and forums opening a conversation about reading, learning, parenting, leadership, or human development.', includes: ['A perspective shaped around the audience’s context', 'Room for reflection, questions, and further conversation', 'One or two ideas people can take forward after the session'] },
+          { intro: 'A warm space for families to find small, workable practices for home.', for: 'Parents, schools, and family communities hoping to strengthen reading, communication, and curiosity in everyday life.', includes: ['A practical conversation, without telling families what to do', 'Simple habits that can be tried with children', 'Time to speak about the real needs in the room'] },
+          { intro: 'A reflective session connecting learning experiences with the way we lead shared spaces.', for: 'Educators, school leaders, facilitators, and teams building a more alive and human learning environment.', includes: ['Questions that revisit existing habits', 'Shared perspectives drawn from participants’ experiences', 'A small next step the team can continue together'] },
+          { intro: 'A conversation and curation format that uses books as a starting point for a shared space.', for: 'Communities, reading spaces, book cafés, libraries, and organisations hoping to bring conversations to life through books.', includes: ['Theme and reading direction suited to the community', 'A conversational format that invites participation', 'Support in shaping an experience that feels relevant'] }
+        ],
         process: 'Every collaboration begins with your context.',
         steps: [['01', 'Listen', 'We begin with the people in the room, what they need, and the change you hope to create.'], ['02', 'Shape', 'We develop a format, perspective, and experience that feels relevant—not a one-size-fits-all package.'], ['03', 'Continue', 'We identify small next steps that people can carry forward after the conversation ends.']],
         future: 'Have a need that is not listed yet?',
@@ -282,7 +299,162 @@ function renderLocalizedPage(language) {
   const photoAlt = language === 'id'
     ? ['Potret Dr Santi di ruang baca', 'Dr Santi menikmati waktu membaca']
     : ['Portrait of Dr Santi in a reading space', 'Dr Santi enjoying a moment of reading'];
-  main.innerHTML = `<section class="service-entry-hero section-shell"><div class="service-entry-copy"><p class="eyebrow">${copy.eyebrow}</p><h1>${copy.title}</h1><p class="lead">${copy.intro}</p><p class="service-entry-note">${copy.note}</p></div><div class="service-entry-photos" aria-label="${language === 'id' ? 'Foto Dr Santi' : 'Photos of Dr Santi'}"><figure class="service-photo service-photo-primary"><img src="https://raw.githubusercontent.com/mdarielfadli-byte/dr-santi-story/main/assets/dr-santi-portrait.webp" alt="${photoAlt[0]}"></figure><figure class="service-photo service-photo-secondary"><img src="https://raw.githubusercontent.com/mdarielfadli-byte/dr-santi-story/main/assets/dr-santi-reading.webp" alt="${photoAlt[1]}"></figure></div></section><section class="service-entry-section section-shell"><div class="section-heading"><div><p class="eyebrow">Ways to begin</p><h2>${copy.section}</h2></div></div><div class="service-entry-grid">${copy.services.map(([number, name, description]) => `<article><span>${number}</span><h3>${name}</h3><p>${description}</p></article>`).join('')}</div></section><section class="service-entry-process"><div class="section-shell"><p class="eyebrow light">A considered process</p><h2>${copy.process}</h2><div class="process-grid">${copy.steps.map(([number, name, description]) => `<div><span>${number}</span><h3>${name}</h3><p>${description}</p></div>`).join('')}</div></div></section><section class="section-shell service-entry-cta"><div><p class="eyebrow">Keep this page close</p><h2>${copy.future}</h2></div><div><p>${copy.futureText}</p><a class="button button-primary" href="contact.html">${copy.cta} <span>→</span></a></div></section>`;
+  const detailLabel = language === 'id' ? 'Lihat detail' : 'View details';
+  const includedLabel = language === 'id' ? 'Di dalam sesi' : 'What the session can include';
+  const forLabel = language === 'id' ? 'Cocok untuk' : 'A good fit for';
+  const modalTitle = language === 'id' ? 'Detail layanan' : 'Service details';
+  const closeLabel = language === 'id' ? 'Tutup detail' : 'Close details';
+  document.querySelector('.service-detail-modal')?.remove();
+  main.innerHTML = `<section class="service-entry-hero section-shell"><div class="service-entry-copy"><p class="eyebrow">${copy.eyebrow}</p><h1>${copy.title}</h1><p class="lead">${copy.intro}</p><p class="service-entry-note">${copy.note}</p></div><div class="service-entry-photos" aria-label="${language === 'id' ? 'Foto Dr Santi' : 'Photos of Dr Santi'}"><div class="service-entry-lottie lottie-motion" data-lottie="assets/lottie/reading-orbit.json" aria-hidden="true"></div><figure class="service-photo service-photo-primary"><img src="https://raw.githubusercontent.com/mdarielfadli-byte/dr-santi-story/main/assets/dr-santi-portrait.webp" alt="${photoAlt[0]}"></figure><figure class="service-photo service-photo-secondary"><img src="https://raw.githubusercontent.com/mdarielfadli-byte/dr-santi-story/main/assets/dr-santi-reading.webp" alt="${photoAlt[1]}"></figure></div></section><section class="service-entry-section section-shell"><div class="section-heading"><div><p class="eyebrow">Ways to begin</p><h2>${copy.section}</h2></div><div class="service-section-lottie lottie-motion" data-lottie="assets/lottie/reading-orbit.json" aria-hidden="true"></div></div><div class="service-entry-grid">${copy.services.map(([number, name, description], index) => `<article><button class="service-detail-trigger" type="button" data-service-index="${index}" aria-haspopup="dialog"><span class="service-type">${copy.serviceTypes[index]}</span><h3>${name}</h3><p>${description}</p><small>${detailLabel}</small></button></article>`).join('')}</div></section><section class="service-entry-process"><div class="section-shell"><p class="eyebrow light">A considered process</p><h2>${copy.process}</h2><div class="process-grid">${copy.steps.map(([number, name, description]) => `<div><span>${number}</span><h3>${name}</h3><p>${description}</p></div>`).join('')}</div></div></section><section class="section-shell service-entry-cta"><div><p class="eyebrow">Keep this page close</p><h2>${copy.future}</h2></div><div><p>${copy.futureText}</p><a class="button button-primary" href="contact.html">${copy.cta}</a></div></section>`;
+  const detailDialog = document.createElement('dialog');
+  detailDialog.className = 'service-detail-modal';
+  detailDialog.innerHTML = `<div class="service-detail-modal-panel"><div class="service-detail-modal-top"><p>${modalTitle}</p><button type="button" aria-label="${closeLabel}">×</button></div><div class="service-detail-modal-content"></div></div>`;
+  document.body.appendChild(detailDialog);
+  const detailContent = detailDialog.querySelector('.service-detail-modal-content');
+  const closeDetail = () => detailDialog.close();
+  detailDialog.querySelector('button').addEventListener('click', closeDetail);
+  detailDialog.addEventListener('click', (event) => { if (event.target === detailDialog) closeDetail(); });
+  document.querySelectorAll('.service-detail-trigger').forEach((trigger) => {
+    trigger.addEventListener('click', () => {
+      const index = Number(trigger.dataset.serviceIndex);
+      const [number, name] = copy.services[index];
+      const detail = copy.serviceDetails[index];
+      detailContent.innerHTML = `<p class="eyebrow">${copy.serviceTypes[index]} · ${modalTitle}</p><h2>${name}</h2><p class="service-detail-intro">${detail.intro}</p><div class="service-detail-fit"><p class="service-detail-label">${forLabel}</p><p>${detail.for}</p></div><div class="service-detail-includes"><p class="service-detail-label">${includedLabel}</p><ul>${detail.includes.map((item) => `<li>${item}</li>`).join('')}</ul></div><a class="button button-primary" href="contact.html">${copy.cta}</a>`;
+      detailDialog.showModal();
+    });
+  });
+  initialiseLottieMotion();
+}
+
+function initialiseLottieMotion() {
+  window.__drSantiLottieAnimations?.forEach(animation => animation.destroy());
+  window.__drSantiLottieAnimations = [];
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  const loadAnimations = () => {
+    const player = window.lottie || window.bodymovin;
+    if (!player) return;
+    window.__drSantiLottieAnimations = [...document.querySelectorAll('.lottie-motion')].map((container, index) => player.loadAnimation({
+      container,
+      renderer: 'svg',
+      loop: true,
+      autoplay: true,
+      path: container.dataset.lottie,
+      name: `dr-santi-motion-${index}`
+    }));
+    window.__drSantiLottieAnimations.forEach(animation => animation.setSpeed(.35));
+  };
+
+  if (window.lottie || window.bodymovin) {
+    loadAnimations();
+    return;
+  }
+
+  const existingPlayer = document.querySelector('script[data-lottie-player]');
+  if (existingPlayer) {
+    existingPlayer.addEventListener('load', loadAnimations, {once: true});
+    return;
+  }
+
+  const player = document.createElement('script');
+  player.src = 'https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie_svg.min.js';
+  player.async = true;
+  player.dataset.lottiePlayer = 'true';
+  player.addEventListener('load', loadAnimations, {once: true});
+  document.head.appendChild(player);
+}
+
+function enhancePageMotion() {
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  const targets = isPage('programs-services') ? []
+    : isPage('about') ? ['.inner-hero', '.credentials']
+    : isPage('contact') ? ['.contact-hero', '.form-section']
+    : isPage('stories-resources') ? ['.page-banner', '.leadership-resource-link']
+    : isPage('articles') ? ['.article-listing-header', '.article-card-grid']
+    : isPage('fantasia-event') ? ['.fantasia-documentation-hero', '.fantasia-event-themes']
+    : isPage('partnership') ? ['.page-banner', '.partnership-process']
+    : isPage('collaborate') ? ['.collaborate-hero', '.collaborate-audiences']
+    : isPage('speaking-collaboration') ? ['.landing-hero', '.fit-section']
+    : isPage('leadership-in-the-home') ? ['.leadership-hero', '.leadership-pillars']
+    : isPage('cartea') ? ['.cartea-hero', '.cartea-story']
+    : isPage('fantasia') ? ['.fantasia-warm-hero', '.fantasia-gathering']
+    : ['.hero', '#about'];
+
+  document.querySelectorAll('.page-motion-lottie').forEach(element => element.remove());
+  targets.forEach((selector, index) => {
+    const target = document.querySelector(selector);
+    if (!target) return;
+    target.classList.add('has-page-motion');
+    const ornament = document.createElement('div');
+    ornament.className = `page-motion-lottie page-motion-lottie-${index + 1} lottie-motion`;
+    ornament.dataset.lottie = '/assets/lottie/reading-orbit.json';
+    ornament.setAttribute('aria-hidden', 'true');
+    target.appendChild(ornament);
+  });
+  initialiseLottieMotion();
+}
+
+function enhanceEditorialComposition() {
+  const page = isPage('programs-services') ? 'programs'
+    : isPage('about') ? 'about'
+    : isPage('contact') ? 'contact'
+    : isPage('stories-resources') ? 'stories'
+    : isPage('articles') ? 'articles'
+    : isPage('fantasia-event') ? 'fantasia-event'
+    : isPage('partnership') ? 'partnership'
+    : isPage('collaborate') ? 'collaborate'
+    : isPage('speaking-collaboration') ? 'speaking'
+    : isPage('leadership-in-the-home') ? 'leadership'
+    : isPage('cartea') ? 'cartea'
+    : isPage('fantasia') ? 'fantasia'
+    : 'home';
+  document.body.dataset.visualPage = page;
+
+  const profiles = {
+    home: {hero: '.hero', feature: '#ways-to-work', cards: '.program-card,.home-feature-grid article,.perspectives-section article'},
+    about: {hero: '.inner-hero', feature: '.credentials', cards: '.credentials>div'},
+    programs: {hero: '.service-entry-hero', feature: '.service-entry-process', cards: '.service-entry-grid article,.process-grid>div'},
+    contact: {hero: '.contact-hero', feature: '.form-section', cards: '.inquiry-form label'},
+    stories: {hero: '.page-banner', feature: '.resource-grid', cards: '.resource-grid article,.event-archive-grid article'},
+    articles: {hero: '.article-listing-header', feature: '.article-card-grid', cards: '.article-card'},
+    fantasia: {hero: '.fantasia-warm-hero', feature: '.fantasia-gathering', cards: '.fantasia-gathering-grid article'},
+    'fantasia-event': {hero: '.fantasia-documentation-hero', feature: '.fantasia-event-themes', cards: '.fantasia-photo-grid figure,.fantasia-event-theme-grid article'},
+    cartea: {hero: '.cartea-hero', feature: '.cartea-story', cards: '.cartea-gallery-grid figure,.cartea-video-grid article'},
+    partnership: {hero: '.page-banner', feature: '.partnership-grid', cards: '.partnership-grid article,.partnership-process .process-grid>div'},
+    collaborate: {hero: '.collaborate-hero', feature: '.collaborate-audiences', cards: '.collaborate-audience-grid article'},
+    speaking: {hero: '.landing-hero', feature: '.fit-section', cards: '.fit-grid>div,.process-section .process-grid>div'},
+    leadership: {hero: '.leadership-hero', feature: '.leadership-pillars', cards: '.leadership-pillars-grid article'}
+  };
+  const profile = profiles[page] || profiles.home;
+  const hero = document.querySelector(profile.hero);
+  const feature = document.querySelector(profile.feature);
+  hero?.classList.add('editorial-hero');
+  feature?.classList.add('editorial-feature');
+
+  [hero, feature].filter(Boolean).forEach(section => {
+    section.querySelectorAll('h1,h2,p,.lead,figure').forEach((element, index) => {
+      if (index < 7) element.classList.add('site-reveal');
+    });
+  });
+  document.querySelectorAll(profile.cards).forEach((card, index) => {
+    card.classList.add('editorial-card', 'site-reveal');
+    card.style.setProperty('--reveal-delay', `${Math.min(index, 5) * 65}ms`);
+  });
+
+  if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches && 'IntersectionObserver' in window) {
+    window.__drSantiEditorialObserver ||= new IntersectionObserver((entries, observer) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, {threshold: .1});
+    document.querySelectorAll('.site-reveal:not(.is-visible)').forEach(element => window.__drSantiEditorialObserver.observe(element));
+  } else {
+    document.querySelectorAll('.site-reveal').forEach(element => element.classList.add('is-visible'));
+  }
 }
 
 const savedLanguage = localStorage.getItem('dr-santi-language') || (isPage('collaborate') ? 'id' : 'en');
@@ -424,6 +596,28 @@ serviceEntryStyles.textContent = `
   @media(max-width:760px){.service-entry-hero{padding:55px 0 45px}.service-entry-section{padding:26px 0 70px}.service-entry-grid{grid-template-columns:1fr}.service-entry-grid article{min-height:260px;padding:27px}.service-entry-grid h3{margin-top:38px}.service-entry-process{padding:70px 0}.service-entry-cta{grid-template-columns:1fr;gap:30px;padding:70px 0}.service-entry-note{font-size:13px}}
 `;
 document.head.appendChild(serviceEntryStyles);
+
+const serviceDetailModalStyles = document.createElement('style');
+serviceDetailModalStyles.textContent = `
+  .service-detail-trigger{display:flex;width:100%;min-height:301px;flex-direction:column;align-items:flex-start;padding:0;border:0;background:transparent;color:inherit;font:inherit;text-align:left;cursor:pointer}.service-detail-trigger:focus-visible{outline:3px solid var(--gold);outline-offset:-7px;border-radius:13px}.service-detail-trigger>.service-type{display:flex;align-items:center;gap:9px;color:var(--coral);font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase}.service-detail-trigger>.service-type:before{width:22px;height:2px;background:currentColor;content:''}.service-entry-grid article:nth-child(4) .service-detail-trigger>.service-type{color:var(--gold)}.service-detail-trigger h3{margin:52px 0 10px}.service-detail-trigger p{margin:0}.service-detail-trigger small{margin-top:auto;padding-top:22px;font-size:13px;font-weight:700;border-bottom:1px solid currentColor}.service-detail-trigger:hover small,.service-detail-trigger:focus-visible small{color:var(--emerald)}.service-entry-grid article:nth-child(4) .service-detail-trigger:hover small,.service-entry-grid article:nth-child(4) .service-detail-trigger:focus-visible small{color:var(--gold)}
+  .service-detail-modal{width:min(690px,calc(100vw - 32px));max-height:calc(100vh - 32px);padding:0;border:0;border-radius:24px;background:var(--cream);box-shadow:0 28px 72px rgba(0,0,0,.34)}.service-detail-modal::backdrop{background:rgba(9,45,38,.78);backdrop-filter:blur(4px)}.service-detail-modal-panel{max-height:calc(100vh - 32px);overflow:auto;padding:25px}.service-detail-modal-top{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:0 0 20px;border-bottom:1px solid var(--line)}.service-detail-modal-top p{margin:0;color:var(--emerald);font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase}.service-detail-modal-top button{display:grid;width:39px;height:39px;place-items:center;border:0;border-radius:50%;background:var(--forest);color:var(--cream);font:28px/1 var(--sans);cursor:pointer}.service-detail-modal-top button:hover,.service-detail-modal-top button:focus-visible{background:var(--emerald)}.service-detail-modal-content{padding:29px 2px 3px}.service-detail-modal-content h2{max-width:570px;margin:11px 0 18px;color:var(--forest);font-size:clamp(34px,5vw,51px);line-height:1.03;letter-spacing:-.04em}.service-detail-intro{max-width:600px;margin:0 0 28px;color:#315e53;font-size:18px;line-height:1.55}.service-detail-fit,.service-detail-includes{padding:21px 0;border-top:1px solid var(--line)}.service-detail-label{margin:0 0 7px;color:var(--emerald);font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase}.service-detail-fit>p:last-child{max-width:600px;margin:0}.service-detail-includes ul{display:grid;gap:11px;margin:0;padding:0;list-style:none}.service-detail-includes li{position:relative;padding-left:24px}.service-detail-includes li:before{position:absolute;left:0;color:var(--coral);content:'✦'}.service-detail-modal-content .button{margin-top:28px}
+  .service-entry-photos{isolation:isolate}.service-entry-lottie{position:absolute;z-index:2;top:-35px;right:-46px;width:175px;height:175px;pointer-events:none}.service-section-lottie{width:98px;height:98px;margin:-15px 22px -15px auto;pointer-events:none}.lottie-motion svg{overflow:visible!important}.service-entry-section .section-heading{align-items:center}
+  .has-page-motion{position:relative;isolation:isolate;overflow:hidden}.has-page-motion>:not(.page-motion-lottie){position:relative;z-index:1}.page-motion-lottie{position:absolute;z-index:0;right:clamp(18px,5vw,68px);top:26px;width:128px;height:128px;pointer-events:none;opacity:.72}.page-motion-lottie-2{top:auto;right:clamp(16px,4vw,56px);bottom:12px;width:105px;height:105px;opacity:.48}.contact-hero .page-motion-lottie,.article-listing-header .page-motion-lottie,.page-banner .page-motion-lottie{top:12px}.fantasia-event-themes .page-motion-lottie,.leadership-pillars .page-motion-lottie,.article-card-grid .page-motion-lottie{top:18px}.landing-hero .page-motion-lottie{right:7%;top:40px;opacity:.38}.cartea-hero .page-motion-lottie,.fantasia-warm-hero .page-motion-lottie{opacity:.36}
+  @media(max-width:760px){.service-detail-trigger{min-height:256px}.service-detail-trigger h3{margin-top:38px}.service-detail-modal{width:min(100vw - 22px,690px);max-height:calc(100vh - 22px);border-radius:18px}.service-detail-modal-panel{max-height:calc(100vh - 22px);padding:19px}.service-detail-modal-content{padding-top:24px}.service-detail-modal-content h2{font-size:37px}.service-detail-intro{font-size:17px}.service-entry-lottie{top:-25px;right:-24px;width:125px;height:125px}.service-section-lottie{display:none}.page-motion-lottie{width:90px;height:90px;right:8px;top:10px;opacity:.42}.page-motion-lottie-2{display:none}}
+`;
+document.head.appendChild(serviceDetailModalStyles);
+
+const editorialCompositionStyles = document.createElement('style');
+editorialCompositionStyles.textContent = `
+  .editorial-hero{box-shadow:0 22px 46px rgba(23,61,53,.07)}.editorial-hero .eyebrow{display:flex;align-items:center;gap:10px}.editorial-hero .eyebrow:after{width:42px;height:1px;background:var(--gold);content:''}.editorial-feature{position:relative}.editorial-feature:before{display:block;width:clamp(54px,9vw,126px);height:4px;margin-bottom:30px;background:var(--gold);content:''}.editorial-card{transform-origin:center bottom;transition:transform .35s cubic-bezier(.2,.7,.2,1),box-shadow .35s ease,filter .35s ease}.editorial-card:hover{z-index:2;transform:translateY(-8px) rotate(-.35deg);box-shadow:0 20px 36px rgba(23,61,53,.14);filter:saturate(1.04)}.site-reveal{opacity:0;transform:translateY(20px);transition:opacity .68s cubic-bezier(.2,.65,.25,1) var(--reveal-delay,0ms),transform .68s cubic-bezier(.2,.65,.25,1) var(--reveal-delay,0ms)}.site-reveal.is-visible{opacity:1;transform:none}.editorial-hero figure.site-reveal{transform:translateX(20px) rotate(1.5deg)}.editorial-hero figure.site-reveal.is-visible{transform:none}
+  [data-visual-page="about"] .inner-hero{padding-top:clamp(72px,10vw,140px);padding-bottom:clamp(62px,8vw,112px)}[data-visual-page="about"] .inner-hero .portrait-placeholder{box-shadow:18px 19px 0 var(--gold)}[data-visual-page="about"] .credentials{gap:18px;padding-top:15px}[data-visual-page="about"] .credentials>div{border-top-width:5px}
+  [data-visual-page="stories"] .page-banner,[data-visual-page="articles"] .article-listing-header,[data-visual-page="partnership"] .page-banner{padding-top:clamp(74px,9vw,132px);padding-bottom:clamp(66px,8vw,108px);background:linear-gradient(130deg,#eef3ed 0%,#f7f3eb 64%,#f4e5a4 150%);border-radius:0 0 28px 28px}[data-visual-page="stories"] .resource-grid article,[data-visual-page="articles"] .article-card,[data-visual-page="partnership"] .partnership-grid article{overflow:hidden;border-top-width:4px}[data-visual-page="stories"] .resource-grid article img,[data-visual-page="articles"] .article-card img{transition:transform .55s ease}[data-visual-page="stories"] .resource-grid article:hover img,[data-visual-page="articles"] .article-card:hover img{transform:scale(1.045)}
+  [data-visual-page="contact"] .contact-hero{padding-top:clamp(74px,9vw,132px);padding-bottom:clamp(60px,7vw,96px);background:linear-gradient(135deg,#f4e5a4 0%,#f7f3eb 57%);border-radius:0 0 28px 28px}[data-visual-page="contact"] .form-section{margin-top:22px}[data-visual-page="contact"] .inquiry-form label{transition:transform .25s ease}[data-visual-page="contact"] .inquiry-form label:focus-within{transform:translateX(6px)}
+  [data-visual-page="fantasia-event"] .fantasia-documentation-hero,[data-visual-page="leadership"] .leadership-hero,[data-visual-page="speaking"] .landing-hero{overflow:hidden}[data-visual-page="fantasia-event"] .fantasia-photo-grid figure,[data-visual-page="cartea"] .cartea-gallery-grid figure{overflow:hidden}[data-visual-page="fantasia-event"] .fantasia-photo-grid img,[data-visual-page="cartea"] .cartea-gallery-grid img{transition:transform .6s ease}[data-visual-page="fantasia-event"] .fantasia-photo-grid figure:hover img,[data-visual-page="cartea"] .cartea-gallery-grid figure:hover img{transform:scale(1.045)}
+  [data-visual-page="leadership"] .leadership-pillars{padding-block:clamp(80px,10vw,130px)}[data-visual-page="leadership"] .leadership-pillars-grid article{border-top-width:5px}[data-visual-page="collaborate"] .collaborate-audiences{padding-top:clamp(80px,9vw,124px)}[data-visual-page="collaborate"] .collaborate-audience-grid article{border-top-width:5px}
+  @media(prefers-reduced-motion:reduce){.site-reveal{opacity:1;transform:none;transition:none}.editorial-card{transition:none}.editorial-card:hover{transform:none}}@media(max-width:760px){.editorial-feature:before{margin-bottom:20px}.editorial-card:hover{transform:none;box-shadow:none}.site-reveal{transform:translateY(12px)}[data-visual-page="stories"] .page-banner,[data-visual-page="articles"] .article-listing-header,[data-visual-page="partnership"] .page-banner,[data-visual-page="contact"] .contact-hero{border-radius:0 0 20px 20px}}
+`;
+document.head.appendChild(editorialCompositionStyles);
 
 const serviceMotionStyles = document.createElement('style');
 serviceMotionStyles.textContent = `

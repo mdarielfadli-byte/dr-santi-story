@@ -48,6 +48,15 @@
   };
 
   let isStudioPreview = false;
+  let publishedFields = [];
+  let publishedSeoDescription = '';
+  const selectLanguageCopy = fields => Object.fromEntries(fields.map(field => {
+    const value = document.documentElement.lang === 'id'
+      ? (field.valueId || null)
+      : (field.valueEn || field.value || null);
+    return [field.key, value];
+  }).filter(([, value]) => value));
+
   const applyCopy = (copy, seoDescription) => {
     // The first CMS version named two service fields differently. Keep using
     // their values so existing team edits remain visible after the layout sync.
@@ -76,7 +85,13 @@
     const preview = event.data;
     if (!preview || preview.type !== 'dr-santi-cms-preview' || preview.pageId !== pageId || !Array.isArray(preview.fields)) return;
     isStudioPreview = true;
-    applyCopy(Object.fromEntries(preview.fields.map(field => [field.key, field.value])), preview.seoDescription);
+    applyCopy(selectLanguageCopy(preview.fields), preview.seoDescription);
+  });
+
+  window.addEventListener('dr-santi-language-change', () => {
+    if (!isStudioPreview && publishedFields.length) {
+      applyCopy(selectLanguageCopy(publishedFields), publishedSeoDescription);
+    }
   });
 
   fetch(`/api/cms-content?page=${encodeURIComponent(pageId)}`)
@@ -84,7 +99,9 @@
     .then(payload => {
       if (!payload?.page) return;
       if (isStudioPreview) return;
-      applyCopy(Object.fromEntries((payload.page.fields || []).map(field => [field.key, field.value])), payload.page.seoDescription);
+      publishedFields = payload.page.fields || [];
+      publishedSeoDescription = payload.page.seoDescription;
+      applyCopy(selectLanguageCopy(publishedFields), publishedSeoDescription);
     })
     .catch(() => {});
 })();
