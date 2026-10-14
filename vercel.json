@@ -4,11 +4,11 @@
   "rewrites": [
     {
       "source": "/parenting-reading",
-      "destination": "/campaign.html"
+      "destination": "/campaign"
     },
     {
       "source": "/parenting-reading/thanks",
-      "destination": "/campaign-thank-you.html"
+      "destination": "/campaign-thank-you"
     },
     {
       "source": "/articles/:slug",
