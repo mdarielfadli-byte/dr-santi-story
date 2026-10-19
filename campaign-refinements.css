@@ -58,6 +58,12 @@
 .campaign-form-section .inquiry-form .consent { margin-top: 2px; padding-top: 2px; color: #dcebe4; line-height: 1.45; }
 .campaign-form-section .inquiry-form .consent input { margin-top: 2px; accent-color: #f2c34e; }
 .campaign-form-section .inquiry-form .button { margin-top: 4px; padding-inline: 27px; }
+.hero-copy--source { padding-block: 8px; }
+.hero-copy--source h1 { max-width: 650px; font-size: clamp(39px, 4.65vw, 62px); line-height: 1.01; }
+.hero-copy--source .campaign-lead { margin: 24px 0 12px; font-size: 17px; line-height: 1.5; }
+.campaign-support { max-width: 570px; margin: 0 0 10px; color: #d7e8df; font-size: 15px; line-height: 1.5; }
+.hero-copy--source .campaign-actions { margin-top: 27px; }
+.source-proof h2 { max-width: 650px; font-size: clamp(34px, 3.5vw, 48px); }
 @keyframes quiet-drift { 0%, 100% { transform: translate3d(0, 0, 0) scale(1); opacity: .45; } 50% { transform: translate3d(-12px, -18px, 0) scale(1.08); opacity: .82; } }
 @keyframes quiet-breathe { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.025); } }
 @keyframes quiet-float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-7px); } }
@@ -70,6 +76,9 @@
   .topic-grid h3 { margin-top: 25px; }
   .profile-modal-panel { padding: 55px 30px 34px; }
   .campaign-form-section .inquiry-form { padding: 22px; gap: 17px; }
+  .hero-copy--source h1 { font-size: clamp(35px, 11vw, 47px); }
+  .hero-copy--source .campaign-lead { font-size: 16px; }
+  .campaign-support { font-size: 14px; }
   .thank-you { padding: 65px 0; }
   .thank-you-layout { grid-template-columns: 1fr; gap: 45px; }
   .thank-you-note { width: min(390px, 100%); padding: 38px 30px 33px; }
