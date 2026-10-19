@@ -81,6 +81,9 @@ if (campaignForm) {
       });
       const data = await result.json().catch(() => ({}));
       if (!result.ok) throw new Error(data.message || 'Permintaan belum dapat dikirim. Silakan coba lagi.');
+      if (typeof window.fbq === 'function') {
+        window.fbq('track', 'Lead');
+      }
       const thankYouPath = window.location.protocol === 'file:'
         ? 'campaign-thank-you.html'
         : '/parenting-reading/thanks';
@@ -91,3 +94,4 @@ if (campaignForm) {
     }
   });
 }
+
