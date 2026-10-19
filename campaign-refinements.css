@@ -64,11 +64,91 @@
 .campaign-support { max-width: 570px; margin: 0 0 10px; color: #d7e8df; font-size: 15px; line-height: 1.5; }
 .hero-copy--source .campaign-actions { margin-top: 27px; }
 .source-proof h2 { max-width: 650px; font-size: clamp(34px, 3.5vw, 48px); }
+
+/* A shared family of quiet, non-interactive ornaments ties every section together. */
+.campaign-intro::before,
+.campaign-topics::after,
+.campaign-format::before,
+.campaign-proof::before,
+.campaign-form-section::after,
+.campaign-footer::before {
+  content: "";
+  position: absolute;
+  pointer-events: none;
+}
+.campaign-intro::before {
+  left: -94px;
+  top: 46px;
+  width: 218px;
+  height: 218px;
+  border: 1px solid rgba(31, 91, 76, .16);
+  border-radius: 50%;
+  box-shadow: inset 0 0 0 42px rgba(242, 195, 78, .08);
+  animation: quiet-drift 13s ease-in-out infinite;
+}
+.campaign-intro .campaign-intro-grid { position: relative; z-index: 1; }
+.campaign-topics::after {
+  right: 7%;
+  top: 56px;
+  width: 116px;
+  height: 116px;
+  border: 1px solid rgba(33, 134, 111, .24);
+  border-radius: 48% 52% 50% 50%;
+  box-shadow: -22px 24px 0 -20px #f2c34e, 22px -22px 0 -20px #e45b4b;
+  animation: quiet-drift 11s ease-in-out infinite reverse;
+}
+.campaign-topics .campaign-shell { position: relative; z-index: 1; }
+.campaign-format {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+}
+.campaign-format::before {
+  right: -74px;
+  bottom: -78px;
+  width: 250px;
+  height: 250px;
+  border: 1px solid rgba(31, 91, 76, .16);
+  border-radius: 50%;
+  box-shadow: inset 0 0 0 1px rgba(242, 195, 78, .62), inset 0 0 0 48px rgba(242, 195, 78, .08);
+  z-index: -1;
+  animation: quiet-drift 14s ease-in-out infinite;
+}
+.campaign-proof::before {
+  left: 5%;
+  top: 58px;
+  width: 82px;
+  height: 82px;
+  border: 1px solid rgba(242, 195, 78, .72);
+  border-radius: 50%;
+  box-shadow: 29px 29px 0 -27px #f2c34e;
+  animation: quiet-drift 10s ease-in-out infinite;
+}
+.campaign-form-section::after {
+  left: -130px;
+  bottom: -142px;
+  width: 344px;
+  height: 344px;
+  border: 1px solid rgba(190, 222, 208, .25);
+  border-radius: 50%;
+  box-shadow: inset 0 0 0 1px rgba(242, 195, 78, .35), inset 0 0 0 70px rgba(33, 134, 111, .2);
+  animation: quiet-drift 15s ease-in-out infinite reverse;
+}
+.campaign-footer { position: relative; overflow: hidden; }
+.campaign-footer::before {
+  right: 8%;
+  bottom: -44px;
+  width: 144px;
+  height: 88px;
+  border: 1px solid rgba(247, 243, 235, .28);
+  border-radius: 90px 90px 0 0;
+}
+.campaign-footer > * { position: relative; z-index: 1; }
 @keyframes quiet-drift { 0%, 100% { transform: translate3d(0, 0, 0) scale(1); opacity: .45; } 50% { transform: translate3d(-12px, -18px, 0) scale(1.08); opacity: .82; } }
 @keyframes quiet-breathe { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.025); } }
 @keyframes quiet-float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-7px); } }
 @media (prefers-reduced-motion: reduce) {
-  .campaign-intro::after, .topic-symbol, .proof-image-wrap.is-visible, .campaign-form-section .inquiry-form { animation: none; }
+  .campaign-intro::before, .campaign-intro::after, .campaign-topics::after, .campaign-format::before, .campaign-proof::before, .campaign-form-section::after, .topic-symbol, .proof-image-wrap.is-visible, .campaign-form-section .inquiry-form { animation: none; }
 }
 @media (max-width: 760px) {
   .campaign-logo img, .campaign-footer-logo img { width: 128px; }
@@ -79,6 +159,11 @@
   .hero-copy--source h1 { font-size: clamp(35px, 11vw, 47px); }
   .hero-copy--source .campaign-lead { font-size: 16px; }
   .campaign-support { font-size: 14px; }
+  .campaign-intro::before { left: -135px; top: 16px; transform: scale(.72); }
+  .campaign-topics::after { right: -40px; top: 34px; transform: scale(.7); }
+  .campaign-format::before { right: -116px; bottom: -112px; transform: scale(.74); }
+  .campaign-proof::before { left: auto; right: 11%; top: 26px; transform: scale(.72); }
+  .campaign-form-section::after { left: -166px; bottom: -180px; transform: scale(.76); }
   .thank-you { padding: 65px 0; }
   .thank-you-layout { grid-template-columns: 1fr; gap: 45px; }
   .thank-you-note { width: min(390px, 100%); padding: 38px 30px 33px; }
