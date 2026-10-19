@@ -158,18 +158,22 @@
 .campaign-gallery-heading .eyebrow { grid-column: 1 / -1; }
 .campaign-gallery-heading h2 { max-width: 700px; margin: 0; color: #1f5b4c; font: clamp(37px, 4.3vw, 57px)/1.02 var(--serif); letter-spacing: -.045em; }
 .campaign-gallery-heading > p:last-child { max-width: 360px; margin: 0 0 5px; color: #30574d; font-size: 16px; line-height: 1.55; }
-.event-gallery-grid { display: grid; grid-template-columns: 1.42fr .72fr .92fr; grid-template-rows: 244px 192px; gap: 18px; }
-.event-gallery-item { position: relative; min-width: 0; margin: 0; overflow: hidden; border-radius: 18px; background: #1f5b4c; }
-.event-gallery-item--wide { grid-row: 1 / span 2; }
-.event-gallery-item--portrait { grid-row: 1 / span 2; }
-.event-gallery-item--audience { grid-column: 3; grid-row: 1 / span 2; }
+.event-gallery-grid { display: grid; grid-template-columns: repeat(3, 1fr); grid-template-rows: repeat(3, 118px); gap: 12px; }
+.event-gallery-item { position: relative; min-width: 0; margin: 0; padding: 0; overflow: hidden; border: 0; border-radius: 14px; background: #1f5b4c; cursor: zoom-in; }
+.event-gallery-item--featured { grid-column: span 2; grid-row: span 2; }
 .event-gallery-item img { display: block; width: 100%; height: 100%; object-fit: cover; transition: transform .65s ease; }
 .event-gallery-item--wide img { object-position: 49% center; }
 .event-gallery-item--portrait img { object-position: center; }
 .event-gallery-item--audience img { object-position: 49% center; }
 .event-gallery-item::after { content: ""; position: absolute; inset: auto 0 0; height: 46%; background: linear-gradient(transparent, rgba(8, 61, 54, .86)); pointer-events: none; }
-.event-gallery-item figcaption { position: absolute; z-index: 1; right: 18px; bottom: 16px; left: 18px; color: #f7f3eb; font: 16px/1.2 var(--serif); }
+.event-gallery-item span { position: absolute; z-index: 1; right: 11px; bottom: 9px; padding: 5px 8px; border-radius: 999px; background: rgba(8, 61, 54, .78); color: #f7f3eb; font: 700 10px/1 var(--sans); letter-spacing: .06em; text-transform: uppercase; }
 .event-gallery-item:hover img { transform: scale(1.035); }
+.gallery-modal { position: fixed; z-index: 40; inset: 0; display: grid; place-items: center; padding: 24px; background: rgba(8, 61, 54, .82); backdrop-filter: blur(9px); }
+.gallery-modal[hidden] { display: none; }
+.gallery-modal-panel { position: relative; width: min(880px, 100%); max-height: calc(100vh - 48px); padding: 18px; border-radius: 18px; background: #f7f3eb; box-shadow: 0 24px 70px rgba(0, 0, 0, .28); }
+.gallery-modal-image { display: block; width: 100%; max-height: calc(100vh - 142px); object-fit: contain; border-radius: 10px; background: #153f38; }
+.gallery-modal-panel p { margin: 12px 42px 2px 2px; color: #1f5b4c; font: 16px/1.35 var(--serif); }
+.gallery-close { position: absolute; z-index: 1; top: 27px; right: 29px; padding: 7px 0; border: 0; border-bottom: 1px solid currentColor; background: rgba(247, 243, 235, .94); color: #1f5b4c; font: 700 12px var(--sans); cursor: pointer; }
 @keyframes quiet-drift { 0%, 100% { transform: translate3d(0, 0, 0) scale(1); opacity: .45; } 50% { transform: translate3d(-12px, -18px, 0) scale(1.08); opacity: .82; } }
 @keyframes quiet-breathe { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.025); } }
 @keyframes quiet-float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-7px); } }
@@ -194,11 +198,11 @@
   .campaign-gallery::before { right: 5%; top: 28px; transform: scale(.72); }
   .campaign-gallery-heading { display: block; margin-bottom: 32px; }
   .campaign-gallery-heading > p:last-child { margin-top: 18px; }
-  .event-gallery-grid { grid-template-columns: 1fr 1fr; grid-template-rows: 270px 210px; gap: 12px; }
-  .event-gallery-item--wide { grid-column: 1 / -1; grid-row: 1; }
-  .event-gallery-item--portrait { grid-column: 1; grid-row: 2; }
-  .event-gallery-item--audience { grid-column: 2; grid-row: 2; }
-  .event-gallery-item figcaption { right: 13px; bottom: 12px; left: 13px; font-size: 14px; }
+  .event-gallery-grid { grid-template-columns: 1fr 1fr; grid-template-rows: repeat(4, 118px); gap: 10px; }
+  .event-gallery-item--featured { grid-column: 1 / -1; grid-row: span 2; }
+  .gallery-modal-panel { padding: 12px; }
+  .gallery-modal-panel p { margin: 10px 34px 1px 0; font-size: 15px; }
+  .gallery-close { top: 20px; right: 22px; }
   .thank-you { padding: 65px 0; }
   .thank-you-layout { grid-template-columns: 1fr; gap: 45px; }
   .thank-you-note { width: min(390px, 100%); padding: 38px 30px 33px; }

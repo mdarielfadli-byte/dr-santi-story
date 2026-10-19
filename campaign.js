@@ -2,6 +2,9 @@ const campaignForm = document.querySelector('#campaign-inquiry-form');
 const profileModal = document.querySelector('#profile-dialog');
 const profileTrigger = document.querySelector('.profile-trigger');
 const profileClose = document.querySelector('.profile-close');
+const galleryModal = document.querySelector('#gallery-dialog');
+const galleryItems = document.querySelectorAll('.event-gallery-item');
+const galleryClose = document.querySelector('.gallery-close');
 
 if (profileModal && profileTrigger && profileClose) {
   const closeProfile = () => {
@@ -17,6 +20,28 @@ if (profileModal && profileTrigger && profileClose) {
   profileClose.addEventListener('click', closeProfile);
   profileModal.addEventListener('click', (event) => { if (event.target === profileModal) closeProfile(); });
   document.addEventListener('keydown', (event) => { if (event.key === 'Escape' && !profileModal.hidden) closeProfile(); });
+}
+
+if (galleryModal && galleryClose && galleryItems.length) {
+  const galleryImage = galleryModal.querySelector('.gallery-modal-image');
+  const galleryCaption = galleryModal.querySelector('#gallery-caption');
+  const closeGallery = () => {
+    galleryModal.hidden = true;
+    document.body.classList.remove('modal-open');
+  };
+  galleryItems.forEach((item) => {
+    item.addEventListener('click', () => {
+      galleryImage.src = item.dataset.gallerySrc;
+      galleryImage.alt = item.dataset.galleryAlt;
+      galleryCaption.textContent = item.dataset.galleryCaption;
+      galleryModal.hidden = false;
+      document.body.classList.add('modal-open');
+      galleryClose.focus();
+    });
+  });
+  galleryClose.addEventListener('click', closeGallery);
+  galleryModal.addEventListener('click', (event) => { if (event.target === galleryModal) closeGallery(); });
+  document.addEventListener('keydown', (event) => { if (event.key === 'Escape' && !galleryModal.hidden) closeGallery(); });
 }
 
 const reveals = document.querySelectorAll('.reveal');
