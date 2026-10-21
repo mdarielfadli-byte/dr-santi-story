@@ -24,12 +24,15 @@ if (profileModal && profileTrigger && profileClose) {
 if (galleryModal && galleryClose && galleryItems.length) {
   const galleryImage = galleryModal.querySelector('.gallery-modal-image');
   const galleryCaption = galleryModal.querySelector('#gallery-caption');
+  let activeGalleryItem = null;
   const closeGallery = () => {
     galleryModal.hidden = true;
     document.body.classList.remove('modal-open');
+    activeGalleryItem?.focus();
   };
   galleryItems.forEach((item) => {
     item.addEventListener('click', () => {
+      activeGalleryItem = item;
       galleryImage.src = item.dataset.gallerySrc;
       galleryImage.alt = item.dataset.galleryAlt;
       galleryCaption.textContent = item.dataset.galleryCaption;
@@ -93,3 +96,4 @@ if (campaignForm) {
     }
   });
 }
+
