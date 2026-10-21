@@ -5,7 +5,6 @@ const profileClose = document.querySelector('.profile-close');
 const galleryModal = document.querySelector('#gallery-dialog');
 const galleryItems = document.querySelectorAll('.event-gallery-item');
 const galleryClose = document.querySelector('.gallery-close');
-
 if (profileModal && profileTrigger && profileClose) {
   const closeProfile = () => {
     profileModal.hidden = true;
@@ -94,4 +93,3 @@ if (campaignForm) {
     }
   });
 }
-
