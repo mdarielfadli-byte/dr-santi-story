@@ -96,4 +96,3 @@ if (campaignForm) {
     }
   });
 }
-
