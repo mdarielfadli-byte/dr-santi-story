@@ -53,6 +53,10 @@ const homeVideoDialog = homeVideoSection?.querySelector('.home-video-dialog');
 const homeVideoPlayer = homeVideoDialog?.querySelector('.home-video-dialog-player');
 const homeVideoClose = homeVideoDialog?.querySelector('.home-video-close');
 if (homeVideoTrigger && homeVideoDialog && homeVideoPlayer) {
+  const thumbnail = homeVideoTrigger.querySelector('img');
+  thumbnail?.addEventListener('error', () => {
+    thumbnail.src = 'https://img.youtube.com/vi/gZJfouKPTaI/hqdefault.jpg';
+  }, { once: true });
   const stopVideo = () => {
     homeVideoPlayer.replaceChildren();
     homeVideoTrigger.focus();
