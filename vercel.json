@@ -25,6 +25,11 @@
   ],
   "redirects": [
     {
+      "source": "/articles",
+      "destination": "/stories-resources#articles",
+      "permanent": true
+    },
+    {
       "source": "/product-services",
       "destination": "/programs-services",
       "permanent": true
