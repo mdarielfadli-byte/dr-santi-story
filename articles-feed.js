@@ -1,12 +1,16 @@
 (function () {
   const grid = document.querySelector('.article-card-grid');
   if (!grid) return;
+  const visibleArticleSlugs = new Set([
+    'from-personal-experience-to-purpose',
+    'dari-pengalaman-pribadi-ke-tujuan'
+  ]);
   const escapeHtml = value => String(value || '').replace(/[&<>'"]/g, character => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;'}[character]));
 
   fetch('/api/articles')
     .then(response => response.ok ? response.json() : null)
     .then(payload => {
-      const articles = payload?.articles || [];
+      const articles = (payload?.articles || []).filter(article => visibleArticleSlugs.has(article.slug));
       if (!articles.length) return;
       const existingLinks = new Set(Array.from(grid.querySelectorAll('a')).map(link => link.getAttribute('href')));
       articles.forEach(article => {
