@@ -1,6 +1,7 @@
 (function () {
-  const grid = document.querySelector('.article-card-grid');
+  const grid = document.querySelector('.article-card-grid, .home-perspective-grid');
   if (!grid) return;
+  const isHomeGrid = grid.classList.contains('home-perspective-grid');
 
   const articleByLanguage = {
     en: 'from-personal-experience-to-purpose',
@@ -30,7 +31,7 @@
     image.loading = 'lazy';
 
     const card = document.createElement('article');
-    card.className = 'article-card';
+    card.className = isHomeGrid ? 'home-article-card' : 'article-card';
     card.append(image);
 
     const details = document.createElement('div');
@@ -38,7 +39,7 @@
     category.className = 'story-type';
     category.textContent = article.category || (language === 'id' ? 'Artikel' : 'Article');
 
-    const title = document.createElement('h2');
+    const title = document.createElement(isHomeGrid ? 'h3' : 'h2');
     title.textContent = article.title || '';
 
     details.append(category, title);
