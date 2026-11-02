@@ -36,16 +36,6 @@ if (toggle && nav) {
 
 const isPage = (name) => location.pathname === `/${name}` || location.pathname.endsWith(`/${name}`) || location.pathname.endsWith(`/${name}.html`);
 document.querySelectorAll('.site-nav a[href="speaking-collaboration.html"]').forEach((navItem) => navItem.remove());
-if (nav && !nav.querySelector('[data-corporate-nav]')) {
-  const corporateLink = document.createElement('a');
-  corporateLink.href = 'corporate.html';
-  corporateLink.dataset.corporateNav = 'true';
-  corporateLink.textContent = 'Corporate';
-  if (isPage('corporate')) corporateLink.classList.add('active');
-  const programsLink = nav.querySelector('a[href*="programs-services"]');
-  if (programsLink) programsLink.insertAdjacentElement('afterend', corporateLink);
-  else nav.appendChild(corporateLink);
-}
 
 const homeVideoSection = document.querySelector('.home-video-section');
 const homeVideoTrigger = homeVideoSection?.querySelector('.home-video-trigger');
@@ -602,13 +592,13 @@ if (footer) {
   const footerCopy = document.documentElement.lang === 'id'
     ? {
         descriptor: 'Membaca, kepemimpinan, dan pembelajaran sepanjang hayat—untuk keluarga, pendidik, dan komunitas yang ingin terus bertumbuh.',
-        explore: 'Jelajahi', about: 'Tentang Dr Santi', programs: 'Program & Layanan', corporate: 'Organisasi', partnership: 'Kemitraan',
+        explore: 'Jelajahi', about: 'Tentang Dr Santi', programs: 'Program & Layanan', partnership: 'Kemitraan',
         connect: 'Terhubung', stories: 'Cerita & Referensi', articles: 'Artikel', collaborate: 'Kolaborasi', contact: 'Kontak',
         contactTitle: 'Kontak', copyright: '© 2026 Dr Santi’s Story. Hak cipta dilindungi.'
       }
     : {
         descriptor: 'Reading, leadership & lifelong learning—for families, educators, and communities that want to keep growing.',
-        explore: 'Explore', about: 'About Dr Santi', programs: 'Programs & Services', corporate: 'Corporate', partnership: 'Partnership',
+        explore: 'Explore', about: 'About Dr Santi', programs: 'Programs & Services', partnership: 'Partnership',
         connect: 'Connect', stories: 'Stories & Resources', articles: 'Articles', collaborate: 'Collaborate', contact: 'Contact',
         contactTitle: 'Contact', copyright: '© 2026 Dr Santi’s Story. All rights reserved.'
       };
@@ -622,7 +612,6 @@ if (footer) {
         <p class="footer-title">${footerCopy.explore}</p>
         <a href="/about">${footerCopy.about}</a>
         <a href="/programs-services">${footerCopy.programs}</a>
-        <a href="/corporate">${footerCopy.corporate}</a>
         <a href="/partnership">${footerCopy.partnership}</a>
       </nav>
       <nav class="footer-nav" aria-label="Connect with Dr Santi's Story">
