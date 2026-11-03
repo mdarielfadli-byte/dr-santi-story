@@ -37,9 +37,9 @@
   outline-offset: 4px;
 }
 .campaign-proof .profile-trigger:active { transform: translateY(0); }
-.profile-modal { position: fixed; z-index: 30; inset: 0; display: grid; place-items: center; padding: 24px; background: rgba(8, 61, 54, .74); backdrop-filter: blur(8px); }
+.profile-modal { position: fixed; z-index: 30; inset: 0; display: grid; place-items: center; padding: 24px; overflow-y: auto; overscroll-behavior: contain; background: rgba(8, 61, 54, .74); backdrop-filter: blur(8px); }
 .profile-modal[hidden] { display: none; }
-.profile-modal-panel { position: relative; width: min(690px, 100%); padding: 58px; border-radius: 22px; background: #f7f3eb; color: #153f38; box-shadow: 0 24px 70px rgba(0, 0, 0, .25); }
+.profile-modal-panel { position: relative; width: min(690px, 100%); max-height: calc(100vh - 48px); max-height: calc(100dvh - 48px); overflow-y: auto; overscroll-behavior: contain; -webkit-overflow-scrolling: touch; padding: 58px; border-radius: 22px; background: #f7f3eb; color: #153f38; box-shadow: 0 24px 70px rgba(0, 0, 0, .25); }
 .profile-modal-panel:before { content: ""; position: absolute; inset: 0 auto 0 0; width: 7px; border-radius: 22px 0 0 22px; background: #f2c34e; }
 .profile-modal-panel h2 { max-width: 560px; margin: 0 0 24px; color: #1f5b4c; font: clamp(35px, 4.2vw, 52px)/1.02 var(--serif); letter-spacing: -.04em; }
 .profile-modal-panel p:not(.eyebrow) { max-width: 590px; margin: 0 0 15px; font-size: 17px; }
@@ -479,6 +479,9 @@
 .event-gallery-item { aspect-ratio: 3 / 2; }
 .event-gallery-item--featured { aspect-ratio: 16 / 9; }
 @media (max-width: 760px) {
+  .profile-modal { place-items: start center; padding: 14px; }
+  .profile-modal-panel { width: 100%; max-height: calc(100vh - 28px); max-height: calc(100dvh - 28px); padding: 58px 25px 30px; border-radius: 20px; }
+  .profile-close { position: sticky; top: 0; z-index: 2; display: block; width: max-content; margin: -38px -5px 20px auto; padding: 7px 0; background: #f7f3eb; }
   .campaign-gallery { padding-block: 68px 76px; }
   .campaign-gallery-heading { margin-bottom: 28px; }
   .campaign-gallery-heading h2 { font-size: clamp(31px, 8vw, 40px); }
