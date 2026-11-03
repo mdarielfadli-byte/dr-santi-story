@@ -1,4 +1,5 @@
 /* Decorative markers are intentionally omitted: cards without links must not look interactive. */
+.campaign-page .eyebrow { text-transform: none; letter-spacing: .025em; }
 .campaign-form-section::before { display: none; }
 .campaign-logo, .campaign-footer-logo { display: inline-flex; align-items: center; }
 .campaign-logo img { display: block; width: 154px; height: auto; }
