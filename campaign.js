@@ -2,14 +2,15 @@ const campaignForm = document.querySelector('#campaign-inquiry-form');
 const profileModal = document.querySelector('#profile-dialog');
 const profileTrigger = document.querySelector('.profile-trigger');
 const profileClose = document.querySelector('.profile-close');
+const profileCta = profileModal?.querySelector('a[href="#inquiry"]');
 const galleryModal = document.querySelector('#gallery-dialog');
 const galleryItems = document.querySelectorAll('.event-gallery-item');
 const galleryClose = document.querySelector('.gallery-close');
 if (profileModal && profileTrigger && profileClose) {
-  const closeProfile = () => {
+  const closeProfile = (restoreFocus = true) => {
     profileModal.hidden = true;
     document.body.classList.remove('modal-open');
-    profileTrigger.focus();
+    if (restoreFocus) profileTrigger.focus();
   };
   profileTrigger.addEventListener('click', () => {
     profileModal.hidden = false;
@@ -17,6 +18,7 @@ if (profileModal && profileTrigger && profileClose) {
     profileClose.focus();
   });
   profileClose.addEventListener('click', closeProfile);
+  profileCta?.addEventListener('click', () => closeProfile(false));
   profileModal.addEventListener('click', (event) => { if (event.target === profileModal) closeProfile(); });
   document.addEventListener('keydown', (event) => { if (event.key === 'Escape' && !profileModal.hidden) closeProfile(); });
 }
@@ -96,3 +98,4 @@ if (campaignForm) {
     }
   });
 }
+
