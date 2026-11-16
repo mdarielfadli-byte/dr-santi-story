@@ -1,0 +1,44 @@
+name: Parenting preview on GitHub Pages
+
+on:
+  push:
+    branches:
+      - codex/parenting-team-preview
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: parenting-preview-pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out preview branch
+        uses: actions/checkout@v4
+      - name: Prepare static preview
+        run: |
+          mkdir -p _site
+          cp parenting-reading-preview.html parenting-reading-preview.css styles.css campaign.css campaign-refinements.css _site/
+          cp -R assets _site/assets
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v4
+        with:
+          path: _site
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
