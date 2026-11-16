@@ -2,7 +2,26 @@
 // here makes the source auditable and prevents local/CMS previews from
 // polluting the production Analytics property.
 const GOOGLE_TAG_MANAGER_ID = 'GTM-T563LCHZ';
-const isProductionSite = ['drsantistory.com', 'www.drsantistory.com'].includes(window.location.hostname);
+const CLARITY_PROJECT_ID = 'zdz14n9xf7';
+const isProductionSite = ['drsantistory.com', 'www.drsantistory.com'].includes(window.location.hostname)
+  && !window.location.pathname.startsWith('/cms');
+
+if (isProductionSite && CLARITY_PROJECT_ID) {
+  // Mark lead forms before Clarity starts. This keeps names, contact details,
+  // and free-text inquiry content out of session recordings.
+  const maskForms = () => {
+    document.querySelectorAll('form:not([data-clarity-mask])').forEach((form) => {
+      form.setAttribute('data-clarity-mask', 'true');
+    });
+  };
+  maskForms();
+  new MutationObserver(maskForms).observe(document.documentElement, { childList: true, subtree: true });
+
+  const clarityScript = document.createElement('script');
+  clarityScript.async = true;
+  clarityScript.src = '/clarity.js';
+  document.head.appendChild(clarityScript);
+}
 
 if (isProductionSite && GOOGLE_TAG_MANAGER_ID && !document.querySelector(`script[data-gtm-id="${GOOGLE_TAG_MANAGER_ID}"]`)) {
   window.dataLayer = window.dataLayer || [];
