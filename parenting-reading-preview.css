@@ -608,3 +608,55 @@
   .ecosystem-practices > .ecosystem-reading-connector { display:none; }
   .ecosystem-practices > .ecosystem-reading { margin-top:13px; }
 }
+
+
+/* Route each session format into one shared endpoint that touches the Reading card. */
+.ecosystem-practices > .ecosystem-reading-connector--converge {
+  display:block;
+  width:100%;
+  height:50px;
+  margin:2px 0 0;
+  overflow:visible;
+}
+.ecosystem-practices > .ecosystem-reading-connector--converge svg {
+  display:block;
+  width:100%;
+  height:50px;
+  overflow:visible;
+  fill:none;
+}
+.ecosystem-reading-connector--converge svg path:not(.ecosystem-flow-arrow-stem):not(.ecosystem-flow-arrowhead) {
+  fill:none;
+  stroke:#21866f;
+  stroke-width:2.3;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+}
+.ecosystem-reading-connector--converge svg .ecosystem-flow-arrow-stem {
+  fill:none;
+  stroke:#0d594b;
+  stroke-width:2.8;
+  stroke-linecap:round;
+}
+.ecosystem-reading-connector--converge svg .ecosystem-flow-arrowhead {
+  fill:#0d594b;
+  stroke:none;
+}
+.ecosystem-practices > .ecosystem-reading { margin-top:0; }
+@media(max-width:1000px) {
+  .ecosystem-practices > .ecosystem-reading-connector--converge {
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    height:27px;
+    margin:4px 0 0;
+  }
+  .ecosystem-practices > .ecosystem-reading-connector--converge svg { display:none; }
+  .ecosystem-practices > .ecosystem-reading-connector--converge::after {
+    content:"↓";
+    display:block;
+    color:#0d594b;
+    font:700 24px/1 var(--sans);
+  }
+  .ecosystem-practices > .ecosystem-reading { margin-top:0; }
+}
