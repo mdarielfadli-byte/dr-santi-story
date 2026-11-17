@@ -684,3 +684,31 @@
   }
   .ecosystem-practices > .ecosystem-reading-connector--converge::after { content:none; }
 }
+
+
+/* Align each Problems arrow with the center of its own card and animate the flow gently. */
+.ecosystem-arrows { align-self:center; height:242px; overflow:visible; }
+.ecosystem-arrows svg { display:block; width:100%; height:242px; overflow:visible; }
+.ecosystem-arrows .ecosystem-arrows--tablet { display:none; }
+.ecosystem-arrows .flow-path { fill:none; stroke:#21866f; stroke-width:3.2; stroke-linecap:round; }
+.ecosystem-arrows marker path { fill:#0d594b; stroke:none; }
+.ecosystem-flow-dot { fill:#e8b83d; filter:drop-shadow(0 0 3px rgba(232,184,61,.35)); }
+.ecosystem-reading-connector--converge .solution-path { fill:none; stroke:#21866f; stroke-width:2.3; stroke-linecap:round; stroke-linejoin:round; }
+.ecosystem-reading-connector--converge .ecosystem-flow-dot { fill:#e8b83d; }
+@media(min-width:761px) and (max-width:1000px) {
+  .ecosystem-arrows { height:280px; }
+  .ecosystem-arrows .ecosystem-arrows--wide { display:none; }
+  .ecosystem-arrows .ecosystem-arrows--tablet { display:block; height:280px; }
+}
+@media(max-width:760px) {
+  .ecosystem-arrows { display:block; height:30px; }
+  .ecosystem-arrows .ecosystem-arrows--wide,
+  .ecosystem-arrows .ecosystem-arrows--tablet { display:none; }
+  .ecosystem-arrows::after { content:"↓"; display:block; color:#0d594b; font-size:24px; font-weight:700; line-height:1; text-align:center; }
+}
+@keyframes ecosystem-flow-drift { to { stroke-dashoffset:-28; } }
+@media(prefers-reduced-motion:reduce) {
+  .ecosystem-flow-dot { display:none; }
+  .ecosystem-arrows animateMotion,
+  .ecosystem-reading-connector animateMotion { display:none; }
+}
