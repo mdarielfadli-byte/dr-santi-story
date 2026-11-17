@@ -387,3 +387,48 @@
   .preview-mid-cta { align-items: flex-start; flex-direction: column; gap: 16px; padding: 19px; }
   .preview-mid-cta .preview-cta-button { width: 100%; }
 }
+
+
+/* Labeled problem-to-solution flow */
+.ecosystem-flow--labeled {
+  grid-template-columns: minmax(190px,.85fr) minmax(76px,.3fr) minmax(330px,1.25fr);
+  align-items: center;
+  gap: clamp(14px,2.3vw,28px);
+}
+.ecosystem-problems-column,
+.ecosystem-solutions-column { display: grid; align-content: center; gap: 13px; min-width: 0; }
+.ecosystem-column-label {
+  margin: 0;
+  color: #6a8078;
+  font: 700 11px/1.2 var(--sans);
+  letter-spacing: .14em;
+  text-transform: uppercase;
+}
+.ecosystem-solutions-column > .ecosystem-column-label { color: #1f6e5b; }
+.ecosystem-problems-column .ecosystem-problems { gap: 12px; }
+.ecosystem-arrows { display: flex; align-items: center; justify-content: center; min-width: 0; }
+.ecosystem-arrows svg { width: 100%; height: 164px; overflow: visible; }
+.ecosystem-arrows path { stroke: #1f806a; stroke-width: 2.8; stroke-linecap: round; stroke-linejoin: round; }
+.ecosystem-arrows path:last-child { stroke: #0d594b; stroke-width: 3.2; }
+.ecosystem-arrows .flow-dot { fill: #e8b83d; }
+.ecosystem-outcomes { gap: 0; }
+.ecosystem-practices { padding: 19px; }
+.ecosystem-reading-connector { display: flex; align-items: center; justify-content: center; height: 30px; }
+.ecosystem-reading-connector svg { width: 28px; height: 28px; }
+.ecosystem-reading-connector path { stroke: #1f806a; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
+.ecosystem-reading { margin-top: 0; }
+@media(max-width:760px) {
+  .ecosystem-flow--labeled { grid-template-columns: 1fr; gap: 12px; padding-top: 18px; }
+  .ecosystem-problems-column,
+  .ecosystem-solutions-column { gap: 9px; }
+  .ecosystem-column-label { padding-left: 2px; }
+  .ecosystem-problems-column .ecosystem-problems { gap: 9px; }
+  .ecosystem-arrows { display: block; height: 26px; text-align: center; }
+  .ecosystem-arrows::after { content: "↓"; color: #1f806a; font-size: 23px; line-height: 1; }
+  .ecosystem-arrows svg { display: none; }
+  .ecosystem-reading-connector { height: 24px; }
+  .ecosystem-reading-connector svg { width: 24px; height: 24px; }
+}
+@media(prefers-reduced-motion:reduce) {
+  .ecosystem-arrows animateMotion { display: none; }
+}
