@@ -596,3 +596,15 @@
   .ecosystem-chips .ecosystem-format-option { transition:none; }
   .ecosystem-chips .ecosystem-format-option:hover { transform:none; }
 }
+
+
+/* Reading belongs to the same Ruang belajar solution card. */
+.ecosystem-practices { display:grid; gap:0; }
+.ecosystem-practices > .ecosystem-practices-heading { margin-bottom:15px; }
+.ecosystem-practices > .ecosystem-chips { margin-bottom:0; }
+.ecosystem-practices > .ecosystem-reading-connector { margin:8px 0 1px; }
+.ecosystem-practices > .ecosystem-reading { width:100%; }
+@media(max-width:1000px) {
+  .ecosystem-practices > .ecosystem-reading-connector { display:none; }
+  .ecosystem-practices > .ecosystem-reading { margin-top:13px; }
+}
