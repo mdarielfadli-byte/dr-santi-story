@@ -432,3 +432,65 @@
 @media(prefers-reduced-motion:reduce) {
   .ecosystem-arrows animateMotion { display: none; }
 }
+
+
+/* Clear per-format routes to Reading and a stronger central flow arrow. */
+.ecosystem-arrows path:last-child {
+  fill: #0d594b;
+  stroke: #0d594b;
+  stroke-width: 2.4;
+}
+.ecosystem-chips .ecosystem-format-option {
+  display: flex;
+  min-width: 0;
+  min-height: 68px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  padding: 8px 10px 5px;
+  border: 1px solid rgba(31,91,76,.16);
+  border-radius: 13px;
+  background: #fffdfa;
+  color: #1f5b4c;
+  box-shadow: 0 3px 10px rgba(8,61,54,.025);
+  transition: transform .22s ease, border-color .22s ease, background .22s ease;
+}
+.ecosystem-chips .ecosystem-format-option > span {
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.25;
+  text-align: center;
+}
+.ecosystem-format-option svg {
+  display: block;
+  width: 14px;
+  height: 14px;
+  overflow: visible;
+  fill: none;
+  stroke: #21866f;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.ecosystem-chips .ecosystem-format-option:hover {
+  transform: translateY(-2px);
+  border-color: rgba(33,134,111,.42);
+  background: #f9fcfa;
+}
+.reading-mark svg {
+  display: block;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.7;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+@media(prefers-reduced-motion:reduce) {
+  .ecosystem-chips .ecosystem-format-option { transition: none; }
+  .ecosystem-chips .ecosystem-format-option:hover { transform: none; }
+}
