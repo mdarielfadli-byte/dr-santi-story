@@ -494,3 +494,72 @@
   .ecosystem-chips .ecosystem-format-option { transition: none; }
   .ecosystem-chips .ecosystem-format-option:hover { transform: none; }
 }
+
+
+/* Independent problem arrows and four direct routes to Reading. */
+.ecosystem-flow--labeled {
+  grid-template-columns: minmax(190px,.85fr) minmax(100px,.34fr) minmax(330px,1.25fr);
+}
+.ecosystem-arrows svg {
+  height: 218px;
+}
+.ecosystem-arrows path {
+  fill: none;
+  stroke: #21866f;
+  stroke-width: 3.2;
+  stroke-linecap: round;
+}
+.ecosystem-arrows marker path {
+  fill: #0d594b;
+  stroke: none;
+}
+.ecosystem-chips {
+  grid-template-columns: repeat(4,minmax(0,1fr));
+  align-items: stretch;
+  gap: 8px;
+}
+.ecosystem-chips .ecosystem-format-option {
+  min-height: 58px;
+  padding: 8px 9px;
+  justify-content: center;
+}
+.ecosystem-reading-connector {
+  display: grid;
+  grid-template-columns: repeat(4,minmax(0,1fr));
+  align-items: start;
+  justify-items: center;
+  gap: 8px;
+  height: 34px;
+  margin-top: 2px;
+}
+.ecosystem-reading-connector svg {
+  display: block;
+  width: 26px;
+  height: 32px;
+  overflow: visible;
+  fill: none;
+  stroke: #21866f;
+  stroke-width: 2.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.ecosystem-reading-connector svg path { fill:none; }
+.ecosystem-reading { position: relative; }
+@media(max-width:1000px) and (min-width:761px) {
+  .ecosystem-flow--labeled { grid-template-columns: minmax(165px,.8fr) minmax(78px,.3fr) minmax(270px,1.2fr); gap: 14px; }
+  .ecosystem-chips { grid-template-columns: repeat(2,minmax(0,1fr)); }
+  .ecosystem-reading-connector { grid-template-columns: repeat(2,minmax(0,1fr)); height: 34px; }
+}
+@media(max-width:760px) {
+  .ecosystem-flow--labeled { grid-template-columns: 1fr; }
+  .ecosystem-arrows { display:block; height:30px; text-align:center; }
+  .ecosystem-arrows::after { content:"↓"; color:#0d594b; font-size:24px; font-weight:700; line-height:1; }
+  .ecosystem-arrows svg { display:none; }
+  .ecosystem-chips { grid-template-columns:repeat(2,minmax(0,1fr)); }
+  .ecosystem-reading-connector { grid-template-columns:repeat(2,minmax(0,1fr)); height:32px; }
+  .ecosystem-reading-connector svg { width:24px; height:30px; }
+}
+@media(prefers-reduced-motion:reduce) {
+  .ecosystem-chips .ecosystem-format-option { transition:none; }
+  .ecosystem-chips .ecosystem-format-option:hover { transform:none; }
+}
