@@ -24,7 +24,7 @@ jobs:
       - name: Prepare static preview
         run: |
           mkdir -p _site
-          cp parenting-reading-preview.html parenting-reading-preview.css styles.css campaign.css campaign-refinements.css _site/
+          cp parenting-reading-preview.html parenting-reading-preview.css leadership-at-work-preview.html leadership-at-work.css styles.css campaign.css campaign-refinements.css campaign.js _site/
           cp -R assets _site/assets
       - name: Configure Pages
         uses: actions/configure-pages@v5
