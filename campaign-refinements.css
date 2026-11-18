@@ -586,3 +586,9 @@
   .event-gallery-item:nth-child(5) { grid-column: 1 / 3; width: 55%; justify-self: center; }
 }
 
+
+/* Hero question emphasis uses the brand accent without adding bold weight. */
+.hero-copy--source .hero-question .hero-emphasis {
+  color: rgb(242, 195, 78);
+  font-weight: 400;
+}
