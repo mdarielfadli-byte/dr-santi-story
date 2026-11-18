@@ -712,3 +712,6 @@
   .ecosystem-arrows animateMotion,
   .ecosystem-reading-connector animateMotion { display:none; }
 }
+
+/* Brand highlight for emphasized phrases in the hero questions. */
+.hero-copy--source .hero-question strong { color: rgb(242, 195, 78); }
