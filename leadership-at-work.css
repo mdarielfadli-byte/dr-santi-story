@@ -612,4 +612,65 @@
   .work-page .work-inquiry-form { grid-template-columns:1fr; gap:15px; padding:20px; }
 }
 
+/* Revision pass: simplify the offer and present the coaching journey in three clear stages. */
+.work-page .hero-copy--source .hero-question-stack { display:grid; width:100%; max-width:610px; gap:11px; }
+.work-page .hero-copy--source .hero-question,
+.work-page .hero-copy--source .hero-question:nth-child(2),
+.work-page .hero-copy--source .hero-question:nth-child(3) {
+  width:100%; max-width:none; min-height:58px; margin:0; padding:13px 18px; display:flex; align-items:center;
+  border:1px solid rgba(255,253,250,.62); border-radius:16px; background:rgba(255,253,250,.09); color:#fffdfa;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.08); font:600 clamp(15px,1.25vw,17px)/1.45 var(--sans);
+  transform:none; transition:background-color .2s ease,border-color .2s ease,transform .2s ease;
+}
+.work-page .hero-copy--source .hero-question:hover,
+.work-page .hero-copy--source .hero-question:nth-child(2):hover,
+.work-page .hero-copy--source .hero-question:nth-child(3):hover { transform:translateX(3px); border-color:#d9f978; background:rgba(255,253,250,.14); }
+.work-page .ecosystem-label span:first-child::before { content:none; }
+.work-page .ecosystem-label { justify-content:flex-start; }
+.work-page .ecosystem-label span:first-child { color:#26775e; font-size:12px; font-weight:700; letter-spacing:.13em; text-transform:uppercase; }
+.work-page .work-process-flow { display:grid; grid-template-columns:minmax(0,1fr) 42px minmax(0,1fr) 42px minmax(0,1fr); align-items:stretch; gap:14px; padding-top:4px; }
+.work-page .work-process-column { display:flex; min-width:0; flex-direction:column; gap:13px; }
+.work-page .work-process-column>.ecosystem-column-label { margin:0; color:#55746a; font-size:11px; font-weight:700; letter-spacing:.14em; text-transform:uppercase; }
+.work-page .work-process-list { display:grid; flex:1; align-content:center; gap:11px; }
+.work-page .work-process-challenges .ecosystem-node { width:100%; min-height:66px; justify-content:flex-start; gap:12px; padding:12px 14px; border:1px solid #26775e28; border-radius:14px; background:#f4f0e7; color:#174c3e; text-align:left; }
+.work-page .work-process-challenges .ecosystem-node::before { content:none; }
+.work-page .work-process-challenges .ecosystem-node-icon { flex:0 0 28px; width:28px; height:28px; border:0; border-radius:0; background:transparent; color:#26775e; }
+.work-page .work-process-challenges .ecosystem-node-icon svg { width:24px; height:24px; }
+.work-page .work-process-arrow { display:grid; place-items:center; align-self:center; color:#26775e; font:500 34px/1 var(--sans); }
+.work-page .work-process-card { display:flex; min-height:220px; flex:1; flex-direction:column; justify-content:center; gap:15px; padding:clamp(18px,2.1vw,28px); border:1px solid #26775e2b; border-radius:18px; background:#f4f0e7; color:#174c3e; }
+.work-page .work-process-card h3 { margin:0; font:600 clamp(21px,2vw,28px)/1.12 var(--serif); }
+.work-page .work-process-card p { margin:0; font-size:15px; line-height:1.55; }
+.work-page .work-process-goal { border-color:#174c3e; background:#174c3e; color:#fffdfa; }
+.work-page .work-process-goal h3 { color:#d9f978; }
+.work-page .work-audience-section .topic-grid { grid-template-columns:minmax(260px,380px); }
+.work-page .work-audience-section .topic-grid article { min-height:0; }
+.work-page .work-audience-section .topic-grid article ul { display:grid; gap:8px; margin:18px 0 0; padding-left:20px; color:#45645c; font-size:16px; line-height:1.5; }
+.work-page .work-packages .preview-format-list>div { grid-template-columns:48px minmax(0,1fr); align-items:center; }
+.work-page .work-packages .preview-format-list>div>b { grid-column:2; }
+.work-page .work-whatsapp-button { display:inline-flex; width:max-content; max-width:100%; min-height:50px; align-items:center; justify-content:center; gap:10px; margin-top:22px; padding:13px 20px; border-radius:999px; background:#d9f978; color:#174c3e; font-weight:700; text-decoration:none; }
+.work-page .work-whatsapp-button:hover { transform:translateY(-2px); box-shadow:0 10px 24px rgba(0,0,0,.16); }
+.work-page .work-whatsapp-button svg { width:20px; height:20px; fill:currentColor; }
+.work-page .work-inquiry-form .consent { display:flex; align-items:flex-start; gap:10px; line-height:1.5; }
+.work-page .work-inquiry-form .consent input { flex:0 0 18px; width:18px; height:18px; margin:2px 0 0; }
+.work-page .work-inquiry-form .consent span { flex:1; }
+@media(max-width:900px) {
+  .work-page .work-process-flow { grid-template-columns:minmax(0,1fr) 30px minmax(0,1fr) 30px minmax(0,1fr); gap:9px; }
+  .work-page .work-process-card { min-height:210px; padding:16px; }
+  .work-page .work-process-challenges .ecosystem-node { padding:10px; }
+}
+@media(max-width:760px) {
+  .work-page .work-process-flow { grid-template-columns:1fr; gap:10px; }
+  .work-page .work-process-arrow { min-height:26px; font-size:0; }
+  .work-page .work-process-arrow::after { content:"↓"; font-size:25px; }
+  .work-page .work-process-card { min-height:0; padding:22px; }
+  .work-page .work-audience-section .topic-grid { grid-template-columns:1fr; }
+  .work-page .work-whatsapp-button { width:100%; }
+}
+@media(prefers-reduced-motion:reduce) {
+  .work-page .hero-copy--source .hero-question,
+  .work-page .hero-copy--source .hero-question:nth-child(2),
+  .work-page .hero-copy--source .hero-question:nth-child(3),
+  .work-page .work-whatsapp-button { transition:none; }
+}
+
 
