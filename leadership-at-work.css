@@ -811,3 +811,23 @@
 }
 
 
+
+/* Compact audience section and temporarily remove decorative ornaments. */
+.work-page .work-audience-section { padding-block:clamp(42px,6vw,68px); }
+.work-page .work-audience-section .topic-grid { margin-top:26px; }
+.work-page .work-audience-section .topic-grid article { padding:22px 28px; }
+.work-page .work-audience-section .topic-grid article ul { margin-top:4px; }
+.work-page .campaign-hero .hero-line-art,
+.work-page .campaign-hero-image.work-hero-cutout::before { display:none !important; }
+.work-page .ecosystem-section::after,
+.work-page .campaign-intro::before,
+.work-page .campaign-intro::after,
+.work-page .campaign-topics::after,
+.work-page .campaign-format::before,
+.work-page .campaign-proof::before,
+.work-page .campaign-proof::after,
+.work-page .campaign-gallery::before,
+.work-page .campaign-gallery::after,
+.work-page .campaign-form-section::before,
+.work-page .campaign-form-section::after,
+.work-page .campaign-footer::before { content:none !important; display:none !important; }
