@@ -740,6 +740,9 @@
 .work-page .work-package-options li strong { grid-area:sessions; color:#26775e; font:600 18px/1.25 var(--serif); }
 .work-page .work-package-options li span { grid-area:duration; color:#45645c; font-size:14px; }
 .work-page .work-package-options li em { grid-area:mode; color:#72877f; font-size:13px; font-style:normal; }
+.work-page .work-packages .work-package-card>.work-package-heading { display:flex; grid-template-columns:none; align-items:center; gap:14px; padding:0; border:0; }
+.work-page .work-packages .work-package-heading>div { display:grid; grid-template-columns:1fr; grid-auto-flow:row; align-content:center; gap:3px; padding:0; border:0; }
+.work-page .work-packages .work-package-heading>div:hover { padding-left:0; }
 @media(max-width:760px) {
   .work-page .campaign-hero-image.work-hero-cutout { width:min(100%,460px); }
   .work-page .campaign-hero-image.work-hero-cutout img { max-height:none; }
