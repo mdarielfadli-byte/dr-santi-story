@@ -754,6 +754,7 @@
 .work-page .campaign-hero .hero-line-art span:nth-child(3) { background:#b29a83; }
 .work-page .work-hero-eyebrow { color:#8c7358; }
 .work-page .work-hero-title { color:#174c3e; }
+.work-page .work-hero-description { color:#45645c; }
 .work-page .hero-copy--source .hero-question,
 .work-page .hero-copy--source .hero-question:nth-child(2),
 .work-page .hero-copy--source .hero-question:nth-child(3) {
@@ -800,7 +801,7 @@
 .work-page .campaign-footer { background:#e4d7c5; color:#174c3e; }
 .work-page .campaign-footer-logo img { filter:none; }
 .work-page .campaign-footer p { color:#45645c; }
-.work-page .work-hero-cutout::before { border-color:rgba(178,154,131,.35); background:radial-gradient(circle,rgba(178,154,131,.34),rgba(178,154,131,0) 72%); }
+.work-page .campaign-hero-image.work-hero-cutout::before { border-color:rgba(178,154,131,.3); background:radial-gradient(circle,rgba(178,154,131,.18),rgba(178,154,131,0) 72%); }
 @media(max-width:760px) {
   .work-page .campaign-hero-image.work-hero-cutout { width:min(100%,460px); }
   .work-page .campaign-hero-image.work-hero-cutout img { max-height:none; }
