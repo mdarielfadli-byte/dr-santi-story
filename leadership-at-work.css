@@ -735,7 +735,7 @@
 .work-page .work-package-heading>div { display:grid; gap:3px; }
 .work-page .work-package-heading b { color:#174c3e; font:600 25px/1.15 var(--serif); }
 .work-page .work-package-heading small { color:#72877f; font:500 12px/1.35 var(--sans); }
-.work-page .work-package-options { display:grid; flex:1; align-content:center; gap:0; margin:0; padding:0; list-style:none; }
+.work-page .work-package-options { display:grid; flex:1; align-content:start; gap:0; margin:0; padding:0; list-style:none; }
 .work-page .work-package-options li { display:grid; grid-template-columns:auto minmax(0,1fr); grid-template-areas:"sessions duration" "mode mode"; align-items:baseline; gap:5px 12px; padding:14px 0; border-top:1px solid #d9e1dc; }
 .work-page .work-package-options li strong { grid-area:sessions; color:#26775e; font:600 18px/1.25 var(--serif); }
 .work-page .work-package-options li span { grid-area:duration; color:#45645c; font-size:14px; }
